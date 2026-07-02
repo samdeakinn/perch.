@@ -98,6 +98,50 @@
 
   initAnimations();
 
+  const fill = document.getElementById('scrollFill');
+  if (fill) {
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const p = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
+      fill.style.width = (p * 100) + '%';
+    }, { passive: true });
+  }
+
+  if (!prefersReduced) {
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      const wrap = card.closest('.tilt-wrap') || card.parentElement;
+      if (!wrap) return;
+      wrap.style.perspective = '800px';
+      card.style.transformStyle = 'preserve-3d';
+      card.style.willChange = 'transform';
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        const rotX = (y - 0.5) * -12;
+        const rotY = (x - 0.5) * 12;
+        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+    });
+
+    const stage = document.getElementById('sceneStage');
+    const scene = document.getElementById('heroScene');
+    if (stage && scene) {
+      scene.addEventListener('mousemove', e => {
+        const r = scene.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        stage.style.transform = `rotateY(${(x - 0.5) * 8}deg) rotateX(${(y - 0.5) * -6}deg)`;
+      });
+      scene.addEventListener('mouseleave', () => {
+        stage.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+  }
+
   const form = document.getElementById('waitlistForm');
   const formSuccess = document.getElementById('formSuccess');
   if (form && formSuccess) {

@@ -1,8 +1,11 @@
 <%- include('partials/head', { title: '' }) %>
+<div class="scroll-progress"><div class="scroll-progress-fill" id="scrollFill"></div></div>
 <%- include('partials/nav') %>
 
-<div class="page">
-<section class="hero">
+<div class="page" id="top">
+<section class="hero" id="heroSection">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
   <div class="wrap hero-inner">
     <div class="a-stagger">
       <div class="eyebrow">Built for the UK</div>
@@ -19,34 +22,361 @@
         <span><strong>200+</strong> households and businesses already tracking renewals</span>
       </div>
     </div>
-    <div class="hero-visual a-stagger">
-      <div class="stage">
-        <div class="flow-a">
-          <div class="flow-item email">
+    <div class="hero-visual a-stagger" id="heroScene">
+      <div class="hero-scene">
+        <div class="scene-stage" id="sceneStage">
+          <div class="scene-ring"></div>
+          <div class="scene-card scene-card-1">
             <div class="ftitle">Fwd: Your policy renews soon</div>
             <div class="fmeta"><span>Admiral Car Insurance</span><span class="tag">PDF</span></div>
           </div>
-          <div class="flow-item card">
-            <div class="ftitle">Admiral — Car Insurance</div>
-            <div class="fmeta"><span>£612.40 / year</span><span>Renews 14 Aug</span></div>
-          </div>
-          <div class="verdict-tag renegotiate">Renegotiate — price up 22%</div>
-          <div class="verdict-ring renegotiate"></div>
-        </div>
-        <div class="flow-b">
-          <div class="flow-item email">
+          <div class="scene-card scene-card-2">
             <div class="ftitle">Fwd: Your subscription ends</div>
             <div class="fmeta"><span>Adobe Creative Cloud</span><span class="tag">Invoice</span></div>
           </div>
-          <div class="flow-item card">
-            <div class="ftitle">Adobe — Creative Cloud</div>
-            <div class="fmeta"><span>£59.99 / month</span><span>Renews 3 Sep</span></div>
+          <div class="scene-card scene-card-3">
+            <div class="ftitle">Fwd: Broadband price update</div>
+            <div class="fmeta"><span>Virgin Media</span><span class="tag">Notice</span></div>
           </div>
-          <div class="verdict-tag cancel">Cancel — unused for 4 months</div>
-          <div class="verdict-ring cancel"></div>
+          <div class="scene-card scene-card-4">
+            <div class="ftitle">Fwd: Domain renewal</div>
+            <div class="fmeta"><span>Namecheap — perch. domain</span><span class="tag">Reminder</span></div>
+          </div>
+          <div class="scene-particle"></div>
+          <div class="scene-particle"></div>
+          <div class="scene-particle"></div>
+          <div class="scene-particle"></div>
+          <div class="scene-particle"></div>
+          <div class="scene-particle"></div>
+          <div class="scene-particle"></div>
+          <div class="scene-label">forward it. we extract it. you decide.</div>
         </div>
-        <div class="stage-caption">forward it. we extract it. you decide.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section a-fade-up" id="cost">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">The cost of doing nothing</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">Auto-renewal isn't a convenience. It's a £4bn tax on not paying attention.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">Every provider is incentivised to make renewal silent. Here's what that adds up to for UK households.</p>
+    <div class="stat-hero a-fade-up tilt-wrap">
+      <div class="stat-hero-card tilt-card">
+        <div class="stat-hero-figure" data-count="4000000000">£4bn</div>
+        <div class="stat-hero-label">Annual loyalty penalty across UK households</div>
+        <span class="stat-hero-src">CMA 2019</span>
+      </div>
+      <div class="stat-hero-card tilt-card">
+        <div class="stat-hero-figure" data-count="560000000">£560m</div>
+        <div class="stat-hero-label">Lost to car insurance auto-renewal alone each year</div>
+        <span class="stat-hero-src">Motoring Research 2025</span>
+      </div>
+      <div class="stat-hero-card tilt-card">
+        <div class="stat-hero-figure" data-count="47">47%</div>
+        <div class="stat-hero-label">Of UK drivers don't check their renewal before it hits</div>
+        <span class="stat-hero-src">Motoring Research 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section lp-section-dark a-fade-up" id="how">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">How it works</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">One email forward, one clear verdict. That's the whole loop.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 0;">perch. doesn't need your bank, your passwords, or your attention every day. Just the emails you'd ignore anyway.</p>
+    <div class="steps tilt-wrap">
+      <div class="step tilt-card">
+        <span class="step-index">01</span>
+        <h3>Forward it</h3>
+        <div class="step-desc">Send us the renewal email, PDF, or screenshot. One forward, or batch a dozen in one go.</div>
+      </div>
+      <div class="step tilt-card">
+        <span class="step-index">02</span>
+        <h3>We extract it</h3>
+        <div class="step-desc">Our AI reads the provider, the amount, the renewal date, and the price change — even from scanned documents.</div>
+      </div>
+      <div class="step tilt-card">
+        <span class="step-index">03</span>
+        <h3>You get a verdict</h3>
+        <div class="step-desc">Renew, Cancel, or Renegotiate — with a clear reason and the deadline. You decide what to do next.</div>
+      </div>
+      <div class="step tilt-card">
+        <span class="step-index">04</span>
+        <h3>Monday digest</h3>
+        <div class="step-desc">Every Monday morning, a 90-second summary of everything renewing this week. Peace of mind in your inbox.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section a-fade-up" id="track">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">What perch. tracks</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">Every category that quietly costs you money.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">Broad categories, precise extraction. If it renews automatically, perch. can track it.</p>
+    <div class="track-grid tilt-wrap">
+      <div class="track-card tilt-card">
+        <div class="track-icon">🛡️</div>
+        <h3>Insurance</h3>
+        <div class="track-desc">Car, home, pet, life, landlord — every policy that auto-renews with a loyalty penalty baked in.</div>
+        <div class="track-cost">£308 <span>avg yearly overpayment</span></div>
+      </div>
+      <div class="track-card tilt-card">
+        <div class="track-icon">🎬</div>
+        <h3>Subscriptions</h3>
+        <div class="track-desc">Streaming, SaaS, gym, co-working, apps — the small charges that add up to big annual totals.</div>
+        <div class="track-cost">£180 <span>avg yearly forgotten subs</span></div>
+      </div>
+      <div class="track-card tilt-card">
+        <div class="track-icon">🌐</div>
+        <h3>Broadband &amp; utilities</h3>
+        <div class="track-desc">Out-of-contract pricing that doubles your bill the moment your fixed term ends without you noticing.</div>
+        <div class="track-cost">£120 <span>avg yearly loyalty penalty</span></div>
+      </div>
+      <div class="track-card tilt-card">
+        <div class="track-icon">🔗</div>
+        <h3>Domains &amp; hosting</h3>
+        <div class="track-desc">The silent lapses that cost ten times more to fix than to renew on time — if you can get them back at all.</div>
+        <div class="track-cost">£40+ <span>per domain if it lapses</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section lp-section-dark a-fade-up" id="not">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">Not another fintech app</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">We do one thing. That's the whole point.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">If it sounds like a budgeting app, read again. We explicitly don't do the things that make other financial tools invasive, noisy, or conflicted.</p>
+    <div class="not-grid tilt-wrap">
+      <div class="not-card tilt-card">
+        <div class="not-mark">✕</div>
+        <h3>No bank linking</h3>
+        <p>We never connect to your bank or card accounts. No read-only access, no API tokens, no "just this once" permissions. Your bank data stays with your bank.</p>
+      </div>
+      <div class="not-card tilt-card">
+        <div class="not-mark">✕</div>
+        <h3>No auto-cancel bots</h3>
+        <p>We never act on your behalf. You get the verdict and the deadline. You make the call. We're a radar, not a robot with your login credentials.</p>
+      </div>
+      <div class="not-card tilt-card">
+        <div class="not-mark">✕</div>
+        <h3>No budgeting features</h3>
+        <p>No spend categories, no net worth tracking, no charts about your coffee habit. That's a different product. We stay in our lane — renewals only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section a-fade-up" id="audience">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">Who it's for</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">One tool, four kinds of overwhelm.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">The problem is the same — things renew that shouldn't — but the scale and the stakes are different depending on who you are.</p>
+    <div class="audience-grid-index tilt-wrap">
+      <div class="audience-tile tilt-card">
+        <div class="audience-tile-header">
+          <div class="audience-tile-emoji">🏠</div>
+          <div>
+            <h3>Households &amp; families</h3>
+            <div class="sub">You didn't sign up to be your family's renewal admin</div>
+          </div>
+        </div>
+        <ul>
+          <li>Insurance hikes of 20–40% you'd miss otherwise</li>
+          <li>Children's activity subscriptions you forgot about</li>
+          <li>Broadband quietly switched to out-of-contract pricing</li>
+        </ul>
+      </div>
+      <div class="audience-tile tilt-card">
+        <div class="audience-tile-header">
+          <div class="audience-tile-emoji">✏️</div>
+          <div>
+            <h3>Freelancers</h3>
+            <div class="sub">Your toolkit renews whether your invoices get paid or not</div>
+          </div>
+        </div>
+        <ul>
+          <li>SaaS tools bought for one project and still billing</li>
+          <li>Insurance with a 14-day notice window you missed</li>
+          <li>Domains expiring while you're between projects</li>
+        </ul>
+      </div>
+      <div class="audience-tile tilt-card">
+        <div class="audience-tile-header">
+          <div class="audience-tile-emoji">⚡</div>
+          <div>
+            <h3>Startups &amp; agencies</h3>
+            <div class="sub">Fifteen SaaS tools and no one knows who manages them</div>
+          </div>
+        </div>
+        <ul>
+          <li>SaaS subs from former employees still billing monthly</li>
+          <li>Free trials that auto-converted to annual plans</li>
+          <li>Enterprise contracts with 30-day notice periods</li>
+        </ul>
+      </div>
+      <div class="audience-tile tilt-card">
+        <div class="audience-tile-header">
+          <div class="audience-tile-emoji">🏘️</div>
+          <div>
+            <h3>Landlords</h3>
+            <div class="sub">Each property has its own set of renewals that don't synchronise</div>
+          </div>
+        </div>
+        <ul>
+          <li>Insurance on vacant properties higher than it should be</li>
+          <li>EPC and gas cert expiries with no built-in reminder</li>
+          <li>Mortgage deals ending that you lost track of</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section lp-section-dark a-fade-up" id="proof">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">Proof</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">What people are saying before they've even paid us.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">No paid reviews. No NPS score gamed by support teams. Just people who forwarded some emails.</p>
+    <div class="proof-inner" style="margin-bottom:40px;">
+      <div class="proof-stat">
+        <div class="proof-num" data-count="47">£0</div>
+        <div class="proof-label">Identified rate increases this month alone</div>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <div class="proof-num" data-count="200">0</div>
+        <div class="proof-label">Households &amp; businesses on the waitlist</div>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <div class="proof-num" data-count="14">0</div>
+        <div class="proof-label">Days average notice regained per renewal</div>
+      </div>
+    </div>
+    <div class="testimonial-grid tilt-wrap">
+      <div class="testimonial-card featured tilt-card">
+        <div class="testimonial-text">I forwarded fifteen emails in about four minutes. It found a domain renewal I'd forgotten about, a pet insurance quote that jumped 34%, and a charity subscription I meant to cancel last year. Already worth it and I haven't paid a thing.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JM</div>
+          <div class="testimonial-meta">
+            <div class="name">Jo Milner</div>
+            <div class="detail">Household, Manchester</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card tilt-card">
+        <div class="testimonial-text">We run a small agency with fifteen SaaS tools across the team. Being able to forward the receipt and get a clear verdict is exactly the right level of involvement.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">TC</div>
+          <div class="testimonial-meta">
+            <div class="name">Tom Carr</div>
+            <div class="detail">Founder, Stag Studio · Bristol</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card tilt-card">
+        <div class="testimonial-text">I consider myself pretty on top of finances, but I still missed a mobile contract renewal that had quietly doubled. The Monday digest format is perfect.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div class="testimonial-meta">
+            <div class="name">Samira Khan</div>
+            <div class="detail">Freelance designer, London</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card tilt-card">
+        <div class="testimonial-text">We had three SaaS tools on annual contracts that we'd completely stopped using. Total cost: about £1,800 a year. perch. flagged all three in the first batch.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div class="testimonial-meta">
+            <div class="name">Mike Rowland</div>
+            <div class="detail">Co-founder, Rafter · Edinburgh</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lp-section a-fade-up" id="pricing">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">Pricing</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">Straightforward. No kickbacks shaping what we tell you.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">Two plans, one job each. Both include unlimited renewals, full extraction, and the Monday digest.</p>
+    <div class="pricing-grid tilt-wrap">
+      <div class="price-card tilt-card">
+        <h3>Household</h3>
+        <div class="for">For personal and family use</div>
+        <div class="price-amount">£6.99<span>/month</span></div>
+        <div class="price-alt">or £59/year (save ~30%)</div>
+        <ul>
+          <li>Unlimited renewals tracked</li>
+          <li>Document &amp; email extraction</li>
+          <li>Weekly Monday digest</li>
+          <li>Cancel / renew / renegotiate verdicts</li>
+        </ul>
+        <a href="/waitlist" class="btn-secondary">Join the waitlist</a>
+      </div>
+      <div class="price-card featured tilt-card">
+        <h3>Small business</h3>
+        <div class="for">For micro-businesses and solo founders</div>
+        <div class="price-amount">£14.99<span>/month</span></div>
+        <div class="price-alt">Billed monthly, cancel anytime</div>
+        <ul>
+          <li>Everything in Household</li>
+          <li>Multiple forwarding inboxes</li>
+          <li>Vendor &amp; SaaS contract tracking</li>
+          <li>Priority extraction support</li>
+        </ul>
+        <a href="/waitlist" class="btn-secondary">Join the waitlist</a>
+      </div>
+    </div>
+    <p class="price-footnote">No surprises, no fees tied to "savings" we claim to generate. Just a flat rate for a tool that works.</p>
+  </div>
+</section>
+
+<section class="lp-section lp-section-dark a-fade-up" id="faq">
+  <div class="wrap">
+    <div class="section-tag" style="text-align:center;">Questions</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">Objections we've heard before.</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 36px;">Here's what people ask when they first hear about perch. and how we answer.</p>
+    <div style="max-width:720px;margin:0 auto;">
+      <div class="faq-item">
+        <div class="faq-q">How is this different from a budgeting app?<span class="icon">+</span></div>
+        <div class="faq-a">Budgeting apps categorise past spending. They tell you what you already spent. perch. looks forward — it tells you what's about to renew and whether you should act. Entirely different time horizon, entirely different job.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you auto-cancel things on my behalf?<span class="icon">+</span></div>
+        <div class="faq-a">Never. You always make the call. We surface the deadline and the recommended action, but we never touch an account, cancel a policy, or send anything on your behalf. That's not a limitation — it's the point.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens to the emails and documents I send you?<span class="icon">+</span></div>
+        <div class="faq-a">We extract the renewal details immediately and store nothing beyond what's needed to track your items. No training models on your data, no sharing with third parties. You can delete any item at any time.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I don't get renewal emails?<span class="icon">+</span></div>
+        <div class="faq-a">That happens more often than you'd think. If you don't have the email, you can upload a PDF statement, a screenshot, or even a photo of a letter. We'll extract the same details from whatever you give us.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I try it before paying?<span class="icon">+</span></div>
+        <div class="faq-a">During early access, all features are free. You'll get full extraction, verdicts, and the Monday digest for as long as you're in the beta. We'll give plenty of notice before billing starts, and you can leave at any time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta-section a-fade-up" id="cta">
+  <div class="orb orb-3"></div>
+  <div class="wrap" style="position:relative;">
+    <h2>Stop overpaying. <span class="glow-text">Start seeing.</span></h2>
+    <p>Join 200+ households and businesses already tracking their renewals. Early access is free — your first digest is on us.</p>
+    <div class="final-cta-row">
+      <a href="/waitlist" class="btn-primary">Get early access →</a>
+      <a href="/how-it-works" class="final-micro">See how it works</a>
     </div>
   </div>
 </section>
