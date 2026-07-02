@@ -12,12 +12,12 @@
 
     <div class="a-fade-up" id="dashLookup">
       <div class="dash-lookup">
-        <label for="dashEmail" style="font-size:13px;color:var(--text-dim);margin-bottom:8px;display:block;">Your email</label>
+        <label for="dashEmail">Your email</label>
         <div class="dash-input-row">
-          <input type="email" id="dashEmail" placeholder="you@email.com" autocomplete="email" style="flex:1;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:14px;outline:none;">
+          <input type="email" id="dashEmail" placeholder="you@email.com" autocomplete="email">
           <button id="dashBtn" class="btn-primary" style="padding:12px 22px;">Check status</button>
         </div>
-        <div id="dashLoading" style="display:none;margin-top:12px;font-size:13px;color:var(--text-faint);">Looking you up...</div>
+        <div id="dashLoading" class="dash-loading" style="display:none;">Looking you up...</div>
       </div>
     </div>
 
@@ -49,11 +49,11 @@
         <h3 style="margin-bottom:6px;">Share &amp; move up</h3>
         <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:16px;line-height:1.6;">Every person who joins using your link moves you one position up the queue. Your friends need the visibility too.</p>
         <div class="dash-input-row">
-          <input type="text" id="dashRefLink" readonly style="flex:1;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--text);font-size:13px;outline:none;font-family:monospace;">
-          <button id="dashCopyBtn" class="btn-primary" style="padding:12px 18px;font-size:13px;">Copy</button>
+          <input type="text" id="dashRefLink" class="dash-ref-input" readonly>
+          <button id="dashCopyBtn" class="btn-primary dash-copy-btn">Copy</button>
         </div>
-        <div id="dashCopyMsg" style="margin-top:8px;font-size:12px;color:var(--accent);display:none;">Copied!</div>
-        <div style="margin-top:16px;font-size:13px;color:var(--text-faint);">Referred so far: <strong style="color:var(--text);" id="dashRefCount">0</strong></div>
+        <div id="dashCopyMsg" class="dash-copy-msg">Copied!</div>
+        <div class="dash-ref-count">Referred so far: <strong id="dashRefCount">0</strong></div>
       </div>
 
       <div class="dash-card">
@@ -92,9 +92,9 @@
     </div>
 
     <div class="dash-card a-fade-up" id="dashNotFound" style="display:none;">
-      <div style="text-align:center;padding:20px;">
-        <h3 style="margin-bottom:8px;">Not on the list yet?</h3>
-        <p style="font-size:14px;color:var(--text-dim);margin-bottom:20px;">We couldn't find that email. Join the waitlist to get your dashboard.</p>
+      <div class="dash-not-found">
+        <h3>Not on the list yet?</h3>
+        <p>We couldn't find that email. Join the waitlist to get your dashboard.</p>
         <a href="/waitlist" class="btn-primary" style="display:inline-flex;">Join the waitlist →</a>
       </div>
     </div>

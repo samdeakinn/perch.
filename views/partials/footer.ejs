@@ -15,7 +15,11 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
 <script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const nav = document.getElementById('nav');
   let ticking = false;
   window.addEventListener('scroll', () => {
@@ -28,7 +32,22 @@
     }
   }, { passive: true });
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const backBtn = document.getElementById('backToTop');
+  if (backBtn) {
+    window.addEventListener('scroll', () => {
+      backBtn.classList.toggle('visible', window.scrollY > 500);
+    }, { passive: true });
+    backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  const hamburger = document.getElementById('hamburgerBtn');
+  const overlay = document.getElementById('navOverlay');
+  const closeBtn = document.getElementById('navDrawerClose');
+  if (hamburger && overlay && closeBtn) {
+    hamburger.addEventListener('click', () => overlay.classList.add('open'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+  }
 
   function initAnimations(){
     const faders = document.querySelectorAll('.a-fade-up');
@@ -98,6 +117,26 @@
 
       form.style.display = 'none';
       formSuccess.classList.add('show');
+    });
+  }
+
+  fetch('/api/waitlist/count', { cache: 'no-store' }).then(r => r.json()).then(d => {
+    if (d.ok && d.count > 0) {
+      const el = document.getElementById('waitlistCount');
+      if (el) { el.textContent = d.count.toLocaleString(); el.style.display = 'inline'; }
+    }
+  }).catch(() => {});
+
+  if (!localStorage.getItem('cookieConsent')) {
+    const bar = document.createElement('div');
+    bar.id = 'cookieBar';
+    bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:100;padding:14px 20px;background:var(--bg-soft);border-top:1px solid var(--line);font-size:13px;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;backdrop-filter:blur(12px);';
+    bar.innerHTML = '<span>perch. uses only essential cookies for site function. No tracking, no profiling, no sharing.</span><button id="cookieDismiss" style="white-space:nowrap;padding:8px 16px;border-radius:8px;border:1px solid var(--line-strong);background:none;color:var(--text);font-size:12.5px;cursor:pointer;font-family:var(--sans);font-weight:500;">Got it</button>';
+    document.body.appendChild(bar);
+    document.getElementById('cookieDismiss').addEventListener('click', () => {
+      bar.style.transform = 'translateY(100%)';
+      bar.style.transition = 'transform .4s cubic-bezier(0.4,0,0.2,1)';
+      localStorage.setItem('cookieConsent', '1');
     });
   }
 </script>

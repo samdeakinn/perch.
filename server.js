@@ -128,6 +128,11 @@ app.get('/api/waitlist/status', (req, res) => {
   });
 });
 
+app.get('/api/waitlist/count', (_, res) => {
+  const list = getWaitlist();
+  res.json({ ok: true, count: list.length });
+});
+
 app.post('/api/waitlist/referral', (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ ok: false, error: 'email required' });
@@ -147,7 +152,7 @@ app.post('/api/waitlist/referral', (req, res) => {
   }
 });
 
-app.use((_, res) => res.status(404).render('index', { currentPage: 'index' }));
+app.use((_, res) => res.status(404).render('404', { currentPage: '404' }));
 
 export default app;
 
