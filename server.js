@@ -20,13 +20,13 @@ pages.forEach(p => {
 });
 
 app.post('/api/waitlist', (req, res) => {
-  const { name, email, segment } = req.body;
+  const { name, email, segment, estimated_exposure } = req.body;
   if (!name || !email) return res.status(400).json({ ok: false, error: 'name and email required' });
 
   const dir = join(__dirname, 'data');
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
-  const entry = { name, email, segment, at: new Date().toISOString() };
+  const entry = { name, email, segment, estimated_exposure: estimated_exposure || null, at: new Date().toISOString() };
   const file = join(dir, 'waitlist.jsonl');
 
   try {

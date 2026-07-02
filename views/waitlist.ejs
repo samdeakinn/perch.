@@ -6,24 +6,66 @@
   <div class="wrap" style="width:100%;">
     <div class="waitlist-inner">
       <div class="a-fade-up">
-        <div class="section-tag">Early access</div>
-        <h2>Get in before launch.</h2>
-        <p class="section-sub">We're onboarding a small group of households and small businesses first. No spam, one email when your access is ready. No commitment, no payment required during the beta.</p>
-        <div style="margin-top:36px;border-left:2px solid var(--accent-line);padding-left:20px;">
-          <p style="font-size:14px;color:var(--text-dim);margin-bottom:12px;"><strong style="color:var(--text);">What you get immediately:</strong></p>
-          <ul style="list-style:none;">
-            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Your own perch. forwarding address</li>
-            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Full AI extraction for unlimited items</li>
-            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Weekly Monday digest with verdicts</li>
-            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Early-access pricing locked in</li>
-          </ul>
+        <div class="section-tag">Your estimate</div>
+        <h2>What are auto-renewals costing you?</h2>
+        <p class="section-sub">Based on UK averages from FCA and CMA data, here's what the typical household overpays. Adjust the sliders to match your situation.</p>
+
+        <div class="calc-panel">
+          <div class="calc-slider-row">
+            <div class="calc-label-row">
+              <span class="calc-label">Insurance policies</span>
+              <span class="calc-val" id="calcInsurance">2</span>
+            </div>
+            <input type="range" class="calc-slider" id="sliderInsurance" min="0" max="8" value="2" step="1">
+            <div class="calc-range-labels"><span>0</span><span>8+</span></div>
+          </div>
+
+          <div class="calc-slider-row">
+            <div class="calc-label-row">
+              <span class="calc-label">Subscriptions (streaming, SaaS, gym, apps)</span>
+              <span class="calc-val" id="calcSubs">6</span>
+            </div>
+            <input type="range" class="calc-slider" id="sliderSubs" min="0" max="20" value="6" step="1">
+            <div class="calc-range-labels"><span>0</span><span>20+</span></div>
+          </div>
+
+          <div class="calc-slider-row">
+            <div class="calc-label-row">
+              <span class="calc-label">Broadband, mobile &amp; utility contracts</span>
+              <span class="calc-val" id="calcUtilities">2</span>
+            </div>
+            <input type="range" class="calc-slider" id="sliderUtilities" min="0" max="6" value="2" step="1">
+            <div class="calc-range-labels"><span>0</span><span>6+</span></div>
+          </div>
+
+          <div class="calc-slider-row">
+            <div class="calc-label-row">
+              <span class="calc-label">Domains &amp; annual services</span>
+              <span class="calc-val" id="calcDomains">3</span>
+            </div>
+            <input type="range" class="calc-slider" id="sliderDomains" min="0" max="10" value="3" step="1">
+            <div class="calc-range-labels"><span>0</span><span>10+</span></div>
+          </div>
+
+          <div class="calc-total">
+            <div class="calc-total-label">Estimated annual exposure</div>
+            <div class="calc-total-amount" id="calcTotal">£650</div>
+            <div class="calc-total-note">Based on average loyalty penalties across UK markets</div>
+          </div>
+
+          <button class="calc-cta" onclick="document.getElementById('calcFormSection').scrollIntoView({behavior:'smooth'})">
+            Get your full breakdown →
+          </button>
         </div>
       </div>
-      <div class="a-fade-up">
+
+      <div class="a-fade-up" id="calcFormSection">
         <div class="form-panel">
           <div class="waitlist-urgency">Limited early access</div>
-          <p class="form-guide">Tell us who you are and we'll add you to the queue. Households go first; businesses with multiple inboxes follow shortly after.</p>
+          <div class="calc-context" id="calcContext">Based on your estimate, you could be overpaying <strong>£650</strong> per year. perch. catches that.</div>
+          <p class="form-guide">Enter your details and we'll send you a full breakdown of what perch. would track for you — plus early access when it's ready.</p>
           <form id="waitlistForm">
+            <input type="hidden" id="estimatedExposure" name="estimated_exposure" value="650">
             <div class="field">
               <label for="name">Name</label>
               <input type="text" id="name" required placeholder="Your name" autocomplete="name">
@@ -39,9 +81,9 @@
                 <div class="segment-btn" data-segment="business">Small business</div>
               </div>
             </div>
-            <button type="submit" class="submit-btn">Join the waitlist</button>
+            <button type="submit" class="submit-btn">Get my breakdown &amp; join the waitlist</button>
           </form>
-          <p class="submit-note">No spam, no newsletters, no inbox clutter. One email when your spot opens up.</p>
+          <p class="submit-note">We'll send you one email with your personalised breakdown. No spam, no newsletters, no inbox clutter.</p>
           <div class="form-success" id="formSuccess">
             <div class="check">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -49,7 +91,7 @@
               </svg>
             </div>
             <h3>You're on the list.</h3>
-            <p>We'll email you when perch. opens up for your segment. In the meantime, start gathering those renewal emails — you'll have a forwarding address waiting for you.</p>
+            <p>We'll email your personalised breakdown when perch. opens up for your segment. In the meantime, start gathering those renewal emails.</p>
           </div>
         </div>
       </div>
@@ -67,5 +109,32 @@
       selectedSegment = btn.getAttribute('data-segment');
     });
   });
+
+  const RATES = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
+
+  function calcTotal(){
+    const ins = parseInt(document.getElementById('sliderInsurance').value, 10);
+    const subs = parseInt(document.getElementById('sliderSubs').value, 10);
+    const util = parseInt(document.getElementById('sliderUtilities').value, 10);
+    const dom = parseInt(document.getElementById('sliderDomains').value, 10);
+
+    const total = ins * RATES.insurance + subs * RATES.subs + util * RATES.utilities + dom * RATES.domains;
+
+    document.getElementById('calcInsurance').textContent = ins;
+    document.getElementById('calcSubs').textContent = subs;
+    document.getElementById('calcUtilities').textContent = util;
+    document.getElementById('calcDomains').textContent = dom;
+
+    const formatted = '£' + total.toLocaleString();
+    document.getElementById('calcTotal').textContent = formatted;
+    document.getElementById('calcContext').innerHTML = 'Based on your estimate, you could be overpaying <strong>' + formatted + '</strong> per year. perch. catches that.';
+    document.getElementById('estimatedExposure').value = total;
+  }
+
+  document.querySelectorAll('.calc-slider').forEach(s => {
+    s.addEventListener('input', calcTotal);
+  });
+
+  calcTotal();
 </script>
 <%- include('partials/footer') %>
