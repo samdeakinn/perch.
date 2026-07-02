@@ -1,0 +1,154 @@
+<%- include('partials/head', { title: 'Dashboard' }) %>
+<%- include('partials/nav') %>
+
+<div class="page">
+<section class="page-section">
+  <div class="wrap" style="max-width:780px;">
+    <div class="page-header a-fade-up">
+      <div class="section-tag">Dashboard</div>
+      <h2>Your perch. status.</h2>
+      <p>If you're on the waitlist, enter your email to see your position, referral link, and estimated access date.</p>
+    </div>
+
+    <div class="a-fade-up" id="dashLookup">
+      <div class="dash-lookup">
+        <label for="dashEmail" style="font-size:13px;color:var(--text-dim);margin-bottom:8px;display:block;">Your email</label>
+        <div class="dash-input-row">
+          <input type="email" id="dashEmail" placeholder="you@email.com" autocomplete="email" style="flex:1;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:14px;outline:none;">
+          <button id="dashBtn" class="btn-primary" style="padding:12px 22px;">Check status</button>
+        </div>
+        <div id="dashLoading" style="display:none;margin-top:12px;font-size:13px;color:var(--text-faint);">Looking you up...</div>
+      </div>
+    </div>
+
+    <div class="dash-result a-fade-up" id="dashResult" style="display:none;">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <div class="dash-greeting">Hi <span id="dashName"></span></div>
+          <div class="dash-segment-badge" id="dashSegment"></div>
+        </div>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="dash-stat-num" id="dashPosition">—</div>
+            <div class="dash-stat-label">Queue position</div>
+          </div>
+          <div class="dash-stat-divider"></div>
+          <div class="dash-stat">
+            <div class="dash-stat-num" id="dashTotal">—</div>
+            <div class="dash-stat-label">Total ahead of you</div>
+          </div>
+          <div class="dash-stat-divider"></div>
+          <div class="dash-stat">
+            <div class="dash-stat-num" id="dashAccess" style="font-size:14px;font-family:var(--sans);font-weight:600;">—</div>
+            <div class="dash-stat-label">Estimated access</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card" id="dashReferral">
+        <h3 style="margin-bottom:6px;">Share &amp; move up</h3>
+        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:16px;line-height:1.6;">Every person who joins using your link moves you one position up the queue. Your friends need the visibility too.</p>
+        <div class="dash-input-row">
+          <input type="text" id="dashRefLink" readonly style="flex:1;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--text);font-size:13px;outline:none;font-family:monospace;">
+          <button id="dashCopyBtn" class="btn-primary" style="padding:12px 18px;font-size:13px;">Copy</button>
+        </div>
+        <div id="dashCopyMsg" style="margin-top:8px;font-size:12px;color:var(--accent);display:none;">Copied!</div>
+        <div style="margin-top:16px;font-size:13px;color:var(--text-faint);">Referred so far: <strong style="color:var(--text);" id="dashRefCount">0</strong></div>
+      </div>
+
+      <div class="dash-card">
+        <h3 style="margin-bottom:6px;">What happens next</h3>
+        <ul class="dash-timeline">
+          <li class="dash-timeline-item active">
+            <div class="dash-timeline-dot"></div>
+            <div>
+              <div class="dash-timeline-title">You joined the waitlist</div>
+              <div class="dash-timeline-desc">You're on the list. We'll email you when we open up your segment.</div>
+            </div>
+          </li>
+          <li class="dash-timeline-item">
+            <div class="dash-timeline-dot"></div>
+            <div>
+              <div class="dash-timeline-title">Your perch. address is created</div>
+              <div class="dash-timeline-desc">We'll assign you a personal forwarding address (you@perch.app) and send you a welcome email with everything you need to get started.</div>
+            </div>
+          </li>
+          <li class="dash-timeline-item">
+            <div class="dash-timeline-dot"></div>
+            <div>
+              <div class="dash-timeline-title">Start forwarding</div>
+              <div class="dash-timeline-desc">Forward your renewal emails and upload documents. perch. starts extracting and building your first Monday digest.</div>
+            </div>
+          </li>
+          <li class="dash-timeline-item">
+            <div class="dash-timeline-dot"></div>
+            <div>
+              <div class="dash-timeline-title">First digest arrives</div>
+              <div class="dash-timeline-desc">Monday morning. Your renewals ranked by urgency. Verdicts for each one. 90 seconds to read, a week of peace of mind.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dash-card a-fade-up" id="dashNotFound" style="display:none;">
+      <div style="text-align:center;padding:20px;">
+        <h3 style="margin-bottom:8px;">Not on the list yet?</h3>
+        <p style="font-size:14px;color:var(--text-dim);margin-bottom:20px;">We couldn't find that email. Join the waitlist to get your dashboard.</p>
+        <a href="/waitlist" class="btn-primary" style="display:inline-flex;">Join the waitlist →</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+  document.getElementById('dashBtn').addEventListener('click', lookupStatus);
+  document.getElementById('dashEmail').addEventListener('keydown', e => { if (e.key === 'Enter') lookupStatus(); });
+
+  async function lookupStatus(){
+    const email = document.getElementById('dashEmail').value.trim();
+    if (!email) return;
+
+    document.getElementById('dashLoading').style.display = 'block';
+    document.getElementById('dashBtn').disabled = true;
+    document.getElementById('dashResult').style.display = 'none';
+    document.getElementById('dashNotFound').style.display = 'none';
+
+    try {
+      const r = await fetch('/api/waitlist/status?email=' + encodeURIComponent(email));
+      const data = await r.json();
+
+      if (data.found) {
+        document.getElementById('dashName').textContent = data.name;
+        document.getElementById('dashPosition').textContent = data.position;
+        document.getElementById('dashTotal').textContent = data.total - data.position;
+        document.getElementById('dashAccess').textContent = data.estimatedAccess;
+        document.getElementById('dashSegment').textContent = data.segment === 'business' ? 'Small business' : 'Household';
+        document.getElementById('dashRefLink').value = 'https://perch.vercel.app/waitlist?ref=' + data.referralCode;
+        document.getElementById('dashRefCount').textContent = data.referralCount;
+        document.getElementById('dashResult').style.display = 'block';
+
+        if (data.referralCount > 0) {
+          document.getElementById('dashPosition').textContent = data.position - data.referralCount + ' (was ' + data.position + ')';
+        }
+      } else {
+        document.getElementById('dashNotFound').style.display = 'block';
+      }
+    } catch(_) {
+      document.getElementById('dashNotFound').style.display = 'block';
+    }
+
+    document.getElementById('dashLoading').style.display = 'none';
+    document.getElementById('dashBtn').disabled = false;
+  }
+
+  document.getElementById('dashCopyBtn').addEventListener('click', () => {
+    const input = document.getElementById('dashRefLink');
+    input.select();
+    document.execCommand('copy');
+    document.getElementById('dashCopyMsg').style.display = 'block';
+    setTimeout(() => { document.getElementById('dashCopyMsg').style.display = 'none'; }, 2000);
+  });
+</script>
+<%- include('partials/footer') %>

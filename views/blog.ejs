@@ -1,0 +1,31 @@
+<%- include('partials/head', { title: 'Blog' }) %>
+<%- include('partials/nav') %>
+
+<div class="page">
+<section class="page-section">
+  <div class="wrap" style="max-width:780px;">
+    <div class="page-header a-fade-up">
+      <div class="section-tag">Blog</div>
+      <h2>Auto-renewal, explained.</h2>
+      <p>What the industry doesn't want you to know about the loyalty penalty, subscription traps, and how to stop overpaying without spending your life on the phone to customer service.</p>
+    </div>
+
+    <div class="blog-list a-fade-up">
+      <% articles.forEach(a => { %>
+      <a href="/blog/<%= a.slug %>" class="blog-card">
+        <div class="blog-card-meta"><%= a.date %> · <%= a.readTime %> min read</div>
+        <h3><%= a.title %></h3>
+        <p><%= a.excerpt %></p>
+        <div class="blog-card-footer">Read more →</div>
+      </a>
+      <% }) %>
+    </div>
+
+    <div class="blog-rss a-fade-up">
+      <a href="/blog/feed.xml" style="font-size:13px;color:var(--text-faint);">Subscribe via RSS</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<%- include('partials/footer') %>

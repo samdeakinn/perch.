@@ -1,0 +1,22 @@
+<%- include('partials/head', { title: article.title }) %>
+<%- include('partials/nav') %>
+
+<div class="page">
+<section class="page-section">
+  <div class="wrap" style="max-width:680px;">
+    <div class="page-header a-fade-up">
+      <div class="section-tag">Blog</div>
+      <h2><%= article.title %></h2>
+      <div style="font-size:13px;color:var(--text-faint);margin-top:8px;"><%= article.date %> · <%= article.readTime %> min read</div>
+    </div>
+    <div class="article-body a-fade-up">
+      <%- include('articles/' + article.template) %>
+    </div>
+    <div class="article-footer a-fade-up">
+      <a href="/blog" style="font-size:14px;color:var(--accent);">&larr; Back to blog</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<%- include('partials/footer') %>
