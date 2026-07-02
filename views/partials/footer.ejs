@@ -1,0 +1,40 @@
+<footer>
+  <div class="wrap footer-inner">
+    <div class="logo" style="font-size:17px;">perch<span>.</span></div>
+    <div class="footer-links">
+      <a href="/problem">The problem</a>
+      <a href="/how-it-works">How it works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="mailto:hello@perch.app">Contact</a>
+    </div>
+    <div class="footer-trust">We only process what you send us. Nothing is shared, sold, or used to train models on your data.</div>
+  </div>
+</footer>
+
+<script src="/transition.js"></script>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('compressed');
+    else nav.classList.remove('compressed');
+  }, { passive: true });
+
+  const faders = document.querySelectorAll('.a-fade-up');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReduced) {
+    faders.forEach(el => el.classList.add('in'));
+  } else {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(el => observer.observe(el));
+  }
+</script>
+</body>
+</html>

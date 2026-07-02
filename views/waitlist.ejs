@@ -1,0 +1,61 @@
+<%- include('partials/head', { title: 'Early access' }) %>
+<%- include('partials/nav') %>
+
+<div class="page">
+<section class="page-section waitlist" style="min-height:80vh;display:flex;align-items:center;">
+  <div class="wrap" style="width:100%;">
+    <div class="waitlist-inner">
+      <div class="a-fade-up">
+        <div class="section-tag">Early access</div>
+        <h2>Get in before launch.</h2>
+        <p class="section-sub">We're onboarding a small group of households and small businesses first. No spam, one email when your access is ready. No commitment, no payment required during the beta.</p>
+        <div style="margin-top:36px;border-left:2px solid var(--accent-line);padding-left:20px;">
+          <p style="font-size:14px;color:var(--text-dim);margin-bottom:12px;"><strong style="color:var(--text);">What you get immediately:</strong></p>
+          <ul style="list-style:none;">
+            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Your own perch. forwarding address</li>
+            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Full AI extraction for unlimited items</li>
+            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Weekly Monday digest with verdicts</li>
+            <li style="font-size:14px;color:var(--text-dim);padding:6px 0;display:flex;gap:10px;">→ Early-access pricing locked in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a-fade-up">
+        <div class="form-panel">
+          <div class="waitlist-urgency">Limited early access</div>
+          <p class="form-guide">Tell us who you are and we'll add you to the queue. Households go first; businesses with multiple inboxes follow shortly after.</p>
+          <form id="waitlistForm">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" required placeholder="Your name" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" required placeholder="you@email.com" autocomplete="email">
+            </div>
+            <div class="field">
+              <label>I'm signing up as a...</label>
+              <div class="segment-row">
+                <div class="segment-btn active" data-segment="household">Household</div>
+                <div class="segment-btn" data-segment="business">Small business</div>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Join the waitlist</button>
+          </form>
+          <p class="submit-note">No spam, no newsletters, no inbox clutter. One email when your spot opens up.</p>
+          <div class="form-success" id="formSuccess">
+            <div class="check">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>You're on the list.</h3>
+            <p>We'll email you when perch. opens up for your segment. In the meantime, start gathering those renewal emails — you'll have a forwarding address waiting for you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<%- include('partials/footer') %>
