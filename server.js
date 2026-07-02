@@ -12,7 +12,7 @@ app.set('views', join(__dirname, 'views'));
 app.use(express.static(join(__dirname, 'public')));
 app.use(express.json());
 
-const pages = ['problem', 'how-it-works', 'proof', 'pricing', 'waitlist', 'privacy'];
+const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy'];
 
 app.get('/', (_, res) => res.render('index', { currentPage: 'index' }));
 pages.forEach(p => {
