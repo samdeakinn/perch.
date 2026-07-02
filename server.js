@@ -41,4 +41,8 @@ app.post('/api/waitlist', (req, res) => {
 
 app.use((_, res) => res.status(404).render('index', { currentPage: 'index' }));
 
-app.listen(PORT, () => console.log(`perch. running at http://localhost:${PORT}`));
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`perch. running at http://localhost:${PORT}`));
+}
