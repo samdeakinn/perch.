@@ -11,29 +11,90 @@
   </div>
 </footer>
 
-<script src="/transition.js"></script>
 <script>
   const nav = document.getElementById('nav');
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) nav.classList.add('compressed');
-    else nav.classList.remove('compressed');
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        nav.classList.toggle('compressed', window.scrollY > 40);
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 
-  const faders = document.querySelectorAll('.a-fade-up');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (prefersReduced) {
-    faders.forEach(el => el.classList.add('in'));
-  } else {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    faders.forEach(el => observer.observe(el));
+  function initAnimations(){
+    const faders = document.querySelectorAll('.a-fade-up');
+    if (prefersReduced) {
+      faders.forEach(el => el.classList.add('in'));
+    } else {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      faders.forEach(el => observer.observe(el));
+    }
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => item.classList.toggle('open'));
+    });
+
+    document.querySelectorAll('.proof-num[data-count]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-count'), 10);
+      const isCurrency = el.textContent.includes('£');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(el);
+
+          const dur = 1500;
+          const start = performance.now();
+
+          function tick(now){
+            const t = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const val = Math.round(eased * target);
+            el.textContent = isCurrency ? '£' + val.toLocaleString() : val.toLocaleString();
+            if (t < 1) requestAnimationFrame(tick);
+          }
+
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.5 });
+      observer.observe(el);
+    });
+  }
+
+  initAnimations();
+
+  const form = document.getElementById('waitlistForm');
+  const formSuccess = document.getElementById('formSuccess');
+  if (form && formSuccess) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !email) return;
+
+      try {
+        await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, segment: selectedSegment })
+        });
+      } catch (_) {}
+
+      form.style.display = 'none';
+      formSuccess.classList.add('show');
+    });
   }
 </script>
 </body>

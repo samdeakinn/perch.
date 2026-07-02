@@ -58,4 +58,14 @@
 </section>
 </div>
 
+<script>
+  let selectedSegment = 'household';
+  document.querySelectorAll('.segment-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedSegment = btn.getAttribute('data-segment');
+    });
+  });
+</script>
 <%- include('partials/footer') %>
