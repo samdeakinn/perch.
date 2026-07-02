@@ -2,7 +2,7 @@ import express from 'express';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { createHash, randomBytes } from 'crypto';
+import { createHash } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -13,8 +13,7 @@ app.set('views', join(__dirname, 'views'));
 app.use(express.static(join(__dirname, 'public')));
 app.use(express.json());
 
-const dataDir = join(__dirname, 'data');
-if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true });
+const dataDir = process.env.VERCEL ? '/tmp/data' : join(__dirname, 'data');
 
 const articles = [
   { slug: 'insurance-loyalty-penalty', title: 'The UK Insurance Loyalty Penalty: What Changed and What Didn\'t', excerpt: 'The FCA banned price walking in 2022, but millions are still overpaying. Here\'s what happened and what hasn\'t changed.', date: '2 Jul 2026', readTime: 4, template: 'insurance-loyalty-penalty' },
@@ -32,10 +31,6 @@ pages.forEach(p => {
     if (p === 'blog') return res.render('blog', { currentPage: 'blog', articles });
     res.render(p, { currentPage: p });
   });
-});
-
-articles.forEach(a => {
-  app.get(`/blog/${a.slug}`, (_, res) => res.render('article', { currentPage: 'blog', article: a }));
 });
 
 app.get('/blog/feed.xml', (_, res) => {
@@ -59,7 +54,16 @@ app.get('/blog/feed.xml', (_, res) => {
     </feed>`);
 });
 
+articles.forEach(a => {
+  app.get(`/blog/${a.slug}`, (_, res) => res.render('article', { currentPage: 'blog', article: a }));
+});
+
+function ensureDataDir(){
+  try { if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true }); } catch(_) {}
+}
+
 function getWaitlist(){
+  ensureDataDir();
   const file = join(dataDir, 'waitlist.jsonl');
   if (!existsSync(file)) return [];
   return readFileSync(file, 'utf-8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
