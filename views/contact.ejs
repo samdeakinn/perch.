@@ -1,0 +1,41 @@
+<%- include('partials/head', { title: 'contact' }) %>
+<%- include('partials/nav') %>
+
+<div class="page" id="main-content" role="main">
+<section class="page-section">
+  <div class="wrap" style="max-width:580px;">
+    <div class="page-header a-fade-up">
+      <div class="section-tag">contact</div>
+      <h2>get in touch.</h2>
+      <p>questions, feedback, press inquiries, or just want to say hello. we read everything.</p>
+    </div>
+
+    <form id="contactForm" class="a-fade-up" style="margin-top:40px;display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <label for="contactName" style="display:block;font-size:12px;color:var(--text-faint);margin-bottom:4px;font-weight:500;">name</label>
+        <input type="text" id="contactName" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:14px;outline:none;font-family:var(--sans);">
+      </div>
+      <div>
+        <label for="contactEmail" style="display:block;font-size:12px;color:var(--text-faint);margin-bottom:4px;font-weight:500;">email</label>
+        <input type="email" id="contactEmail" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:14px;outline:none;font-family:var(--sans);">
+      </div>
+      <div>
+        <label for="contactMessage" style="display:block;font-size:12px;color:var(--text-faint);margin-bottom:4px;font-weight:500;">message</label>
+        <textarea id="contactMessage" rows="5" required style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:14px;outline:none;font-family:var(--sans);resize:vertical;"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="align-self:flex-start;">send message</button>
+      <div id="contactMsg" style="display:none;font-size:13px;color:var(--accent);">thanks — we'll be in touch.</div>
+    </form>
+  </div>
+</section>
+</div>
+
+<script>
+document.getElementById('contactForm')?.addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('contactMsg').style.display = 'block';
+});
+</script>
+
+<%- include('partials/footer') %>
