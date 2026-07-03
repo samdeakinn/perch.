@@ -1,0 +1,192 @@
+<%- include('partials/head', { title: 'app', metaDesc: 'perch. renewal tracker — paste an email, upload a pdf, or add manually. parse, track, and manage every auto-renewal.' }) %>
+<%- include('partials/nav') %>
+
+<div class="page" id="main-content" role="main">
+
+<section class="app-section">
+  <div class="wrap" style="padding-top:120px;padding-bottom:20px;">
+
+    <div style="text-align:center;margin-bottom:32px;">
+      <div class="eyebrow" style="justify-content:center;">renewal tracker</div>
+      <h1 style="max-width:none;margin-bottom:8px;">your <em class="glow-text">inbox.</em></h1>
+      <p style="font-size:14px;color:var(--text-dim);max-width:500px;margin:0 auto;">paste a renewal email, upload a document, or enter the details yourself. perch. extracts what matters.</p>
+    </div>
+
+    <!-- Quick Add Panel -->
+    <div class="app-add-panel" id="appAddPanel">
+      <div class="app-add-tabs">
+        <button class="app-add-tab active" data-mode="paste">paste email</button>
+        <button class="app-add-tab" data-mode="upload">upload file</button>
+        <button class="app-add-tab" data-mode="manual">manual entry</button>
+      </div>
+
+      <!-- Paste Mode -->
+      <div class="app-add-body active" id="appAddPaste">
+        <textarea class="app-paste-area" id="appPasteInput" placeholder="paste a renewal email here...
+
+example:
+Subject: Your car insurance is renewing soon
+From: Admiral Insurance
+
+your policy for your toyota yaris will renew on 14 august 2026. your new premium is £612.40 per year. this represents a change of +22% from your previous year's premium of £502.00.
+
+if you want to cancel or make changes, please contact us before the renewal date."></textarea>
+        <div class="app-add-actions">
+          <span class="app-add-hint">perch. reads the email and extracts dates, amounts, and price changes automatically.</span>
+          <button class="app-parse-btn" id="appParseBtn">parse & add →</button>
+        </div>
+        <div class="app-parse-result" id="appParseResult" style="display:none;"></div>
+      </div>
+
+      <!-- Upload Mode -->
+      <div class="app-add-body" id="appAddUpload">
+        <div class="app-drop-zone" id="appDropZone">
+          <div class="app-drop-icon">📄</div>
+          <div class="app-drop-label">drop a pdf, screenshot, or photo here</div>
+          <div class="app-drop-sub">or click to browse · pdf, jpg, png, webp</div>
+          <input type="file" id="appFileInput" accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none;">
+        </div>
+        <div class="app-parse-result" id="appUploadResult" style="display:none;"></div>
+      </div>
+
+      <!-- Manual Mode -->
+      <div class="app-add-body" id="appAddManual">
+        <form id="appManualForm" class="app-manual-form">
+          <div class="app-form-grid">
+            <div class="app-form-group">
+              <label>provider</label>
+              <input type="text" id="mfProvider" placeholder="e.g. Admiral Car Insurance" required>
+            </div>
+            <div class="app-form-group">
+              <label>amount</label>
+              <input type="text" id="mfAmount" placeholder="e.g. 612.40" required>
+            </div>
+            <div class="app-form-group">
+              <label>period</label>
+              <select id="mfPeriod">
+                <option value="year">per year</option>
+                <option value="month">per month</option>
+              </select>
+            </div>
+            <div class="app-form-group">
+              <label>renewal date</label>
+              <input type="date" id="mfDate" required>
+            </div>
+            <div class="app-form-group">
+              <label>category</label>
+              <select id="mfCategory">
+                <option value="insurance">insurance</option>
+                <option value="subscription">subscription</option>
+                <option value="broadband">broadband / utilities</option>
+                <option value="domain">domain / hosting</option>
+                <option value="other">other</option>
+              </select>
+            </div>
+            <div class="app-form-group">
+              <label>price change (optional)</label>
+              <input type="text" id="mfChange" placeholder="e.g. +22% or stable">
+            </div>
+            <div class="app-form-group app-form-full">
+              <label>notes (optional)</label>
+              <input type="text" id="mfNotes" placeholder="any additional context">
+            </div>
+          </div>
+          <div class="app-form-actions">
+            <button type="submit" class="app-parse-btn">add item →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="app-stats" id="appStats">
+      <div class="app-stat">
+        <div class="app-stat-num" id="appStatTotal">0</div>
+        <div class="app-stat-label">items tracked</div>
+      </div>
+      <div class="app-stat-div"></div>
+      <div class="app-stat">
+        <div class="app-stat-num" id="appStatAnnual">£0</div>
+        <div class="app-stat-label">annual exposure</div>
+      </div>
+      <div class="app-stat-div"></div>
+      <div class="app-stat">
+        <div class="app-stat-num" id="appStatAction">0</div>
+        <div class="app-stat-label">need action</div>
+      </div>
+      <div class="app-stat-div"></div>
+      <div class="app-stat">
+        <div class="app-stat-num app-stat-pos" id="appStatSaved">£0</div>
+        <div class="app-stat-label">potential savings</div>
+      </div>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="app-view-bar">
+      <div class="app-filters" id="appFilters">
+        <button class="app-filter active" data-filter="all">all</button>
+        <button class="app-filter" data-filter="insurance">insurance</button>
+        <button class="app-filter" data-filter="subscription">subscriptions</button>
+        <button class="app-filter" data-filter="broadband">broadband</button>
+        <button class="app-filter" data-filter="domain">domains</button>
+        <button class="app-filter" data-filter="other">other</button>
+      </div>
+      <div class="app-view-toggles">
+        <button class="app-view-btn active" data-view="list" title="list view">☰</button>
+        <button class="app-view-btn" data-view="calendar" title="calendar view">📅</button>
+        <button class="app-view-btn" data-view="digest" title="digest view">📋</button>
+      </div>
+    </div>
+
+    <!-- List View -->
+    <div class="app-view app-view-active" id="appList">
+      <div class="app-list-empty" id="appEmpty">
+        <div class="app-empty-icon">📬</div>
+        <h3>nothing tracked yet.</h3>
+        <p>paste a renewal email above, upload a pdf, or add an item manually to get started.</p>
+      </div>
+      <div class="app-list-items" id="appItems"></div>
+    </div>
+
+    <!-- Calendar View -->
+    <div class="app-view" id="appCalendar">
+      <div class="app-cal-header">
+        <button class="app-cal-nav" id="calPrev">←</button>
+        <span class="app-cal-month" id="calMonth">July 2026</span>
+        <button class="app-cal-nav" id="calNext">→</button>
+      </div>
+      <div class="app-cal-grid" id="calGrid"></div>
+    </div>
+
+    <!-- Digest View -->
+    <div class="app-view" id="appDigest">
+      <div class="app-digest-header">
+        <span class="app-digest-icon">📬</span>
+        <div>
+          <div class="app-digest-title">weekly renewal roundup</div>
+          <div class="app-digest-date" id="digestDate">issued monday</div>
+        </div>
+      </div>
+      <div class="app-digest-empty" id="digestEmpty" style="display:none;">
+        <p>not enough items to generate a digest. add some renewals first.</p>
+      </div>
+      <div class="app-digest-content" id="digestContent"></div>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="app-actions-bar">
+      <button class="app-action-btn" id="appExportBtn">↓ export csv</button>
+      <button class="app-action-btn" id="appClearBtn">clear all data</button>
+      <label class="app-action-btn app-action-toggle">
+        <input type="checkbox" id="appNotifyToggle" checked> notifications
+      </label>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+<script src="/app.js"></script>
+<%- include('partials/footer') %>

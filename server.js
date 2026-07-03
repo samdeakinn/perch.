@@ -58,7 +58,7 @@ const articles = [
   { slug: 'domain-renewal-lapses', title: 'domain renewal lapses: the most preventable financial loss', excerpt: 'a forgotten domain renewal can cost ten times the original price to fix. here\'s why it happens and how to stop it.', date: '23 Jun 2026', readTime: 3, template: 'domain-renewal-lapses' },
 ];
 
-const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap', 'about', 'terms', 'contact', 'download', 'features', 'resources'];
+const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap', 'about', 'terms', 'contact', 'download', 'features', 'resources', 'app'];
 
 app.get('/', (_, res) => res.render('index', { currentPage: 'index' }));
 app.get('/get-access', (_, res) => res.redirect(301, '/waitlist'));
@@ -81,7 +81,7 @@ app.get('/robots.txt', (_, res) => {
 });
 
 app.get('/sitemap.xml', (_, res) => {
-  const primary = ['','problem','how-it-works','comparison','proof','pricing','uses','demo','download','tool','waitlist','features','dashboard'];
+  const primary = ['','problem','how-it-works','comparison','proof','pricing','uses','demo','app','download','tool','waitlist','features','dashboard'];
   const secondary = ['privacy','brand','blog','changelog','roadmap','about','terms','contact','digest','stats','dashboard','resources'];
   const blogUrls = articles.map(a => `blog/${a.slug}`);
   const all = [...primary.map(u => ({url:u,priority:'0.9',changefreq:'weekly'})),
