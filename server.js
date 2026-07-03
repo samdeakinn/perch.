@@ -55,7 +55,7 @@ app.get('/blog/feed.xml', (_, res) => {
 });
 
 articles.forEach(a => {
-  app.get(`/blog/${a.slug}`, (_, res) => res.render('article', { currentPage: 'blog', article: a }));
+  app.get(`/blog/${a.slug}`, (_, res) => res.render('article', { currentPage: 'blog', article: a, articles }));
 });
 
 function ensureDataDir(){

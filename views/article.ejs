@@ -1,4 +1,4 @@
-<%- include('partials/head', { title: article.title }) %>
+<%- include('partials/head', { title: article.title + ' — Blog' }) %>
 <div class="scroll-progress"><div class="scroll-progress-fill" id="scrollFill"></div></div>
 <%- include('partials/nav') %>
 
@@ -17,6 +17,28 @@
       <%- include('articles/' + article.template) %>
     </div>
     <div class="article-footer a-fade-up">
+      <div style="font-size:12px;color:var(--text-faint);margin-bottom:16px;">
+        <a href="/blog" style="color:var(--text-dim);">Blog</a>
+        <span style="margin:0 6px;">/</span>
+        <span><%= article.title %></span>
+      </div>
+
+      <% if (locals.articles) {
+        const related = articles.filter(a => a.slug !== article.slug).slice(0, 3);
+        if (related.length > 0) { %>
+      <div style="margin-bottom:24px;">
+        <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-faint);margin-bottom:12px;">Related articles</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <% related.forEach(r => { %>
+          <a href="/blog/<%= r.slug %>" style="display:block;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-sm);transition:border-color .2s var(--ease);">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;"><%= r.title %></div>
+            <div style="font-size:11px;color:var(--text-faint);"><%= r.readTime %> min read</div>
+          </a>
+          <% }) %>
+        </div>
+      </div>
+      <% } } %>
+
       <a href="/blog" style="font-size:14px;color:var(--accent);">&larr; Back to blog</a>
     </div>
   </div>
