@@ -33,6 +33,26 @@ pages.forEach(p => {
   });
 });
 
+app.get('/stats', (_, res) => {
+  const s = getWaitlistStats();
+  res.render('stats', { currentPage: 'stats', stats: s });
+});
+
+app.get('/robots.txt', (_, res) => {
+  res.type('text/plain').send('User-agent: *\nAllow: /\nSitemap: https://perch.vercel.app/sitemap.xml');
+});
+
+app.get('/sitemap.xml', (_, res) => {
+  const urls = ['','problem','how-it-works','comparison','proof','pricing','uses','waitlist','privacy','brand','dashboard','blog','demo','stats'];
+  const blogUrls = articles.map(a => `blog/${a.slug}`);
+  const all = [...urls, ...blogUrls];
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${all.map(u => `<url><loc>https://perch.vercel.app/${u}</loc></url>`).join('\n  ')}
+</urlset>`;
+  res.type('application/xml').send(xml);
+});
+
 app.get('/blog/feed.xml', (_, res) => {
   const items = articles.map(a => `
     <entry>
@@ -126,6 +146,33 @@ app.get('/api/waitlist/status', (req, res) => {
     name: entry.name,
     segment: entry.segment
   });
+});
+
+function getWaitlistStats(){
+  const list = getWaitlist();
+  const refs = getReferrals();
+  const total = list.length;
+  const households = list.filter(e => e.segment === 'household').length;
+  const businesses = list.filter(e => e.segment === 'business').length;
+  const totalRefs = refs.length;
+  const today = new Date().toISOString().slice(0,10);
+  const todaySignups = list.filter(e => e.at && e.at.slice(0,10) === today).length;
+
+  const byDate = {};
+  list.forEach(e => {
+    if (!e.at) return;
+    const d = e.at.slice(0,10);
+    byDate[d] = (byDate[d] || 0) + 1;
+  });
+  const signupsByDay = Object.entries(byDate).sort((a,b) => a[0].localeCompare(b[0])).slice(-30).map(([date,count]) => ({date,count}));
+
+  const avg = total > 0 ? Math.round(totalRefs / total * 10) / 10 : 0;
+
+  return { total, households, businesses, totalRefs, todaySignups, avgReferralsPerPerson:avg, signupsByDay };
+}
+
+app.get('/api/waitlist/stats', (_, res) => {
+  res.json({ ok:true, ...getWaitlistStats() });
 });
 
 app.get('/api/waitlist/count', (_, res) => {

@@ -32,10 +32,29 @@ document.getElementById('footerSubscribe')?.addEventListener('submit', e => {
 </script>
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+<div class="cursor-dot" id="cursorDot"></div>
 
 <script src="/particles.js"></script>
 <script>
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const dot = document.getElementById('cursorDot');
+  if (dot && !window.matchMedia('(hover:none),(pointer:coarse)').matches && !prefersReduced) {
+    let mx = -100, my = -100, cx = -100, cy = -100;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function driftDot(){
+      cx += (mx - cx) * 0.15;
+      cy += (my - cy) * 0.15;
+      dot.style.transform = `translate(${cx - 3}px, ${cy - 3}px)`;
+      dot.classList.add('cursor-dot-visible');
+      requestAnimationFrame(driftDot);
+    }
+    driftDot();
+    document.querySelectorAll('a, button, .tilt-card, input, .faq-item').forEach(el => {
+      el.addEventListener('mouseenter', () => dot.classList.add('cursor-dot-hover'));
+      el.addEventListener('mouseleave', () => dot.classList.remove('cursor-dot-hover'));
+    });
+  }
 
   const nav = document.getElementById('nav');
   let ticking = false;
