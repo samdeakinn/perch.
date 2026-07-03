@@ -57,19 +57,10 @@
     });
   });
 
-  el.sumAnnual.textContent = '£' + totalAnnual.toLocaleString();
-  el.sumItems.textContent = '6';
-  el.sumAction.textContent = totalActionable.toString();
-  if (el.savingsHero) el.savingsHero.textContent = '£1,431';
-
   var seen = null;
   try { seen = localStorage.getItem(STORAGE_KEY); } catch(e) {}
-
-  if (!seen) {
-    startScan();
-  } else {
-    showImmediately();
-  }
+  showImmediately();
+  if (!seen) try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
 
   function startScan() {
     isAnimating = true;
@@ -127,12 +118,16 @@
   function showImmediately() {
     el.scanning.classList.remove('demo-scanning-active');
     el.scanning.classList.add('demo-scanning-hidden');
+    el.statusBadge.textContent = 'demo ready';
 
     itemEls.forEach(function(div) {
-      div.classList.remove('demo-item-init', 'demo-item-anim');
+      div.classList.remove('demo-item-anim');
       div.classList.add('demo-item-visible');
     });
 
+    el.sumAnnual.textContent = '£' + totalAnnual.toLocaleString();
+    el.sumItems.textContent = '6';
+    el.sumAction.textContent = totalActionable.toString();
     el.listFooter.style.display = 'block';
     showScenarios();
     animateCountUp(el.savingsHero, 1431);
@@ -140,6 +135,11 @@
 
   function replayScan() {
     if (isAnimating) return;
+    expandedIndex = -1;
+    itemEls.forEach(function(div) {
+      div.classList.remove('demo-item-expanded', 'demo-item-in', 'demo-item-visible');
+      div.classList.add('demo-item-init');
+    });
     startScan();
   }
 
