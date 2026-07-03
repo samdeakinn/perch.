@@ -16,11 +16,11 @@ app.use(express.json());
 const dataDir = process.env.VERCEL ? '/tmp/data' : join(__dirname, 'data');
 
 const articles = [
-  { slug: 'insurance-loyalty-penalty', title: 'The UK Insurance Loyalty Penalty: What Changed and What Didn\'t', excerpt: 'The FCA banned price walking in 2022, but millions are still overpaying. Here\'s what happened and what hasn\'t changed.', date: '2 Jul 2026', readTime: 4, template: 'insurance-loyalty-penalty' },
-  { slug: 'car-insurance-auto-renewal', title: 'The £560m Car Insurance Auto-Renewal Tax', excerpt: '47% of UK drivers don\'t check before renewing. The average overpayment is £82 a year. Here\'s where that money goes.', date: '30 Jun 2026', readTime: 3, template: 'car-insurance-auto-renewal' },
-  { slug: 'broadband-out-of-contract', title: 'Out-of-Contract Pricing: Broadband\'s Quietest Leak', excerpt: 'Your broadband doubled and you didn\'t notice. Out-of-contract pricing is costing UK households hundreds a year.', date: '28 Jun 2026', readTime: 4, template: 'broadband-out-of-contract' },
-  { slug: 'forgotten-subscriptions', title: 'The £1.6bn Subscription Trap', excerpt: 'Unwanted subscriptions cost UK consumers £1.6 billion a year. Not because they\'re expensive — because they\'re forgotten.', date: '25 Jun 2026', readTime: 3, template: 'forgotten-subscriptions' },
-  { slug: 'domain-renewal-lapses', title: 'Domain Renewal Lapses: The Most Preventable Financial Loss', excerpt: 'A forgotten domain renewal can cost ten times the original price to fix. Here\'s why it happens and how to stop it.', date: '23 Jun 2026', readTime: 3, template: 'domain-renewal-lapses' },
+  { slug: 'insurance-loyalty-penalty', title: 'the uk insurance loyalty penalty: what changed and what didn\'t', excerpt: 'the fca banned price walking in 2022, but millions are still overpaying. here\'s what happened and what hasn\'t changed.', date: '2 Jul 2026', readTime: 4, template: 'insurance-loyalty-penalty' },
+  { slug: 'car-insurance-auto-renewal', title: 'the £560m car insurance auto-renewal tax', excerpt: '47% of uk drivers don\'t check before renewing. the average overpayment is £82 a year. here\'s where that money goes.', date: '30 Jun 2026', readTime: 3, template: 'car-insurance-auto-renewal' },
+  { slug: 'broadband-out-of-contract', title: 'out-of-contract pricing: broadband\'s quietest leak', excerpt: 'your broadband doubled and you didn\'t notice. out-of-contract pricing is costing uk households hundreds a year.', date: '28 Jun 2026', readTime: 4, template: 'broadband-out-of-contract' },
+  { slug: 'forgotten-subscriptions', title: 'the £1.6bn subscription trap', excerpt: 'unwanted subscriptions cost uk consumers £1.6 billion a year. not because they\'re expensive — because they\'re forgotten.', date: '25 Jun 2026', readTime: 3, template: 'forgotten-subscriptions' },
+  { slug: 'domain-renewal-lapses', title: 'domain renewal lapses: the most preventable financial loss', excerpt: 'a forgotten domain renewal can cost ten times the original price to fix. here\'s why it happens and how to stop it.', date: '23 Jun 2026', readTime: 3, template: 'domain-renewal-lapses' },
 ];
 
 const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap'];

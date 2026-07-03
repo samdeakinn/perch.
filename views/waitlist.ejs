@@ -1,36 +1,36 @@
-<%- include('partials/head', { title: 'Early access' }) %>
+<%- include('partials/head', { title: 'early access' }) %>
 <%- include('partials/nav') %>
 
 <div class="page" id="main-content" role="main">
 <section class="page-section" style="min-height:80vh;display:flex;align-items:center;">
   <div class="wrap" style="width:100%;max-width:700px;">
     <div class="a-fade-up" style="text-align:center;">
-      <div class="section-tag" style="justify-content:center;">Early access</div>
-      <h2 style="max-width:none;">You're minutes away from <em class="glow-text">seeing clearly.</em></h2>
-      <p class="section-sub" style="text-align:center;margin:8px auto 0;">Three quick steps. No commitment. We'll email you when perch. opens for your segment.</p>
+      <div class="section-tag" style="justify-content:center;">early access</div>
+      <h2 style="max-width:none;">you're minutes away from <em class="glow-text">seeing clearly.</em></h2>
+      <p class="section-sub" style="text-align:center;margin:8px auto 0;">three quick steps. no commitment. we'll email you when perch. opens for your segment.</p>
     </div>
 
     <div class="onboarding-progress a-fade-up" id="obProgress">
-      <div class="ob-step ob-step-active" data-step="1"><span class="ob-num">1</span><span class="ob-label">Segment</span></div>
-      <div class="ob-step" data-step="2"><span class="ob-num">2</span><span class="ob-label">Estimate</span></div>
-      <div class="ob-step" data-step="3"><span class="ob-num">3</span><span class="ob-label">Details</span></div>
+      <div class="ob-step ob-step-active" data-step="1"><span class="ob-num">1</span><span class="ob-label">segment</span></div>
+      <div class="ob-step" data-step="2"><span class="ob-num">2</span><span class="ob-label">estimate</span></div>
+      <div class="ob-step" data-step="3"><span class="ob-num">3</span><span class="ob-label">details</span></div>
     </div>
 
     <div class="onboarding-panels a-fade-up">
       <!-- Step 1: Segment -->
       <div class="ob-panel ob-panel-active" id="obStep1">
-        <h3 class="ob-panel-title">I'm signing up as a...</h3>
+        <h3 class="ob-panel-title">i'm signing up as a...</h3>
         <div class="ob-segment-grid">
           <button class="ob-segment-card" data-segment="household">
             <div class="ob-seg-icon">🏠</div>
-            <div class="ob-seg-name">Household</div>
-            <div class="ob-seg-desc">For personal and family use</div>
+            <div class="ob-seg-name">household</div>
+            <div class="ob-seg-desc">for personal and family use</div>
             <div class="ob-seg-check">✓</div>
           </button>
           <button class="ob-segment-card" data-segment="business">
             <div class="ob-seg-icon">⚡</div>
-            <div class="ob-seg-name">Small business</div>
-            <div class="ob-seg-desc">For micro-businesses and solo founders</div>
+            <div class="ob-seg-name">small business</div>
+            <div class="ob-seg-desc">for micro-businesses and solo founders</div>
             <div class="ob-seg-check">✓</div>
           </button>
         </div>
@@ -38,12 +38,12 @@
 
       <!-- Step 2: Calculator -->
       <div class="ob-panel" id="obStep2">
-        <h3 class="ob-panel-title">What are auto-renewals costing you?</h3>
-        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">Based on UK averages. Adjust the sliders to match your situation — we'll calculate your estimated annual exposure.</p>
+        <h3 class="ob-panel-title">what are auto-renewals costing you?</h3>
+        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">based on uk averages. adjust the sliders to match your situation — we'll calculate your estimated annual exposure.</p>
         <div class="calc-panel" style="margin-top:0;">
           <div class="calc-slider-row">
             <div class="calc-label-row">
-              <span class="calc-label">Insurance policies</span>
+              <span class="calc-label">insurance policies</span>
               <span class="calc-val" id="calcInsurance">2</span>
             </div>
             <input type="range" class="calc-slider" id="sliderInsurance" min="0" max="8" value="2" step="1">
@@ -51,7 +51,7 @@
           </div>
           <div class="calc-slider-row">
             <div class="calc-label-row">
-              <span class="calc-label">Subscriptions (streaming, SaaS, gym, apps)</span>
+              <span class="calc-label">subscriptions (streaming, saas, gym, apps)</span>
               <span class="calc-val" id="calcSubs">6</span>
             </div>
             <input type="range" class="calc-slider" id="sliderSubs" min="0" max="20" value="6" step="1">
@@ -59,7 +59,7 @@
           </div>
           <div class="calc-slider-row">
             <div class="calc-label-row">
-              <span class="calc-label">Broadband, mobile &amp; utility contracts</span>
+              <span class="calc-label">broadband, mobile &amp; utility contracts</span>
               <span class="calc-val" id="calcUtilities">2</span>
             </div>
             <input type="range" class="calc-slider" id="sliderUtilities" min="0" max="6" value="2" step="1">
@@ -67,36 +67,36 @@
           </div>
           <div class="calc-slider-row">
             <div class="calc-label-row">
-              <span class="calc-label">Domains &amp; annual services</span>
+              <span class="calc-label">domains &amp; annual services</span>
               <span class="calc-val" id="calcDomains">3</span>
             </div>
             <input type="range" class="calc-slider" id="sliderDomains" min="0" max="10" value="3" step="1">
             <div class="calc-range-labels"><span>0</span><span>10+</span></div>
           </div>
           <div class="calc-total" style="margin-top:8px;">
-            <div class="calc-total-label">Estimated annual exposure</div>
+            <div class="calc-total-label">estimated annual exposure</div>
             <div class="calc-total-amount" id="calcTotal">£650</div>
-            <div class="calc-total-note">Based on average loyalty penalties across UK markets</div>
+            <div class="calc-total-note">based on average loyalty penalties across uk markets</div>
           </div>
         </div>
       </div>
 
       <!-- Step 3: Details -->
       <div class="ob-panel" id="obStep3">
-        <h3 class="ob-panel-title">Where should we send your breakdown?</h3>
-        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">We'll send you one email with your personalised estimate and early access when perch. opens for your segment.</p>
+        <h3 class="ob-panel-title">where should we send your breakdown?</h3>
+        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">we'll send you one email with your personalised estimate and early access when perch. opens for your segment.</p>
         <form id="waitlistForm" class="ob-form">
           <input type="hidden" id="estimatedExposure" name="estimated_exposure" value="650">
           <div class="field">
-            <label for="name">Your name</label>
+            <label for="name">your name</label>
             <input type="text" id="name" required placeholder="e.g. Jo Milner" autocomplete="name">
           </div>
           <div class="field">
-            <label for="email">Email address</label>
+            <label for="email">email address</label>
             <input type="email" id="email" required placeholder="you@email.com" autocomplete="email">
           </div>
-          <button type="submit" class="ob-submit-btn">Get my breakdown &amp; join the waitlist →</button>
-          <p class="submit-note">No spam. No newsletters. One email with your breakdown, then silence until we're ready for you.</p>
+          <button type="submit" class="ob-submit-btn">get my breakdown &amp; join the waitlist →</button>
+          <p class="submit-note">no spam. no newsletters. one email with your breakdown, then silence until we're ready for you.</p>
         </form>
         <div class="form-success" id="formSuccess">
           <div class="check">
@@ -104,60 +104,60 @@
               <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <h3>You're on the list.</h3>
-          <p id="formSuccessMsg">We'll email your personalised breakdown when perch. opens for your segment. In the meantime, start gathering those renewal emails.</p>
+          <h3>you're on the list.</h3>
+          <p id="formSuccessMsg">we'll email your personalised breakdown when perch. opens for your segment. in the meantime, start gathering those renewal emails.</p>
         </div>
       </div>
     </div>
 
     <div class="ob-nav" id="obNav">
-      <button class="ob-back" id="obBack">← Back</button>
-      <button class="ob-next" id="obNext">Continue →</button>
+      <button class="ob-back" id="obBack">← back</button>
+      <button class="ob-next" id="obNext">continue →</button>
     </div>
   </div>
 </section>
 </div>
 
 <script>
-  let selectedSegment = 'household';
-  let currentStep = 1;
-  const totalSteps = 3;
+  let selectedsegment = 'household';
+  let currentstep = 1;
+  const totalsteps = 3;
 
-  const RATES = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
+  const rates = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
 
-  function calcTotal(){
-    const ins = parseInt(document.getElementById('sliderInsurance').value, 10);
-    const subs = parseInt(document.getElementById('sliderSubs').value, 10);
-    const util = parseInt(document.getElementById('sliderUtilities').value, 10);
-    const dom = parseInt(document.getElementById('sliderDomains').value, 10);
-    const total = ins * RATES.insurance + subs * RATES.subs + util * RATES.utilities + dom * RATES.domains;
-    document.getElementById('calcInsurance').textContent = ins;
-    document.getElementById('calcSubs').textContent = subs;
-    document.getElementById('calcUtilities').textContent = util;
-    document.getElementById('calcDomains').textContent = dom;
-    document.getElementById('calcTotal').textContent = '£' + total.toLocaleString();
-    document.getElementById('estimatedExposure').value = total;
+  function calctotal(){
+    const ins = parseint(document.getelementbyid('sliderinsurance').value, 10);
+    const subs = parseint(document.getelementbyid('slidersubs').value, 10);
+    const util = parseint(document.getelementbyid('sliderutilities').value, 10);
+    const dom = parseint(document.getelementbyid('sliderdomains').value, 10);
+    const total = ins * rates.insurance + subs * rates.subs + util * rates.utilities + dom * rates.domains;
+    document.getelementbyid('calcinsurance').textcontent = ins;
+    document.getelementbyid('calcsubs').textcontent = subs;
+    document.getelementbyid('calcutilities').textcontent = util;
+    document.getelementbyid('calcdomains').textcontent = dom;
+    document.getelementbyid('calctotal').textcontent = '£' + total.tolocalestring();
+    document.getelementbyid('estimatedexposure').value = total;
   }
-  document.querySelectorAll('.calc-slider').forEach(s => s.addEventListener('input', calcTotal));
-  calcTotal();
+  document.queryselectorall('.calc-slider').foreach(s => s.addeventlistener('input', calctotal));
+  calctotal();
 
-  document.querySelectorAll('.ob-segment-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.ob-segment-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      selectedSegment = card.getAttribute('data-segment');
+  document.queryselectorall('.ob-segment-card').foreach(card => {
+    card.addeventlistener('click', () => {
+      document.queryselectorall('.ob-segment-card').foreach(c => c.classlist.remove('selected'));
+      card.classlist.add('selected');
+      selectedsegment = card.getattribute('data-segment');
     });
   });
 
-  function showStep(n){
-    currentStep = n;
-    document.querySelectorAll('.ob-panel').forEach((el, i) => {
-      el.classList.toggle('ob-panel-active', i + 1 === n);
+  function showstep(n){
+    currentstep = n;
+    document.queryselectorall('.ob-panel').foreach((el, i) => {
+      el.classlist.toggle('ob-panel-active', i + 1 === n);
     });
-    document.querySelectorAll('.ob-step').forEach(el => {
-      const step = parseInt(el.getAttribute('data-step'), 10);
-      el.classList.toggle('ob-step-active', step === n);
-      el.classList.toggle('ob-step-done', step < n);
+    document.queryselectorall('.ob-step').foreach(el => {
+      const step = parseint(el.getattribute('data-step'), 10);
+      el.classlist.toggle('ob-step-active', step === n);
+      el.classlist.toggle('ob-step-done', step < n);
     });
     document.getElementById('obBack').style.display = n === 1 ? 'none' : 'inline-flex';
     document.getElementById('obNext').textContent = n === totalSteps ? 'Submit' : 'Continue →';
@@ -165,10 +165,10 @@
   }
 
   document.getElementById('obNext').addEventListener('click', () => {
-    if (currentStep === 2) {
-      document.getElementById('obNext').textContent = 'Submit';
+    if (currentstep === 2) {
+      document.getelementbyid('obnext').textcontent = 'submit';
     }
-    if (currentStep < totalSteps) {
+    if (currentstep < totalSteps) {
       showStep(currentStep + 1);
     } else {
       document.getElementById('obNext').style.display = 'none';
@@ -177,32 +177,32 @@
   });
 
   document.getElementById('obBack').addEventListener('click', () => {
-    if (currentStep > 1) showStep(currentStep - 1);
+    if (currentstep > 1) showstep(currentstep - 1);
   });
 
-  const form = document.getElementById('waitlistForm');
-  const formSuccess = document.getElementById('formSuccess');
-  if (form && formSuccess) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
+  const form = document.getelementbyid('waitlistform');
+  const formsuccess = document.getelementbyid('formsuccess');
+  if (form && formsuccess) {
+    form.addeventlistener('submit', async (e) => {
+      e.preventdefault();
+      const name = document.getelementbyid('name').value.trim();
+      const email = document.getelementbyid('email').value.trim();
       if (!name || !email) return;
 
-      const exposure = document.getElementById('estimatedExposure').value;
-      const msgEl = document.getElementById('formSuccessMsg');
-      msgEl.textContent = 'We\'ll email your personalised breakdown at ' + email + ' when perch. opens for ' + (selectedSegment === 'business' ? 'small businesses' : 'households') + '. In the meantime, start gathering those renewal emails.';
+      const exposure = document.getelementbyid('estimatedexposure').value;
+      const msgel = document.getelementbyid('formsuccessmsg');
+      msgel.textcontent = 'we\'ll email your personalised breakdown at ' + email + ' when perch. opens for ' + (selectedsegment === 'business' ? 'small businesses' : 'households') + '. in the meantime, start gathering those renewal emails.';
 
       try {
         await fetch('/api/waitlist', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, segment: selectedSegment, estimated_exposure: exposure })
+          method: 'post', headers: { 'content-type': 'application/json' },
+          body: json.stringify({ name, email, segment: selectedsegment, estimated_exposure: exposure })
         });
       } catch(_) {}
 
       form.style.display = 'none';
-      formSuccess.classList.add('show');
-      document.getElementById('obNav').style.display = 'none';
+      formsuccess.classlist.add('show');
+      document.getelementbyid('obnav').style.display = 'none';
     });
   }
 </script>

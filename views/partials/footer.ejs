@@ -2,34 +2,34 @@
   <div class="wrap footer-inner">
     <div class="logo" style="font-size:17px;">perch<span>.</span></div>
     <div class="footer-links">
-      <a href="/demo">Demo</a>
-      <a href="/problem">The problem</a>
-      <a href="/how-it-works">How it works</a>
-      <a href="/uses">Uses</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/blog">Blog</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/changelog">Changelog</a>
-      <a href="/roadmap">Roadmap</a>
-      <a href="mailto:hello@perch.app">Contact</a>
+      <a href="/demo">demo</a>
+      <a href="/problem">the problem</a>
+      <a href="/how-it-works">how it works</a>
+      <a href="/uses">uses</a>
+      <a href="/pricing">pricing</a>
+      <a href="/blog">blog</a>
+      <a href="/privacy">privacy</a>
+      <a href="/changelog">changelog</a>
+      <a href="/roadmap">roadmap</a>
+      <a href="mailto:hello@perch.app">contact</a>
     </div>
     <div style="width:100%;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-      <div style="font-size:12.5px;color:var(--text-faint);">Get updates on auto-renewal, loyalty penalties, and perch. launch news.</div>
+      <div style="font-size:12.5px;color:var(--text-faint);">get updates on auto-renewal, loyalty penalties, and perch. launch news.</div>
       <form id="footerSubscribe" style="display:flex;gap:6px;max-width:340px;">
         <input type="email" id="footerEmail" placeholder="you@email.com" required style="flex:1;min-width:180px;padding:8px 12px;border-radius:6px;border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:12.5px;outline:none;font-family:var(--sans);">
-        <button type="submit" style="padding:8px 14px;border-radius:6px;border:none;background:var(--accent);color:#181208;font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--sans);">Subscribe</button>
+        <button type="submit" style="padding:8px 14px;border-radius:6px;border:none;background:var(--accent);color:#181208;font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--sans);">subscribe</button>
       </form>
-      <div id="footerSubMsg" style="display:none;font-size:12px;color:var(--accent);">You're subscribed.</div>
+      <div id="footerSubMsg" style="display:none;font-size:12px;color:var(--accent);">you're subscribed.</div>
     </div>
-    <div class="footer-trust">We only process what you send us. Nothing is shared, sold, or used to train models on your data.</div>
+    <div class="footer-trust">we only process what you send us. nothing is shared, sold, or used to train models on your data.</div>
   </div>
 </footer>
 
 <script>
-document.getElementById('footerSubscribe')?.addEventListener('submit', e => {
-  e.preventDefault();
-  document.getElementById('footerSubscribe').style.display = 'none';
-  document.getElementById('footerSubMsg').style.display = 'block';
+document.getelementbyid('footersubscribe')?.addeventlistener('submit', e => {
+  e.preventdefault();
+  document.getelementbyid('footersubscribe').style.display = 'none';
+  document.getelementbyid('footersubmsg').style.display = 'block';
 });
 </script>
 
@@ -38,109 +38,109 @@ document.getElementById('footerSubscribe')?.addEventListener('submit', e => {
 
 <script src="/particles.js"></script>
 <script>
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+if ('serviceworker' in navigator) navigator.serviceworker.register('/sw.js');
 </script>
 <script>
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersreduced = window.matchmedia('(prefers-reduced-motion: reduce)').matches;
 
-  const dot = document.getElementById('cursorDot');
-  if (dot && !window.matchMedia('(hover:none),(pointer:coarse)').matches && !prefersReduced) {
+  const dot = document.getelementbyid('cursordot');
+  if (dot && !window.matchmedia('(hover:none),(pointer:coarse)').matches && !prefersreduced) {
     let mx = -100, my = -100, cx = -100, cy = -100;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    function driftDot(){
+    document.addeventlistener('mousemove', e => { mx = e.clientx; my = e.clienty; });
+    function driftdot(){
       cx += (mx - cx) * 0.15;
       cy += (my - cy) * 0.15;
       dot.style.transform = `translate(${cx - 3}px, ${cy - 3}px)`;
-      dot.classList.add('cursor-dot-visible');
-      requestAnimationFrame(driftDot);
+      dot.classlist.add('cursor-dot-visible');
+      requestanimationframe(driftdot);
     }
-    driftDot();
-    document.querySelectorAll('a, button, .tilt-card, input, .faq-item').forEach(el => {
-      el.addEventListener('mouseenter', () => dot.classList.add('cursor-dot-hover'));
-      el.addEventListener('mouseleave', () => dot.classList.remove('cursor-dot-hover'));
+    driftdot();
+    document.queryselectorall('a, button, .tilt-card, input, .faq-item').foreach(el => {
+      el.addeventlistener('mouseenter', () => dot.classlist.add('cursor-dot-hover'));
+      el.addeventlistener('mouseleave', () => dot.classlist.remove('cursor-dot-hover'));
     });
   }
 
-  document.querySelectorAll('.btn-primary').forEach(btn => {
-    btn.addEventListener('click', function(e){
-      const rect = this.getBoundingClientRect();
-      const ripple = document.createElement('span');
-      const size = Math.max(rect.width, rect.height);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
-      ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
-      ripple.className = 'btn-ripple';
-      this.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove());
+  document.queryselectorall('.btn-primary').foreach(btn => {
+    btn.addeventlistener('click', function(e){
+      const rect = this.getboundingclientrect();
+      const ripple = document.createelement('span');
+      const size = math.max(rect.width, rect.height);
+      const x = e.clientx - rect.left - size / 2;
+      const y = e.clienty - rect.top - size / 2;
+      ripple.style.csstext = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
+      ripple.classname = 'btn-ripple';
+      this.appendchild(ripple);
+      ripple.addeventlistener('animationend', () => ripple.remove());
     });
   });
 
-  const nav = document.getElementById('nav');
+  const nav = document.getelementbyid('nav');
   let ticking = false;
-  window.addEventListener('scroll', () => {
+  window.addeventlistener('scroll', () => {
     if (!ticking) {
-      requestAnimationFrame(() => {
-        nav.classList.toggle('compressed', window.scrollY > 40);
+      requestanimationframe(() => {
+        nav.classlist.toggle('compressed', window.scrolly > 40);
         ticking = false;
       });
       ticking = true;
     }
   }, { passive: true });
 
-  const backBtn = document.getElementById('backToTop');
-  if (backBtn) {
-    window.addEventListener('scroll', () => {
-      backBtn.classList.toggle('visible', window.scrollY > 500);
+  const backbtn = document.getelementbyid('backtotop');
+  if (backbtn) {
+    window.addeventlistener('scroll', () => {
+      backbtn.classlist.toggle('visible', window.scrolly > 500);
     }, { passive: true });
-    backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backbtn.addeventlistener('click', () => window.scrollto({ top: 0, behavior: 'smooth' }));
   }
 
-  const hamburger = document.getElementById('hamburgerBtn');
-  const overlay = document.getElementById('navOverlay');
-  const closeBtn = document.getElementById('navDrawerClose');
-  if (hamburger && overlay && closeBtn) {
-    hamburger.addEventListener('click', () => overlay.classList.add('open'));
-    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+  const hamburger = document.getelementbyid('hamburgerbtn');
+  const overlay = document.getelementbyid('navoverlay');
+  const closebtn = document.getelementbyid('navdrawerclose');
+  if (hamburger && overlay && closebtn) {
+    hamburger.addeventlistener('click', () => overlay.classlist.add('open'));
+    closebtn.addeventlistener('click', () => overlay.classlist.remove('open'));
+    overlay.addeventlistener('click', e => { if (e.target === overlay) overlay.classlist.remove('open'); });
   }
 
-  function initAnimations(){
-    const faders = document.querySelectorAll('.a-fade-up');
-    if (prefersReduced) {
-      faders.forEach(el => el.classList.add('in'));
+  function initanimations(){
+    const faders = document.queryselectorall('.a-fade-up');
+    if (prefersreduced) {
+      faders.foreach(el => el.classlist.add('in'));
     } else {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
+      const observer = new intersectionobserver(entries => {
+        entries.foreach(entry => {
+          if (entry.isintersecting) {
+            entry.target.classlist.add('in');
             observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.1 });
-      faders.forEach(el => observer.observe(el));
+      faders.foreach(el => observer.observe(el));
     }
 
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.addEventListener('click', () => item.classList.toggle('open'));
+    document.queryselectorall('.faq-item').foreach(item => {
+      item.addeventlistener('click', () => item.classlist.toggle('open'));
     });
 
-    document.querySelectorAll('.proof-num[data-count]').forEach(el => {
-      const target = parseInt(el.getAttribute('data-count'), 10);
-      const isCurrency = el.textContent.includes('£');
+    document.queryselectorall('.proof-num[data-count]').foreach(el => {
+      const target = parseint(el.getattribute('data-count'), 10);
+      const iscurrency = el.textcontent.includes('£');
 
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
+      const observer = new intersectionobserver(entries => {
+        entries.foreach(entry => {
+          if (!entry.isintersecting) return;
           observer.unobserve(el);
 
           const dur = 1500;
           const start = performance.now();
 
           function tick(now){
-            const t = Math.min((now - start) / dur, 1);
-            const eased = 1 - Math.pow(1 - t, 3);
-            const val = Math.round(eased * target);
-            el.textContent = isCurrency ? '£' + val.toLocaleString() : val.toLocaleString();
+            const t = math.min((now - start) / dur, 1);
+            const eased = 1 - math.pow(1 - t, 3);
+            const val = math.round(eased * target);
+            el.textcontent = iscurrency ? '£' + val.tolocalestring() : val.tolocalestring();
             if (t < 1) requestAnimationFrame(tick);
           }
 
@@ -156,79 +156,79 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
   const fill = document.getElementById('scrollFill');
   if (fill) {
     window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      const p = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
+      const h = document.documentelement;
+      const p = (h.scrolltop || document.body.scrolltop) / (h.scrollheight - h.clientheight);
       fill.style.width = (p * 100) + '%';
     }, { passive: true });
   }
 
-  if (!prefersReduced) {
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      const wrap = card.closest('.tilt-wrap') || card.parentElement;
+  if (!prefersreduced) {
+    document.queryselectorall('.tilt-card').foreach(card => {
+      const wrap = card.closest('.tilt-wrap') || card.parentelement;
       if (!wrap) return;
       wrap.style.perspective = '800px';
-      card.style.transformStyle = 'preserve-3d';
-      card.style.willChange = 'transform';
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top) / r.height;
-        const rotX = (y - 0.5) * -12;
-        const rotY = (x - 0.5) * 12;
-        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      card.style.transformstyle = 'preserve-3d';
+      card.style.willchange = 'transform';
+      card.addeventlistener('mousemove', e => {
+        const r = card.getboundingclientrect();
+        const x = (e.clientx - r.left) / r.width;
+        const y = (e.clienty - r.top) / r.height;
+        const rotx = (y - 0.5) * -12;
+        const roty = (x - 0.5) * 12;
+        card.style.transform = `rotatex(${rotx}deg) rotatey(${roty}deg)`;
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      card.addeventlistener('mouseleave', () => {
+        card.style.transform = 'rotatex(0deg) rotatey(0deg)';
       });
     });
 
-    const stage = document.getElementById('sceneStage');
-    const scene = document.getElementById('heroScene');
+    const stage = document.getelementbyid('scenestage');
+    const scene = document.getelementbyid('heroscene');
     if (stage && scene) {
-      scene.addEventListener('mousemove', e => {
-        const r = scene.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top) / r.height;
-        stage.style.transform = `rotateY(${(x - 0.5) * 8}deg) rotateX(${(y - 0.5) * -6}deg)`;
+      scene.addeventlistener('mousemove', e => {
+        const r = scene.getboundingclientrect();
+        const x = (e.clientx - r.left) / r.width;
+        const y = (e.clienty - r.top) / r.height;
+        stage.style.transform = `rotatey(${(x - 0.5) * 8}deg) rotatex(${(y - 0.5) * -6}deg)`;
       });
-      scene.addEventListener('mouseleave', () => {
-        stage.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      scene.addeventlistener('mouseleave', () => {
+        stage.style.transform = 'rotatey(0deg) rotatex(0deg)';
       });
     }
   }
 
-  const form = document.getElementById('waitlistForm');
-  const formSuccess = document.getElementById('formSuccess');
-  if (form && formSuccess) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
+  const form = document.getelementbyid('waitlistform');
+  const formsuccess = document.getelementbyid('formsuccess');
+  if (form && formsuccess) {
+    form.addeventlistener('submit', async (e) => {
+      e.preventdefault();
+      const name = document.getelementbyid('name').value.trim();
+      const email = document.getelementbyid('email').value.trim();
       if (!name || !email) return;
 
       try {
         await fetch('/api/waitlist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, segment: selectedSegment })
+          method: 'post',
+          headers: { 'content-type': 'application/json' },
+          body: json.stringify({ name, email, segment: selectedsegment })
         });
       } catch (_) {}
 
       form.style.display = 'none';
-      formSuccess.classList.add('show');
+      formsuccess.classlist.add('show');
     });
   }
 
   fetch('/api/waitlist/count', { cache: 'no-store' }).then(r => r.json()).then(d => {
     if (d.ok && d.count > 0) {
-      const badge = document.getElementById('waitlistCount');
-      if (badge) { badge.textContent = d.count.toLocaleString(); badge.style.display = 'inline'; }
-      const heroBadge = document.getElementById('heroWaitlistCount');
-      const heroPlus = document.getElementById('heroWaitlistPlus');
-      if (heroBadge && heroPlus) {
+      const badge = document.getelementbyid('waitlistcount');
+      if (badge) { badge.textcontent = d.count.tolocalestring(); badge.style.display = 'inline'; }
+      const herobadge = document.getelementbyid('herowaitlistcount');
+      const heroplus = document.getelementbyid('herowaitlistplus');
+      if (herobadge && heroplus) {
         const target = d.count;
-        const startVal = parseInt(heroBadge.textContent.replace(/[^0-9]/g,''), 10) || 0;
-        const diff = target - startVal;
+        const startval = parseint(herobadge.textcontent.replace(/[^0-9]/g,''), 10) || 0;
+        const diff = target - startval;
         if (diff <= 0) { heroBadge.textContent = target.toLocaleString(); return; }
         heroPlus.style.opacity = '0';
         const dur = 1200;
@@ -246,16 +246,16 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
     }
   }).catch(() => {});
 
-  if (!localStorage.getItem('cookieConsent')) {
-    const bar = document.createElement('div');
-    bar.id = 'cookieBar';
-    bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:100;padding:14px 20px;background:var(--bg-soft);border-top:1px solid var(--line);font-size:13px;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;backdrop-filter:blur(12px);';
-    bar.innerHTML = '<span>perch. uses only essential cookies for site function. No tracking, no profiling, no sharing.</span><button id="cookieDismiss" style="white-space:nowrap;padding:8px 16px;border-radius:8px;border:1px solid var(--line-strong);background:none;color:var(--text);font-size:12.5px;cursor:pointer;font-family:var(--sans);font-weight:500;">Got it</button>';
-    document.body.appendChild(bar);
-    document.getElementById('cookieDismiss').addEventListener('click', () => {
-      bar.style.transform = 'translateY(100%)';
+  if (!localstorage.getitem('cookieconsent')) {
+    const bar = document.createelement('div');
+    bar.id = 'cookiebar';
+    bar.style.csstext = 'position:fixed;bottom:0;left:0;right:0;z-index:100;padding:14px 20px;background:var(--bg-soft);border-top:1px solid var(--line);font-size:13px;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;backdrop-filter:blur(12px);';
+    bar.innerhtml = '<span>perch. uses only essential cookies for site function. no tracking, no profiling, no sharing.</span><button id="cookieDismiss" style="white-space:nowrap;padding:8px 16px;border-radius:8px;border:1px solid var(--line-strong);background:none;color:var(--text);font-size:12.5px;cursor:pointer;font-family:var(--sans);font-weight:500;">got it</button>';
+    document.body.appendchild(bar);
+    document.getelementbyid('cookiedismiss').addeventlistener('click', () => {
+      bar.style.transform = 'translatey(100%)';
       bar.style.transition = 'transform .4s cubic-bezier(0.4,0,0.2,1)';
-      localStorage.setItem('cookieConsent', '1');
+      localstorage.setitem('cookieconsent', '1');
     });
   }
 </script>

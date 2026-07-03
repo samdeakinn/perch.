@@ -1,90 +1,90 @@
-<%- include('partials/head', { title: 'Dashboard' }) %>
+<%- include('partials/head', { title: 'dashboard' }) %>
 <%- include('partials/nav') %>
 
 <div class="page" id="main-content" role="main">
 <section class="page-section">
   <div class="wrap" style="max-width:780px;">
     <div class="page-header a-fade-up">
-      <div class="section-tag">Dashboard</div>
-      <h2>Your perch. status.</h2>
-      <p>If you're on the waitlist, enter your email to see your position, referral link, and estimated access date.</p>
+      <div class="section-tag">dashboard</div>
+      <h2>your perch. status.</h2>
+      <p>if you're on the waitlist, enter your email to see your position, referral link, and estimated access date.</p>
     </div>
 
     <div class="a-fade-up" id="dashLookup">
       <div class="dash-lookup">
-        <label for="dashEmail">Your email</label>
+        <label for="dashEmail">your email</label>
         <div class="dash-input-row">
           <input type="email" id="dashEmail" placeholder="you@email.com" autocomplete="email">
-          <button id="dashBtn" class="btn-primary" style="padding:12px 22px;">Check status</button>
+          <button id="dashBtn" class="btn-primary" style="padding:12px 22px;">check status</button>
         </div>
-        <div id="dashLoading" class="dash-loading">Looking you up <span class="dash-loading-dot"></span><span class="dash-loading-dot"></span><span class="dash-loading-dot"></span></div>
+        <div id="dashLoading" class="dash-loading">looking you up <span class="dash-loading-dot"></span><span class="dash-loading-dot"></span><span class="dash-loading-dot"></span></div>
       </div>
     </div>
 
     <div class="dash-result a-fade-up" id="dashResult" style="display:none;">
       <div class="dash-card">
         <div class="dash-card-header">
-          <div class="dash-greeting">Hi <span id="dashName"></span></div>
+          <div class="dash-greeting">hi <span id="dashName"></span></div>
           <div class="dash-segment-badge" id="dashSegment"></div>
         </div>
         <div class="dash-stats">
           <div class="dash-stat">
             <div class="dash-stat-num" id="dashPosition">—</div>
-            <div class="dash-stat-label">Queue position</div>
+            <div class="dash-stat-label">queue position</div>
           </div>
           <div class="dash-stat-divider"></div>
           <div class="dash-stat">
             <div class="dash-stat-num" id="dashTotal">—</div>
-            <div class="dash-stat-label">Total ahead of you</div>
+            <div class="dash-stat-label">total ahead of you</div>
           </div>
           <div class="dash-stat-divider"></div>
           <div class="dash-stat">
             <div class="dash-stat-num" id="dashAccess" style="font-size:14px;font-family:var(--sans);font-weight:600;">—</div>
-            <div class="dash-stat-label">Estimated access</div>
+            <div class="dash-stat-label">estimated access</div>
           </div>
         </div>
       </div>
 
       <div class="dash-card" id="dashReferral">
-        <h3 style="margin-bottom:6px;">Share &amp; move up</h3>
-        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:16px;line-height:1.6;">Every person who joins using your link moves you one position up the queue. Your friends need the visibility too.</p>
+        <h3 style="margin-bottom:6px;">share &amp; move up</h3>
+        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:16px;line-height:1.6;">every person who joins using your link moves you one position up the queue. your friends need the visibility too.</p>
         <div class="dash-input-row">
           <input type="text" id="dashRefLink" class="dash-ref-input" readonly>
-          <button id="dashCopyBtn" class="btn-primary dash-copy-btn">Copy</button>
+          <button id="dashCopyBtn" class="btn-primary dash-copy-btn">copy</button>
         </div>
-        <div id="dashCopyMsg" class="dash-copy-msg">Copied!</div>
-        <div class="dash-ref-count">Referred so far: <strong id="dashRefCount">0</strong></div>
+        <div id="dashCopyMsg" class="dash-copy-msg">copied!</div>
+        <div class="dash-ref-count">referred so far: <strong id="dashRefCount">0</strong></div>
       </div>
 
       <div class="dash-card">
-        <h3 style="margin-bottom:6px;">What happens next</h3>
+        <h3 style="margin-bottom:6px;">what happens next</h3>
         <ul class="dash-timeline">
           <li class="dash-timeline-item active">
             <div class="dash-timeline-dot"></div>
             <div>
-              <div class="dash-timeline-title">You joined the waitlist</div>
-              <div class="dash-timeline-desc">You're on the list. We'll email you when we open up your segment.</div>
+              <div class="dash-timeline-title">you joined the waitlist</div>
+              <div class="dash-timeline-desc">you're on the list. we'll email you when we open up your segment.</div>
             </div>
           </li>
           <li class="dash-timeline-item">
             <div class="dash-timeline-dot"></div>
             <div>
-              <div class="dash-timeline-title">Your perch. address is created</div>
-              <div class="dash-timeline-desc">We'll assign you a personal forwarding address (you@perch.app) and send you a welcome email with everything you need to get started.</div>
+              <div class="dash-timeline-title">your perch. address is created</div>
+              <div class="dash-timeline-desc">we'll assign you a personal forwarding address (you@perch.app) and send you a welcome email with everything you need to get started.</div>
             </div>
           </li>
           <li class="dash-timeline-item">
             <div class="dash-timeline-dot"></div>
             <div>
-              <div class="dash-timeline-title">Start forwarding</div>
-              <div class="dash-timeline-desc">Forward your renewal emails and upload documents. perch. starts extracting and building your first Monday digest.</div>
+              <div class="dash-timeline-title">start forwarding</div>
+              <div class="dash-timeline-desc">forward your renewal emails and upload documents. perch. starts extracting and building your first monday digest.</div>
             </div>
           </li>
           <li class="dash-timeline-item">
             <div class="dash-timeline-dot"></div>
             <div>
-              <div class="dash-timeline-title">First digest arrives</div>
-              <div class="dash-timeline-desc">Monday morning. Your renewals ranked by urgency. Verdicts for each one. 90 seconds to read, a week of peace of mind.</div>
+              <div class="dash-timeline-title">first digest arrives</div>
+              <div class="dash-timeline-desc">monday morning. your renewals ranked by urgency. verdicts for each one. 90 seconds to read, a week of peace of mind.</div>
             </div>
           </li>
         </ul>
@@ -93,9 +93,9 @@
 
     <div class="dash-card a-fade-up" id="dashNotFound" style="display:none;">
       <div class="dash-not-found">
-        <h3>Not on the list yet?</h3>
-        <p>We couldn't find that email. Join the waitlist to get your dashboard.</p>
-        <a href="/waitlist" class="btn-primary" style="display:inline-flex;">Join the waitlist →</a>
+        <h3>not on the list yet?</h3>
+        <p>we couldn't find that email. join the waitlist to get your dashboard.</p>
+        <a href="/waitlist" class="btn-primary" style="display:inline-flex;">join the waitlist →</a>
       </div>
     </div>
   </div>
@@ -103,52 +103,52 @@
 </div>
 
 <script>
-  document.getElementById('dashBtn').addEventListener('click', lookupStatus);
-  document.getElementById('dashEmail').addEventListener('keydown', e => { if (e.key === 'Enter') lookupStatus(); });
+  document.getelementbyid('dashbtn').addeventlistener('click', lookupstatus);
+  document.getelementbyid('dashemail').addeventlistener('keydown', e => { if (e.key === 'enter') lookupstatus(); });
 
-  async function lookupStatus(){
-    const email = document.getElementById('dashEmail').value.trim();
+  async function lookupstatus(){
+    const email = document.getelementbyid('dashemail').value.trim();
     if (!email) return;
 
-    document.getElementById('dashLoading').classList.add('dash-loading-visible');
-    document.getElementById('dashBtn').disabled = true;
-    document.getElementById('dashResult').style.display = 'none';
-    document.getElementById('dashNotFound').style.display = 'none';
+    document.getelementbyid('dashloading').classlist.add('dash-loading-visible');
+    document.getelementbyid('dashbtn').disabled = true;
+    document.getelementbyid('dashresult').style.display = 'none';
+    document.getelementbyid('dashnotfound').style.display = 'none';
 
     try {
-      const r = await fetch('/api/waitlist/status?email=' + encodeURIComponent(email));
+      const r = await fetch('/api/waitlist/status?email=' + encodeuricomponent(email));
       const data = await r.json();
 
       if (data.found) {
-        document.getElementById('dashName').textContent = data.name;
-        document.getElementById('dashPosition').textContent = data.position;
-        document.getElementById('dashTotal').textContent = data.total - data.position;
-        document.getElementById('dashAccess').textContent = data.estimatedAccess;
-        document.getElementById('dashSegment').textContent = data.segment === 'business' ? 'Small business' : 'Household';
-        document.getElementById('dashRefLink').value = 'https://perch.vercel.app/waitlist?ref=' + data.referralCode;
-        document.getElementById('dashRefCount').textContent = data.referralCount;
-        document.getElementById('dashResult').style.display = 'block';
+        document.getelementbyid('dashname').textcontent = data.name;
+        document.getelementbyid('dashposition').textcontent = data.position;
+        document.getelementbyid('dashtotal').textcontent = data.total - data.position;
+        document.getelementbyid('dashaccess').textcontent = data.estimatedaccess;
+        document.getelementbyid('dashsegment').textcontent = data.segment === 'business' ? 'small business' : 'household';
+        document.getelementbyid('dashreflink').value = 'https://perch.vercel.app/waitlist?ref=' + data.referralcode;
+        document.getelementbyid('dashrefcount').textcontent = data.referralcount;
+        document.getelementbyid('dashresult').style.display = 'block';
 
-        if (data.referralCount > 0) {
-          document.getElementById('dashPosition').textContent = data.position - data.referralCount + ' (was ' + data.position + ')';
+        if (data.referralcount > 0) {
+          document.getelementbyid('dashposition').textcontent = data.position - data.referralcount + ' (was ' + data.position + ')';
         }
       } else {
-        document.getElementById('dashNotFound').style.display = 'block';
+        document.getelementbyid('dashnotfound').style.display = 'block';
       }
     } catch(_) {
-      document.getElementById('dashNotFound').style.display = 'block';
+      document.getelementbyid('dashnotfound').style.display = 'block';
     }
 
-    document.getElementById('dashLoading').classList.remove('dash-loading-visible');
-    document.getElementById('dashBtn').disabled = false;
+    document.getelementbyid('dashloading').classlist.remove('dash-loading-visible');
+    document.getelementbyid('dashbtn').disabled = false;
   }
 
-  document.getElementById('dashCopyBtn').addEventListener('click', () => {
-    const input = document.getElementById('dashRefLink');
+  document.getelementbyid('dashcopybtn').addeventlistener('click', () => {
+    const input = document.getelementbyid('dashreflink');
     input.select();
-    document.execCommand('copy');
-    document.getElementById('dashCopyMsg').style.display = 'block';
-    setTimeout(() => { document.getElementById('dashCopyMsg').style.display = 'none'; }, 2000);
+    document.execcommand('copy');
+    document.getelementbyid('dashcopymsg').style.display = 'block';
+    settimeout(() => { document.getelementbyid('dashcopymsg').style.display = 'none'; }, 2000);
   });
 </script>
 <%- include('partials/footer') %>
