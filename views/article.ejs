@@ -40,17 +40,19 @@
 
       <a href="/blog" style="font-size:14px;color:var(--accent);">&larr; back to blog</a>
     </div>
+
+    <%- include('partials/newsletter-cta') %>
   </div>
 </section>
 </div>
-<script>function sharearticle(){
-  const url = location.href;
-  if (navigator.share) navigator.share({url});
-  else { navigator.clipboard.writetext(url).then(() => {
-    const btn = document.queryselector('.article-share-btn');
-    const orig = btn.textcontent;
-    btn.textcontent = '✓ copied';
-    settimeout(() => btn.textcontent = orig, 2000);
+<script>function shareArticle(){
+  var url = location.href;
+  if (navigator.share) navigator.share({url:url});
+  else { navigator.clipboard.writeText(url).then(function() {
+    var btn = document.querySelector('.article-share-btn');
+    var orig = btn.textContent;
+    btn.textContent = '✓ copied';
+    setTimeout(function() { btn.textContent = orig; }, 2000);
   }); }
 }</script>
 

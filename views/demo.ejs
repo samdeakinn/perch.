@@ -67,7 +67,33 @@
 
         <!-- Inbox pane -->
         <div class="demo-pane demo-pane-active" id="demoPaneInbox">
-          <div class="demo-list" id="demoList"></div>
+          <div class="demo-list" id="demoList">
+            <!-- Pre-rendered items (graceful fallback, JS replaces on animation) -->
+            <div class="demo-item demo-item-init" data-index="0">
+              <div class="demo-item-header"><div class="demo-item-icon">🛡️</div><div class="demo-item-body"><div class="demo-item-subject">Your policy renews soon</div><div class="demo-item-provider">Admiral Car Insurance</div></div><span class="demo-item-tag">pdf</span></div>
+              <div class="demo-item-data"><div class="demo-item-data-inner"><div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">£612.40/yr</span></div><div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">14 Aug 2026</span></div><div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value demo-data-change">+22%</span></div><div class="demo-data-verdict verdict-renegotiate">✕ Renegotiate — Price up 22% — loyalty penalty applied.</div></div></div>
+            </div>
+            <div class="demo-item demo-item-init" data-index="1">
+              <div class="demo-item-header"><div class="demo-item-icon">🎬</div><div class="demo-item-body"><div class="demo-item-subject">Your subscription ends</div><div class="demo-item-provider">Adobe Creative Cloud</div></div><span class="demo-item-tag">invoice</span></div>
+              <div class="demo-item-data"><div class="demo-item-data-inner"><div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">£59.99/mo</span></div><div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">3 Sep 2026</span></div><div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value">No change</span></div><div class="demo-data-verdict verdict-cancel">✕ Cancel — Unused for 4 months. Last login: March 2026.</div></div></div>
+            </div>
+            <div class="demo-item demo-item-init" data-index="2">
+              <div class="demo-item-header"><div class="demo-item-icon">🌐</div><div class="demo-item-body"><div class="demo-item-subject">Your broadband price is changing</div><div class="demo-item-provider">Virgin Media Broadband</div></div><span class="demo-item-tag">notice</span></div>
+              <div class="demo-item-data"><div class="demo-item-data-inner"><div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">£42.00/mo</span></div><div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">21 Jul 2026</span></div><div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value demo-data-change">+£14/mo</span></div><div class="demo-data-verdict verdict-renegotiate">✕ Renegotiate — Out of contract pricing. Switch or renegotiate.</div></div></div>
+            </div>
+            <div class="demo-item demo-item-init" data-index="3">
+              <div class="demo-item-header"><div class="demo-item-icon">🔗</div><div class="demo-item-body"><div class="demo-item-subject">Domain renewal reminder</div><div class="demo-item-provider">Namecheap — perch. domain</div></div><span class="demo-item-tag">reminder</span></div>
+              <div class="demo-item-data"><div class="demo-item-data-inner"><div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">£14.99/yr</span></div><div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">18 Aug 2026</span></div><div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value">No change</span></div><div class="demo-data-verdict verdict-renew">✓ Renew — Essential domain. Price unchanged.</div></div></div>
+            </div>
+            <div class="demo-item demo-item-init" data-index="4">
+              <div class="demo-item-header"><div class="demo-item-icon">🎬</div><div class="demo-item-body"><div class="demo-item-subject">Monthly membership</div><div class="demo-item-provider">PureGym Manchester</div></div><span class="demo-item-tag">invoice</span></div>
+              <div class="demo-item-data"><div class="demo-item-data-inner"><div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">£32.00/mo</span></div><div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">1 Aug 2026</span></div><div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value">No change</span></div><div class="demo-data-verdict verdict-cancel">✕ Cancel — Unused since March. £160/yr saved by cancelling.</div></div></div>
+            </div>
+            <div class="demo-item demo-item-init" data-index="5">
+              <div class="demo-item-header"><div class="demo-item-icon">🛡️</div><div class="demo-item-body"><div class="demo-item-subject">Your home insurance renews</div><div class="demo-item-provider">Direct Line Home Insurance</div></div><span class="demo-item-tag">pdf</span></div>
+              <div class="demo-item-data"><div class="demo-item-data-inner"><div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">£387.00/yr</span></div><div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">5 Sep 2026</span></div><div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value demo-data-change">+31%</span></div><div class="demo-data-verdict verdict-renegotiate">✕ Renegotiate — Massive hike. New customer rate is £289.</div></div></div>
+            </div>
+          </div>
           <div class="demo-list-footer" id="demoListFooter" style="display:none;">
             <div class="demo-list-footer-inner">
               <span class="demo-footer-text">all 6 renewals processed</span>
@@ -166,6 +192,7 @@
   </div>
 </section>
 
+  <%- include('partials/newsletter-cta') %>
 </div>
 
 <script src="/demo.js"></script>

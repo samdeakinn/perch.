@@ -50,6 +50,7 @@ app.use(express.urlencoded({ extended: false }));
 const dataDir = process.env.VERCEL ? '/tmp/data' : join(__dirname, 'data');
 
 const articles = [
+  { slug: 'july-renewal-season', title: 'why july is the worst month for auto-renewals', excerpt: 'july is peak renewal season for everything from car insurance to gym memberships. here\'s why and what to watch for.', date: '4 Jul 2026', readTime: 4, template: 'july-renewal-season' },
   { slug: 'insurance-loyalty-penalty', title: 'the uk insurance loyalty penalty: what changed and what didn\'t', excerpt: 'the fca banned price walking in 2022, but millions are still overpaying. here\'s what happened and what hasn\'t changed.', date: '2 Jul 2026', readTime: 4, template: 'insurance-loyalty-penalty' },
   { slug: 'car-insurance-auto-renewal', title: 'the £560m car insurance auto-renewal tax', excerpt: '47% of uk drivers don\'t check before renewing. the average overpayment is £82 a year. here\'s where that money goes.', date: '30 Jun 2026', readTime: 3, template: 'car-insurance-auto-renewal' },
   { slug: 'broadband-out-of-contract', title: 'out-of-contract pricing: broadband\'s quietest leak', excerpt: 'your broadband doubled and you didn\'t notice. out-of-contract pricing is costing uk households hundreds a year.', date: '28 Jun 2026', readTime: 4, template: 'broadband-out-of-contract' },
@@ -57,7 +58,7 @@ const articles = [
   { slug: 'domain-renewal-lapses', title: 'domain renewal lapses: the most preventable financial loss', excerpt: 'a forgotten domain renewal can cost ten times the original price to fix. here\'s why it happens and how to stop it.', date: '23 Jun 2026', readTime: 3, template: 'domain-renewal-lapses' },
 ];
 
-const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap', 'about', 'terms', 'contact', 'download'];
+const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap', 'about', 'terms', 'contact', 'download', 'features', 'resources'];
 
 app.get('/', (_, res) => res.render('index', { currentPage: 'index' }));
 app.get('/get-access', (_, res) => res.redirect(301, '/waitlist'));
@@ -80,8 +81,8 @@ app.get('/robots.txt', (_, res) => {
 });
 
 app.get('/sitemap.xml', (_, res) => {
-  const primary = ['','problem','how-it-works','comparison','proof','pricing','uses','demo','download','tool','waitlist'];
-  const secondary = ['privacy','brand','blog','changelog','roadmap','about','terms','contact','digest','stats','dashboard'];
+  const primary = ['','problem','how-it-works','comparison','proof','pricing','uses','demo','download','tool','waitlist','features','dashboard'];
+  const secondary = ['privacy','brand','blog','changelog','roadmap','about','terms','contact','digest','stats','dashboard','resources'];
   const blogUrls = articles.map(a => `blog/${a.slug}`);
   const all = [...primary.map(u => ({url:u,priority:'0.9',changefreq:'weekly'})),
     ...secondary.map(u => ({url:u,priority:'0.6',changefreq:'monthly'})),

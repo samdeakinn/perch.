@@ -1,0 +1,20 @@
+<div class="nl-cta">
+  <div class="nl-cta-inner">
+    <div class="nl-cta-icon">📬</div>
+    <h3>the monday digest</h3>
+    <p>one email, every monday. your renewals this week, ranked by urgency. free until we launch billing.</p>
+    <form id="newsletterForm" class="nl-form">
+      <input type="email" id="nlEmail" placeholder="you@email.com" required class="nl-input">
+      <button type="submit" class="nl-submit">subscribe</button>
+    </form>
+    <p id="nlMsg" style="display:none;font-size:13px;color:var(--accent);margin-top:8px;">subscribed. you'll hear from us soon.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('newsletterForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('nlMsg').style.display = 'block';
+});
+</script>
