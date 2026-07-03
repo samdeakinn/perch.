@@ -1,154 +1,167 @@
 (function(){
-  if (!document.getElementById('main-content')) return;
+  if (!document.getElementById('demoPage')) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pause = prefersReduced ? (t) => t : (t) => t + 1.5;
+
   const ITEMS = [
-    { id:1, type:'PDF', provider:'Admiral Car Insurance', subject:'Your policy renews soon', amount:612.40, period:'year', renews:'14 Aug 2026', change:'+22%', verdict:'renegotiate', reason:'Price up 22% — loyalty penalty applied.', urgency:'high', icon:'🛡️' },
-    { id:2, type:'Invoice', provider:'Adobe Creative Cloud', subject:'Your subscription ends', amount:59.99, period:'month', renews:'3 Sep 2026', change:'stable', verdict:'cancel', reason:'Unused for 4 months. Last login: March 2026.', urgency:'medium', icon:'🎬' },
-    { id:3, type:'Notice', provider:'Virgin Media Broadband', subject:'Your broadband price is changing', amount:42, period:'month', renews:'21 Jul 2026', change:'+£14/mo', verdict:'renegotiate', reason:'Out of contract pricing. Switch or renegotiate.', urgency:'high', icon:'🌐' },
-    { id:4, type:'Reminder', provider:'Namecheap — perch. domain', subject:'Domain renewal reminder', amount:14.99, period:'year', renews:'18 Aug 2026', change:'stable', verdict:'renew', reason:'Essential domain. Price unchanged.', urgency:'low', icon:'🔗' },
-    { id:5, type:'Invoice', provider:'PureGym Manchester', subject:'Monthly membership', amount:32, period:'month', renews:'1 Aug 2026', change:'stable', verdict:'cancel', reason:'Unused since March. £160/yr saved by cancelling.', urgency:'medium', icon:'🎬' },
-    { id:6, type:'PDF', provider:'Direct Line Home Insurance', subject:'Your home insurance renews', amount:387, period:'year', renews:'5 Sep 2026', change:'+31%', verdict:'renegotiate', reason:'Massive hike. New customer rate is £289.', urgency:'high', icon:'🛡️' }
+    { icon:'🛡️', subject:'Your policy renews soon', provider:'Admiral Car Insurance', amount:612.40, period:'year', renews:'14 Aug 2026', change:'+22%', verdict:'renegotiate', reason:'Price up 22% — loyalty penalty applied.', urgency:'high', dead:'23 days' },
+    { icon:'🎬', subject:'Your subscription ends', provider:'Adobe Creative Cloud', amount:59.99, period:'month', renews:'3 Sep 2026', change:'stable', verdict:'cancel', reason:'Unused for 4 months. Last login: March 2026.', urgency:'medium', dead:'55 days' },
+    { icon:'🌐', subject:'Your broadband price is changing', provider:'Virgin Media Broadband', amount:42, period:'month', renews:'21 Jul 2026', change:'+£14/mo', verdict:'renegotiate', reason:'Out of contract pricing. Switch or renegotiate.', urgency:'high', dead:'12 days' },
+    { icon:'🔗', subject:'Domain renewal reminder', provider:'Namecheap — perch. domain', amount:14.99, period:'year', renews:'18 Aug 2026', change:'stable', verdict:'renew', reason:'Essential domain. Price unchanged.', urgency:'low', dead:'27 days' },
+    { icon:'🎬', subject:'Monthly membership', provider:'PureGym Manchester', amount:32, period:'month', renews:'1 Aug 2026', change:'stable', verdict:'cancel', reason:'Unused since March. £160/yr saved by cancelling.', urgency:'medium', dead:'23 days' },
+    { icon:'🛡️', subject:'Your home insurance renews', provider:'Direct Line Home Insurance', amount:387, period:'year', renews:'5 Sep 2026', change:'+31%', verdict:'renegotiate', reason:'Massive hike. New customer rate is £289.', urgency:'high', dead:'56 days' }
   ];
 
-  const state = { phase:'intro', idx:0, extracted:[] };
+  const el = {
+    launchBtn: document.getElementById('demoLaunchBtn'),
+    window: document.getElementById('demoWindow'),
+    scanning: document.getElementById('demoScanning'),
+    scanLabel: document.getElementById('demoScanLabel'),
+    scanFill: document.getElementById('demoScanFill'),
+    app: document.getElementById('demoApp'),
+    list: document.getElementById('demoList'),
+    listFooter: document.getElementById('demoListFooter'),
+    viewDigestBtn: document.getElementById('demoViewDigestBtn'),
+    sumAnnual: document.getElementById('demoSumAnnual'),
+    sumItems: document.getElementById('demoSumItems'),
+    sumAction: document.getElementById('demoSumAction'),
+    savingsHero: document.getElementById('demoSavingsHero'),
+    tabs: document.querySelectorAll('.demo-tab'),
+    panes: {
+      inbox: document.getElementById('demoPaneInbox'),
+      digest: document.getElementById('demoPaneDigest'),
+      savings: document.getElementById('demoPaneSavings')
+    }
+  };
 
-  const app = document.getElementById('demoApp');
-  const intro = document.getElementById('demoIntro');
-  const stage = document.getElementById('demoStage');
-  const itemsEl = document.getElementById('demoItems');
-  const progress = document.getElementById('demoProgress');
-  const stepLabel = document.getElementById('demoStepLabel');
-  const statsEl = document.getElementById('demoStats');
-  const digestBtn = document.getElementById('demoDigestBtn');
-  const digestEl = document.getElementById('demoDigest');
+  const totalAnnual = ITEMS.reduce((s, it) => s + (it.period === 'month' ? it.amount * 12 : it.amount), 0);
+  const totalActionable = ITEMS.filter(it => it.verdict !== 'renew').length;
+  const totalSavings = 328 + 1103;
 
-  const totalAnnual = ITEMS.reduce((sum, it) => {
-    const amt = it.period === 'month' ? it.amount * 12 : it.amount;
-    return sum + amt;
-  }, 0);
+  let expandedIndex = -1;
 
-  const totalActionable = ITEMS.filter(i => i.verdict !== 'renew').length;
+  el.launchBtn.addEventListener('click', startDemo);
+  el.viewDigestBtn.addEventListener('click', () => switchTab('digest'));
 
-  document.getElementById('demoStartBtn').addEventListener('click', startDemo);
-  digestBtn.addEventListener('click', showDigest);
+  el.tabs.forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
 
   function startDemo(){
-    state.phase = 'scanning';
-    intro.classList.add('demo-intro-done');
-    stage.classList.add('demo-stage-active');
-    progress.classList.add('demo-progress-active');
-    updateProgress(0);
-    addNextItem();
+    el.launchBtn.parentElement.style.display = 'none';
+    el.window.classList.add('demo-window-visible');
+    el.window.scrollIntoView({ behavior:'smooth', block:'center' });
+    scanProgress();
   }
 
-  function addNextItem(){
-    const item = ITEMS[state.idx];
-    const card = document.createElement('div');
-    card.className = 'demo-item';
-    card.innerHTML = `
-      <div class="demo-item-email">
+  function scanProgress(){
+    const steps = [
+      { pct:10, label:'connecting to inbox...' },
+      { pct:25, label:'scanning for renewal emails...' },
+      { pct:45, label:'parsing dates and amounts...' },
+      { pct:65, label:'comparing price changes...' },
+      { pct:85, label:'generating verdicts...' },
+      { pct:100, label:'building your digest...' }
+    ];
+
+    let i = 0;
+    function tick(){
+      if (i >= steps.length) {
+        doneScanning();
+        return;
+      }
+      const s = steps[i];
+      el.scanLabel.textContent = s.label;
+      el.scanFill.style.width = s.pct + '%';
+      i++;
+      setTimeout(tick, pause(s.pct === 100 ? 600 : 350));
+    }
+    setTimeout(tick, 800);
+  }
+
+  function doneScanning(){
+    el.scanning.classList.add('demo-scanning-hidden');
+    el.app.classList.add('demo-app-visible');
+    revealItems(0);
+  }
+
+  function revealItems(idx){
+    if (idx >= ITEMS.length) {
+      updateSummary();
+      el.listFooter.style.display = 'block';
+      return;
+    }
+
+    const item = ITEMS[idx];
+    const div = document.createElement('div');
+    div.className = 'demo-item';
+    div.style.transitionDelay = '0s';
+    div.innerHTML = `
+      <div class="demo-item-header">
         <div class="demo-item-icon">${item.icon}</div>
-        <div class="demo-item-meta">
+        <div class="demo-item-body">
           <div class="demo-item-subject">${item.subject}</div>
           <div class="demo-item-provider">${item.provider}</div>
         </div>
-        <span class="demo-item-tag">${item.type}</span>
+        <span class="demo-item-tag">${item.type || 'notice'}</span>
       </div>
       <div class="demo-item-data">
-        <div class="demo-data-line" data-field="amount"><span class="demo-data-label">Amount</span><span class="demo-data-val">${item.period === 'month' ? '£' + item.amount.toFixed(2) + '/month' : '£' + item.amount.toFixed(2) + '/year'}</span></div>
-        <div class="demo-data-line" data-field="renews"><span class="demo-data-label">Renews</span><span class="demo-data-val">${item.renews}</span></div>
-        <div class="demo-data-line" data-field="change"><span class="demo-data-label">Change</span><span class="demo-data-val ${item.change === 'stable' ? 'val-stable' : 'val-up'}">${item.change === 'stable' ? 'No change' : item.change}</span></div>
-        <div class="demo-data-verdict verdict-${item.verdict}">${item.verdict === 'renegotiate' ? 'Renegotiate' : item.verdict === 'cancel' ? 'Cancel' : 'Renew'} — ${item.reason}</div>
+        <div class="demo-item-data-inner">
+          <div class="demo-data-row"><span class="demo-data-label">Amount</span><span class="demo-data-value">${item.period === 'month' ? '£' + item.amount.toFixed(2) + '/mo' : '£' + item.amount.toFixed(2) + '/yr'}</span></div>
+          <div class="demo-data-row"><span class="demo-data-label">Renews</span><span class="demo-data-value">${item.renews}</span></div>
+          <div class="demo-data-row"><span class="demo-data-label">Change</span><span class="demo-data-value ${item.change !== 'stable' ? 'demo-data-change' : ''}">${item.change === 'stable' ? 'No change' : item.change}</span></div>
+          <div class="demo-data-verdict verdict-${item.verdict}">${item.verdict === 'renegotiate' ? '✕ Renegotiate' : item.verdict === 'cancel' ? '✕ Cancel' : '✓ Renew'} — ${item.reason}</div>
+        </div>
       </div>
     `;
-    itemsEl.appendChild(card);
+    el.list.appendChild(div);
 
-    state.extracted.push(item);
-    state.idx++;
+    div.addEventListener('click', () => toggleItem(idx, div));
 
-    stepLabel.textContent = `Extracting ${state.idx} of ${ITEMS.length}...`;
-    updateProgress(state.idx / ITEMS.length);
+    setTimeout(() => div.classList.add('demo-item-in'), 50);
 
-    if (!prefersReduced) {
-      requestAnimationFrame(() => card.classList.add('demo-item-in'));
-      revealLines(card, 0);
+    setTimeout(() => revealItems(idx + 1), pause(600));
+  }
+
+  function toggleItem(idx, div){
+    if (expandedIndex === idx) {
+      div.classList.remove('demo-item-expanded');
+      expandedIndex = -1;
     } else {
-      card.classList.add('demo-item-in', 'demo-item-data-visible');
-      card.querySelectorAll('.demo-data-line').forEach(l => l.classList.add('line-revealed'));
-      card.querySelector('.demo-data-verdict').classList.add('verdict-shown');
-    }
-
-    const delay = prefersReduced ? 400 : 1000;
-    if (state.idx < ITEMS.length) {
-      setTimeout(addNextItem, delay);
-    } else {
-      setTimeout(showStats, prefersReduced ? 400 : 1200);
+      if (expandedIndex >= 0) {
+        const prev = el.list.children[expandedIndex];
+        if (prev) prev.classList.remove('demo-item-expanded');
+      }
+      div.classList.add('demo-item-expanded');
+      expandedIndex = idx;
     }
   }
 
-  function revealLines(card, i){
-    const lines = card.querySelectorAll('.demo-data-line');
-    if (i >= lines.length) {
-      setTimeout(() => {
-        card.querySelector('.demo-data-verdict').classList.add('verdict-shown');
-        card.classList.add('demo-item-data-visible');
-      }, 300);
-      return;
+  function updateSummary(){
+    el.sumAnnual.textContent = '£' + totalAnnual.toLocaleString();
+    el.sumItems.textContent = ITEMS.length;
+    el.sumAction.textContent = totalActionable;
+    animateCountUp(el.savingsHero, 1431);
+  }
+
+  function animateCountUp(el, target){
+    const dur = 1200;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = Math.round(eased * target);
+      el.textContent = '£' + v.toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
     }
-    setTimeout(() => {
-      lines[i].classList.add('line-revealed');
-      revealLines(card, i + 1);
-    }, 350);
+    requestAnimationFrame(tick);
   }
 
-  function updateProgress(pct){
-    progress.style.width = Math.round(pct * 100) + '%';
+  function switchTab(tab){
+    el.tabs.forEach(t => t.classList.toggle('demo-tab-active', t.dataset.tab === tab));
+    Object.keys(el.panes).forEach(key => {
+      el.panes[key].classList.toggle('demo-pane-active', key === tab);
+    });
   }
-
-  function showStats(){
-    state.phase = 'complete';
-    stepLabel.textContent = 'Complete';
-    progress.classList.remove('demo-progress-active');
-    progress.classList.add('demo-progress-done');
-
-    document.getElementById('demoStatItems').textContent = ITEMS.length;
-    document.getElementById('demoStatAnnual').textContent = '£' + totalAnnual.toLocaleString();
-    document.getElementById('demoStatAction').textContent = totalActionable;
-
-    setTimeout(() => {
-      statsEl.classList.add('demo-stats-visible');
-    }, 300);
-
-    setTimeout(() => {
-      digestBtn.classList.add('demo-digest-btn-visible');
-    }, 1000);
-  }
-
-  function showDigest(){
-    digestEl.scrollIntoView({ behavior:'smooth', block:'start' });
-    digestEl.classList.add('demo-digest-visible');
-  }
-
-  document.querySelectorAll('.demo-stat-num[data-count]').forEach(el => {
-    const t = parseInt(el.getAttribute('data-count'), 10);
-    const isCur = el.textContent.includes('£');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        obs.unobserve(el);
-        const dur = 800;
-        const start = performance.now();
-        function tick(now){
-          const p = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          const v = Math.round(eased * t);
-          el.textContent = isCur ? '£' + v.toLocaleString() : v.toLocaleString();
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
-    }, { threshold:0.5 });
-    obs.observe(el);
-  });
 })();

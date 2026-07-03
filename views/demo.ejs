@@ -1,151 +1,138 @@
-<%- include('partials/head', { title: 'demo' }) %>
-<canvas id="particleCanvas"></canvas>
+<%- include('partials/head', { title: 'demo', metaDesc: 'try perch. in your browser — see how renewal emails get parsed into verdicts in real time.' }) %>
 <%- include('partials/nav') %>
 
 <div class="page" id="main-content" role="main">
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
 
-<section class="demo-intro" id="demoIntro">
-  <div class="wrap" style="text-align:center;position:relative;">
+<section class="demo-page" id="demoPage">
+  <div class="wrap" style="text-align:center;padding-top:140px;padding-bottom:60px;">
     <div class="eyebrow" style="justify-content:center;">interactive demo</div>
-    <h1 style="max-width:none;">see perch. <em class="glow-text">in action.</em></h1>
-    <p style="font-size:17.5px;color:var(--text-dim);max-width:520px;margin:16px auto 0;line-height:1.65;">watch how perch. extracts renewal details from forwarded emails, generates verdicts, and builds your monday digest — all in under 30 seconds.</p>
-    <button class="demo-start-btn" id="demoStartBtn">
-      start demo →
-      <span class="demo-start-glow"></span>
-    </button>
-    <div class="demo-start-note">no email forwarding required. this is a simulation.</div>
+    <h1 style="max-width:none;margin-bottom:12px;">see perch. <em class="glow-text">in action.</em></h1>
+    <p style="font-size:16px;color:var(--text-dim);max-width:480px;margin:0 auto 32px;line-height:1.6;">forward an email in your head. watch what happens. no download, no sign-up, no risk.</p>
+    <button class="demo-launch-btn" id="demoLaunchBtn">launch the demo →</button>
+    <p style="font-size:12px;color:var(--text-faint);margin-top:10px;">everything runs in your browser. nothing is saved.</p>
+  </div>
+
+  <!-- macOS-style window -->
+  <div class="demo-window" id="demoWindow">
+    <div class="demo-titlebar">
+      <div class="demo-traffic">
+        <span class="demo-dot demo-dot-red"></span>
+        <span class="demo-dot demo-dot-yellow"></span>
+        <span class="demo-dot demo-dot-green"></span>
+      </div>
+      <div class="demo-title-text">perch.</div>
+    </div>
+
+    <div class="demo-body">
+      <!-- Scanning overlay -->
+      <div class="demo-scanning" id="demoScanning">
+        <div class="demo-scan-inner">
+          <div class="demo-scan-icon">
+            <div class="demo-scan-ring"></div>
+            <span>⌛</span>
+          </div>
+          <div class="demo-scan-label" id="demoScanLabel">connecting to inbox...</div>
+          <div class="demo-scan-track">
+            <div class="demo-scan-fill" id="demoScanFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App content (hidden until scanning done) -->
+      <div class="demo-app" id="demoApp">
+        <!-- Summary bar -->
+        <div class="demo-summary" id="demoSummary">
+          <div class="demo-summary-item">
+            <span class="demo-summary-val" id="demoSumAnnual">£0</span>
+            <span class="demo-summary-lbl">annual exposure</span>
+          </div>
+          <div class="demo-summary-gap"></div>
+          <div class="demo-summary-item">
+            <span class="demo-summary-val" id="demoSumItems">0</span>
+            <span class="demo-summary-lbl">items tracked</span>
+          </div>
+          <div class="demo-summary-gap"></div>
+          <div class="demo-summary-item">
+            <span class="demo-summary-val" id="demoSumAction">0</span>
+            <span class="demo-summary-lbl">need attention</span>
+          </div>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="demo-tabs">
+          <button class="demo-tab demo-tab-active" data-tab="inbox">inbox</button>
+          <button class="demo-tab" data-tab="digest">digest</button>
+          <button class="demo-tab" data-tab="savings">savings</button>
+        </div>
+
+        <!-- Inbox pane -->
+        <div class="demo-pane demo-pane-active" id="demoPaneInbox">
+          <div class="demo-list" id="demoList"></div>
+          <div class="demo-list-footer" id="demoListFooter" style="display:none;">
+            <div class="demo-list-footer-inner">
+              <span>all 6 renewals processed</span>
+              <button class="demo-list-footer-btn" id="demoViewDigestBtn">view digest →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Digest pane -->
+        <div class="demo-pane" id="demoPaneDigest">
+          <div class="demo-digest-pane">
+            <div class="demo-digest-pane-header">
+              <span class="demo-digest-pane-icon">📬</span>
+              <div>
+                <div style="font-size:13px;font-weight:600;">weekly renewal roundup</div>
+                <div style="font-size:11px;color:var(--text-faint);">issued mon 14 jul 2026</div>
+              </div>
+            </div>
+            <div class="demo-digest-intro">good morning. here's what's renewing this week and what needs your attention.</div>
+            <div class="demo-digest-group">
+              <div class="demo-digest-heading"><span class="demo-dot-urgent"></span> needs action</div>
+              <div class="demo-digest-item"><span class="demo-digest-badge urgent">renegotiate</span><span>admiral car insurance</span><span class="demo-digest-meta">£612.40/yr · ⬆ 22%</span><span class="demo-digest-deadline">23 days</span></div>
+              <div class="demo-digest-item"><span class="demo-digest-badge urgent">renegotiate</span><span>virgin media broadband</span><span class="demo-digest-meta">£42/mo · ⬆ +£14/mo</span><span class="demo-digest-deadline">12 days</span></div>
+              <div class="demo-digest-item"><span class="demo-digest-badge urgent">renegotiate</span><span>direct line home insurance</span><span class="demo-digest-meta">£387/yr · ⬆ 31%</span><span class="demo-digest-deadline">56 days</span></div>
+            </div>
+            <div class="demo-digest-group">
+              <div class="demo-digest-heading"><span class="demo-dot-cancel"></span> consider cancelling</div>
+              <div class="demo-digest-item"><span class="demo-digest-badge cancel">cancel</span><span>adobe creative cloud</span><span class="demo-digest-meta">£59.99/mo · unused 4mo</span><span class="demo-digest-deadline">55 days</span></div>
+              <div class="demo-digest-item"><span class="demo-digest-badge cancel">cancel</span><span>puregym manchester</span><span class="demo-digest-meta">£32/mo · unused since mar</span><span class="demo-digest-deadline">23 days</span></div>
+            </div>
+            <div class="demo-digest-group">
+              <div class="demo-digest-heading"><span class="demo-dot-ok"></span> all clear</div>
+              <div class="demo-digest-item"><span class="demo-digest-badge ok">renew</span><span>namecheap — perch. domain</span><span class="demo-digest-meta">£14.99/yr</span><span class="demo-digest-deadline">27 days</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Savings pane -->
+        <div class="demo-pane" id="demoPaneSavings">
+          <div class="demo-savings-pane">
+            <div class="demo-savings-hero">
+              <div class="demo-savings-hero-num" id="demoSavingsHero">£0</div>
+              <div class="demo-savings-hero-lbl">potential annual savings found</div>
+            </div>
+            <div class="demo-savings-detail">
+              <div class="demo-savings-row"><span>by renegotiating 3 policies</span><span class="demo-savings-pos">+£328</span></div>
+              <div class="demo-savings-row"><span>by cancelling 2 unused subs</span><span class="demo-savings-pos">+£1,103</span></div>
+              <div class="demo-savings-row demo-savings-total"><span>total potential savings</span><span id="demoSavingsTotal">£1,431</span></div>
+            </div>
+            <p class="demo-savings-note">based on typical loyalty penalties and unused subscription costs. your actual savings will vary.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="wrap" style="text-align:center;padding:80px 0 60px;">
+    <h2 style="max-width:none;margin:0 auto 16px;">see what <em class="glow-text">you're</em> missing.</h2>
+    <p style="font-size:15px;color:var(--text-dim);max-width:420px;margin:0 auto 28px;line-height:1.6;">forward one email. get a date, an amount, and a verdict. that's the whole loop.</p>
+    <a href="/waitlist" class="btn-primary" style="padding:16px 32px;font-size:16px;">get early access →</a>
+    <p style="font-size:12px;color:var(--text-faint);margin-top:10px;">no bank linking. no auto-cancel bots. just visibility.</p>
   </div>
 </section>
 
-<section class="demo-stage" id="demoStage">
-  <div class="wrap">
-    <div class="demo-bar">
-      <div class="demo-bar-track">
-        <div class="demo-bar-fill" id="demoProgress"></div>
-      </div>
-      <div class="demo-bar-label" id="demoStepLabel">extracting 0 of 6...</div>
-    </div>
-
-    <div class="demo-items" id="demoItems"></div>
-
-    <div class="demo-stats" id="demoStats">
-      <div class="demo-stat-inner">
-        <div class="demo-stat">
-          <div class="demo-stat-num" id="demoStatItems" data-count="6">0</div>
-          <div class="demo-stat-label">items tracked</div>
-        </div>
-        <div class="demo-stat-divider"></div>
-        <div class="demo-stat">
-          <div class="demo-stat-num" id="demoStatAnnual" data-count="1148" style="color:var(--accent);">£0</div>
-          <div class="demo-stat-label">annual exposure found</div>
-        </div>
-        <div class="demo-stat-divider"></div>
-        <div class="demo-stat">
-          <div class="demo-stat-num" id="demoStatAction" data-count="5" style="font-size:14px;font-family:var(--sans);font-weight:600;">0</div>
-          <div class="demo-stat-label">items needing action</div>
-        </div>
-      </div>
-      <button class="demo-digest-btn" id="demoDigestBtn">🔍 view my monday digest →</button>
-    </div>
-  </div>
-</section>
-
-<section class="demo-digest" id="demoDigest">
-  <div class="wrap">
-    <div class="page-header a-fade-up" style="text-align:center;">
-      <div class="section-tag" style="justify-content:center;">your monday morning</div>
-      <h2 style="max-width:none;">90 seconds. <span class="glow-text">peace of mind.</span></h2>
-      <p style="max-width:520px;margin:14px auto 0;">every monday. ranked by urgency. verdicts for every item. forward once, forget forever.</p>
-    </div>
-
-    <div class="demo-digest-mockup a-fade-up">
-      <div class="digest-mockup" style="max-width:600px;margin:0 auto;">
-        <div class="digest-header">
-          <div class="digest-from">
-            <div class="digest-avatar">p</div>
-            <div>
-              <div class="digest-name">perch. digest</div>
-              <div class="digest-addr">digest@perch.app</div>
-            </div>
-          </div>
-          <div class="digest-to">to me</div>
-        </div>
-        <div class="digest-subject">your monday digest — 6 items tracked, 4 need attention</div>
-        <div class="digest-body">
-          <div class="digest-intro">good morning. here's what's renewing this week and what needs your attention.</div>
-
-          <div class="digest-section">
-            <div class="digest-sectitle"><span class="digest-dot urgent"></span> action required (high urgency)</div>
-            <div class="digest-item">
-              <span class="digest-verdict urgent">renegotiate</span>
-              <div class="digest-info">
-                <div class="digest-provider">admiral car insurance</div>
-                <div class="digest-meta">£612.40/yr — renews 14 aug <span class="digest-up">⬆ 22%</span></div>
-              </div>
-              <span class="digest-deadline">23 days</span>
-            </div>
-            <div class="digest-item">
-              <span class="digest-verdict urgent">renegotiate</span>
-              <div class="digest-info">
-                <div class="digest-provider">virgin media broadband</div>
-                <div class="digest-meta">£42/mo — renews 21 jul <span class="digest-up">⬆ +£14/mo</span></div>
-              </div>
-              <span class="digest-deadline">12 days</span>
-            </div>
-            <div class="digest-item">
-              <span class="digest-verdict urgent">renegotiate</span>
-              <div class="digest-info">
-                <div class="digest-provider">direct line home insurance</div>
-                <div class="digest-meta">£387/yr — renews 5 sep <span class="digest-up">⬆ 31%</span></div>
-              </div>
-              <span class="digest-deadline">56 days</span>
-            </div>
-          </div>
-
-          <div class="digest-section">
-            <div class="digest-sectitle"><span class="digest-dot coming"></span> consider cancelling</div>
-            <div class="digest-item">
-              <span class="digest-verdict cancel">cancel</span>
-              <div class="digest-info">
-                <div class="digest-provider">adobe creative cloud</div>
-                <div class="digest-meta">£59.99/mo — unused for 4 months</div>
-              </div>
-              <span class="digest-deadline">55 days</span>
-            </div>
-            <div class="digest-item">
-              <span class="digest-verdict cancel">cancel</span>
-              <div class="digest-info">
-                <div class="digest-provider">puregym manchester</div>
-                <div class="digest-meta">£32/mo — unused since march</div>
-              </div>
-              <span class="digest-deadline">23 days</span>
-            </div>
-          </div>
-
-          <div class="digest-section">
-            <div class="digest-sectitle"><span class="digest-dot coming"></span> all clear — no action needed</div>
-            <div class="digest-item">
-              <span class="digest-verdict monitor">renew</span>
-              <div class="digest-info">
-                <div class="digest-provider">namecheap — perch. domain</div>
-                <div class="digest-meta">£14.99/yr — renews 18 aug</div>
-              </div>
-              <span class="digest-deadline">27 days</span>
-            </div>
-          </div>
-        </div>
-        <div class="digest-footer-line">perch. — see everything, miss nothing.</div>
-      </div>
-    </div>
-
-    <div class="demo-cta-row a-fade-up">
-      <a href="/waitlist" class="btn-primary" style="padding:16px 32px;font-size:16px;">get early access →</a>
-      <span class="hero-microcopy">no bank linking. no auto-cancel bots. just visibility.</span>
-    </div>
-  </div>
-</section>
 </div>
 
 <script src="/demo.js"></script>
