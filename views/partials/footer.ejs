@@ -17,6 +17,7 @@
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
+<script src="/particles.js"></script>
 <script>
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -166,8 +167,28 @@
 
   fetch('/api/waitlist/count', { cache: 'no-store' }).then(r => r.json()).then(d => {
     if (d.ok && d.count > 0) {
-      const el = document.getElementById('waitlistCount');
-      if (el) { el.textContent = d.count.toLocaleString(); el.style.display = 'inline'; }
+      const badge = document.getElementById('waitlistCount');
+      if (badge) { badge.textContent = d.count.toLocaleString(); badge.style.display = 'inline'; }
+      const heroBadge = document.getElementById('heroWaitlistCount');
+      const heroPlus = document.getElementById('heroWaitlistPlus');
+      if (heroBadge && heroPlus) {
+        const target = d.count;
+        const startVal = parseInt(heroBadge.textContent.replace(/[^0-9]/g,''), 10) || 0;
+        const diff = target - startVal;
+        if (diff <= 0) { heroBadge.textContent = target.toLocaleString(); return; }
+        heroPlus.style.opacity = '0';
+        const dur = 1200;
+        const start = performance.now();
+        function tick(now){
+          const t = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const v = Math.round(startVal + eased * diff);
+          heroBadge.textContent = v.toLocaleString();
+          if (t < 1) { requestAnimationFrame(tick); }
+          else { heroPlus.style.opacity = '1'; heroPlus.style.transition = 'opacity .3s'; }
+        }
+        requestAnimationFrame(tick);
+      }
     }
   }).catch(() => {});
 

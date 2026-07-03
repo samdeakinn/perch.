@@ -1,4 +1,5 @@
 <%- include('partials/head', { title: article.title }) %>
+<div class="scroll-progress"><div class="scroll-progress-fill" id="scrollFill"></div></div>
 <%- include('partials/nav') %>
 
 <div class="page">
@@ -7,7 +8,10 @@
     <div class="page-header a-fade-up">
       <div class="section-tag">Blog</div>
       <h2><%= article.title %></h2>
-      <div style="font-size:13px;color:var(--text-faint);margin-top:8px;"><%= article.date %> · <%= article.readTime %> min read</div>
+      <div style="font-size:13px;color:var(--text-faint);margin-top:8px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span><%= article.date %> · <%= article.readTime %> min read</span>
+        <button class="article-share-btn" onclick="shareArticle()" title="Copy link">⎘ Share</button>
+      </div>
     </div>
     <div class="article-body a-fade-up">
       <%- include('articles/' + article.template) %>
@@ -18,5 +22,15 @@
   </div>
 </section>
 </div>
+<script>function shareArticle(){
+  const url = location.href;
+  if (navigator.share) navigator.share({url});
+  else { navigator.clipboard.writeText(url).then(() => {
+    const btn = document.querySelector('.article-share-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => btn.textContent = orig, 2000);
+  }); }
+}</script>
 
 <%- include('partials/footer') %>

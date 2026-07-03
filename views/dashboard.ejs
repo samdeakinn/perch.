@@ -17,7 +17,7 @@
           <input type="email" id="dashEmail" placeholder="you@email.com" autocomplete="email">
           <button id="dashBtn" class="btn-primary" style="padding:12px 22px;">Check status</button>
         </div>
-        <div id="dashLoading" class="dash-loading" style="display:none;">Looking you up...</div>
+        <div id="dashLoading" class="dash-loading">Looking you up <span class="dash-loading-dot"></span><span class="dash-loading-dot"></span><span class="dash-loading-dot"></span></div>
       </div>
     </div>
 
@@ -110,7 +110,7 @@
     const email = document.getElementById('dashEmail').value.trim();
     if (!email) return;
 
-    document.getElementById('dashLoading').style.display = 'block';
+    document.getElementById('dashLoading').classList.add('dash-loading-visible');
     document.getElementById('dashBtn').disabled = true;
     document.getElementById('dashResult').style.display = 'none';
     document.getElementById('dashNotFound').style.display = 'none';
@@ -139,7 +139,7 @@
       document.getElementById('dashNotFound').style.display = 'block';
     }
 
-    document.getElementById('dashLoading').style.display = 'none';
+    document.getElementById('dashLoading').classList.remove('dash-loading-visible');
     document.getElementById('dashBtn').disabled = false;
   }
 

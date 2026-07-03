@@ -1,16 +1,46 @@
 <%- include('partials/head', { title: 'Early access' }) %>
 <%- include('partials/nav') %>
 
-<div class="page">
-<section class="page-section waitlist" style="min-height:80vh;display:flex;align-items:center;">
-  <div class="wrap" style="width:100%;">
-    <div class="waitlist-inner">
-      <div class="a-fade-up">
-        <div class="section-tag">Your estimate</div>
-        <h2>What are auto-renewals costing you?</h2>
-        <p class="section-sub">Based on UK averages from FCA and CMA data, here's what the typical household overpays. Adjust the sliders to match your situation.</p>
+<div class="page" id="onboardingApp">
+<section class="page-section" style="min-height:80vh;display:flex;align-items:center;">
+  <div class="wrap" style="width:100%;max-width:700px;">
+    <div class="a-fade-up" style="text-align:center;">
+      <div class="section-tag" style="justify-content:center;">Early access</div>
+      <h2 style="max-width:none;">You're minutes away from <em class="glow-text">seeing clearly.</em></h2>
+      <p class="section-sub" style="text-align:center;margin:8px auto 0;">Three quick steps. No commitment. We'll email you when perch. opens for your segment.</p>
+    </div>
 
-        <div class="calc-panel">
+    <div class="onboarding-progress a-fade-up" id="obProgress">
+      <div class="ob-step ob-step-active" data-step="1"><span class="ob-num">1</span><span class="ob-label">Segment</span></div>
+      <div class="ob-step" data-step="2"><span class="ob-num">2</span><span class="ob-label">Estimate</span></div>
+      <div class="ob-step" data-step="3"><span class="ob-num">3</span><span class="ob-label">Details</span></div>
+    </div>
+
+    <div class="onboarding-panels a-fade-up">
+      <!-- Step 1: Segment -->
+      <div class="ob-panel ob-panel-active" id="obStep1">
+        <h3 class="ob-panel-title">I'm signing up as a...</h3>
+        <div class="ob-segment-grid">
+          <button class="ob-segment-card" data-segment="household">
+            <div class="ob-seg-icon">🏠</div>
+            <div class="ob-seg-name">Household</div>
+            <div class="ob-seg-desc">For personal and family use</div>
+            <div class="ob-seg-check">✓</div>
+          </button>
+          <button class="ob-segment-card" data-segment="business">
+            <div class="ob-seg-icon">⚡</div>
+            <div class="ob-seg-name">Small business</div>
+            <div class="ob-seg-desc">For micro-businesses and solo founders</div>
+            <div class="ob-seg-check">✓</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Calculator -->
+      <div class="ob-panel" id="obStep2">
+        <h3 class="ob-panel-title">What are auto-renewals costing you?</h3>
+        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">Based on UK averages. Adjust the sliders to match your situation — we'll calculate your estimated annual exposure.</p>
+        <div class="calc-panel" style="margin-top:0;">
           <div class="calc-slider-row">
             <div class="calc-label-row">
               <span class="calc-label">Insurance policies</span>
@@ -19,7 +49,6 @@
             <input type="range" class="calc-slider" id="sliderInsurance" min="0" max="8" value="2" step="1">
             <div class="calc-range-labels"><span>0</span><span>8+</span></div>
           </div>
-
           <div class="calc-slider-row">
             <div class="calc-label-row">
               <span class="calc-label">Subscriptions (streaming, SaaS, gym, apps)</span>
@@ -28,7 +57,6 @@
             <input type="range" class="calc-slider" id="sliderSubs" min="0" max="20" value="6" step="1">
             <div class="calc-range-labels"><span>0</span><span>20+</span></div>
           </div>
-
           <div class="calc-slider-row">
             <div class="calc-label-row">
               <span class="calc-label">Broadband, mobile &amp; utility contracts</span>
@@ -37,7 +65,6 @@
             <input type="range" class="calc-slider" id="sliderUtilities" min="0" max="6" value="2" step="1">
             <div class="calc-range-labels"><span>0</span><span>6+</span></div>
           </div>
-
           <div class="calc-slider-row">
             <div class="calc-label-row">
               <span class="calc-label">Domains &amp; annual services</span>
@@ -46,55 +73,46 @@
             <input type="range" class="calc-slider" id="sliderDomains" min="0" max="10" value="3" step="1">
             <div class="calc-range-labels"><span>0</span><span>10+</span></div>
           </div>
-
-          <div class="calc-total">
+          <div class="calc-total" style="margin-top:8px;">
             <div class="calc-total-label">Estimated annual exposure</div>
             <div class="calc-total-amount" id="calcTotal">£650</div>
             <div class="calc-total-note">Based on average loyalty penalties across UK markets</div>
           </div>
-
-          <button class="calc-cta" onclick="document.getElementById('calcFormSection').scrollIntoView({behavior:'smooth'})">
-            Get your full breakdown →
-          </button>
         </div>
       </div>
 
-      <div class="a-fade-up" id="calcFormSection">
-        <div class="form-panel">
-          <div class="waitlist-urgency">Limited early access</div>
-          <div class="calc-context" id="calcContext">Based on your estimate, you could be overpaying <strong>£650</strong> per year. perch. catches that.</div>
-          <p class="form-guide">Enter your details and we'll send you a full breakdown of what perch. would track for you — plus early access when it's ready.</p>
-          <form id="waitlistForm">
-            <input type="hidden" id="estimatedExposure" name="estimated_exposure" value="650">
-            <div class="field">
-              <label for="name">Name</label>
-              <input type="text" id="name" required placeholder="Your name" autocomplete="name">
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" required placeholder="you@email.com" autocomplete="email">
-            </div>
-            <div class="field">
-              <label>I'm signing up as a...</label>
-              <div class="segment-row">
-                <div class="segment-btn active" data-segment="household">Household</div>
-                <div class="segment-btn" data-segment="business">Small business</div>
-              </div>
-            </div>
-            <button type="submit" class="submit-btn">Get my breakdown &amp; join the waitlist</button>
-          </form>
-          <p class="submit-note">We'll send you one email with your personalised breakdown. No spam, no newsletters, no inbox clutter.</p>
-          <div class="form-success" id="formSuccess">
-            <div class="check">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>You're on the list.</h3>
-            <p>We'll email your personalised breakdown when perch. opens up for your segment. In the meantime, start gathering those renewal emails.</p>
+      <!-- Step 3: Details -->
+      <div class="ob-panel" id="obStep3">
+        <h3 class="ob-panel-title">Where should we send your breakdown?</h3>
+        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">We'll send you one email with your personalised estimate and early access when perch. opens for your segment.</p>
+        <form id="waitlistForm" class="ob-form">
+          <input type="hidden" id="estimatedExposure" name="estimated_exposure" value="650">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" required placeholder="e.g. Jo Milner" autocomplete="name">
           </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" required placeholder="you@email.com" autocomplete="email">
+          </div>
+          <button type="submit" class="ob-submit-btn">Get my breakdown &amp; join the waitlist →</button>
+          <p class="submit-note">No spam. No newsletters. One email with your breakdown, then silence until we're ready for you.</p>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="check">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>You're on the list.</h3>
+          <p id="formSuccessMsg">We'll email your personalised breakdown when perch. opens for your segment. In the meantime, start gathering those renewal emails.</p>
         </div>
       </div>
+    </div>
+
+    <div class="ob-nav" id="obNav">
+      <button class="ob-back" id="obBack">← Back</button>
+      <button class="ob-next" id="obNext">Continue →</button>
     </div>
   </div>
 </section>
@@ -102,13 +120,8 @@
 
 <script>
   let selectedSegment = 'household';
-  document.querySelectorAll('.segment-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedSegment = btn.getAttribute('data-segment');
-    });
-  });
+  let currentStep = 1;
+  const totalSteps = 3;
 
   const RATES = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
 
@@ -117,24 +130,80 @@
     const subs = parseInt(document.getElementById('sliderSubs').value, 10);
     const util = parseInt(document.getElementById('sliderUtilities').value, 10);
     const dom = parseInt(document.getElementById('sliderDomains').value, 10);
-
     const total = ins * RATES.insurance + subs * RATES.subs + util * RATES.utilities + dom * RATES.domains;
-
     document.getElementById('calcInsurance').textContent = ins;
     document.getElementById('calcSubs').textContent = subs;
     document.getElementById('calcUtilities').textContent = util;
     document.getElementById('calcDomains').textContent = dom;
-
-    const formatted = '£' + total.toLocaleString();
-    document.getElementById('calcTotal').textContent = formatted;
-    document.getElementById('calcContext').innerHTML = 'Based on your estimate, you could be overpaying <strong>' + formatted + '</strong> per year. perch. catches that.';
+    document.getElementById('calcTotal').textContent = '£' + total.toLocaleString();
     document.getElementById('estimatedExposure').value = total;
   }
+  document.querySelectorAll('.calc-slider').forEach(s => s.addEventListener('input', calcTotal));
+  calcTotal();
 
-  document.querySelectorAll('.calc-slider').forEach(s => {
-    s.addEventListener('input', calcTotal);
+  document.querySelectorAll('.ob-segment-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.ob-segment-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedSegment = card.getAttribute('data-segment');
+    });
   });
 
-  calcTotal();
+  function showStep(n){
+    currentStep = n;
+    document.querySelectorAll('.ob-panel').forEach((el, i) => {
+      el.classList.toggle('ob-panel-active', i + 1 === n);
+    });
+    document.querySelectorAll('.ob-step').forEach(el => {
+      const step = parseInt(el.getAttribute('data-step'), 10);
+      el.classList.toggle('ob-step-active', step === n);
+      el.classList.toggle('ob-step-done', step < n);
+    });
+    document.getElementById('obBack').style.display = n === 1 ? 'none' : 'inline-flex';
+    document.getElementById('obNext').textContent = n === totalSteps ? 'Submit' : 'Continue →';
+    document.getElementById('obNext').style.display = 'inline-flex';
+  }
+
+  document.getElementById('obNext').addEventListener('click', () => {
+    if (currentStep === 2) {
+      document.getElementById('obNext').textContent = 'Submit';
+    }
+    if (currentStep < totalSteps) {
+      showStep(currentStep + 1);
+    } else {
+      document.getElementById('obNext').style.display = 'none';
+      document.getElementById('obBack').style.display = 'none';
+    }
+  });
+
+  document.getElementById('obBack').addEventListener('click', () => {
+    if (currentStep > 1) showStep(currentStep - 1);
+  });
+
+  const form = document.getElementById('waitlistForm');
+  const formSuccess = document.getElementById('formSuccess');
+  if (form && formSuccess) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !email) return;
+
+      const exposure = document.getElementById('estimatedExposure').value;
+      const msgEl = document.getElementById('formSuccessMsg');
+      msgEl.textContent = 'We\'ll email your personalised breakdown at ' + email + ' when perch. opens for ' + (selectedSegment === 'business' ? 'small businesses' : 'households') + '. In the meantime, start gathering those renewal emails.';
+
+      try {
+        await fetch('/api/waitlist', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, segment: selectedSegment, estimated_exposure: exposure })
+        });
+      } catch(_) {}
+
+      form.style.display = 'none';
+      formSuccess.classList.add('show');
+      document.getElementById('obNav').style.display = 'none';
+    });
+  }
 </script>
 <%- include('partials/footer') %>
