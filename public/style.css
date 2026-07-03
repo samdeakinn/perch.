@@ -1467,6 +1467,30 @@ footer{ padding:48px 0 36px; }
 .tool-bar-labels{ display:flex; justify-content:space-between; font-size:10px; color:var(--text-faint); margin-top:4px; }
 .tool-total-note{ font-size:12.5px; color:var(--text-dim); line-height:1.6; max-width:480px; margin:0 auto; }
 
+/* ─── CHANGELOG ─── */
+
+.cl-list{ margin-top:40px; }
+.cl-entry{
+  position:relative; padding:24px 0 24px 28px;
+  border-left:1px solid var(--line);
+  margin-left:8px;
+}
+.cl-entry::before{
+  content:''; position:absolute; left:-4px; top:28px;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--bg-soft);
+}
+.cl-date{ font-size:11px; color:var(--text-faint); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.05em; }
+.cl-badge{
+  display:inline-block; font-size:9.5px; font-weight:600; text-transform:uppercase;
+  padding:2px 8px; border-radius:4px; margin-bottom:8px; letter-spacing:0.04em;
+}
+.cl-badge-new{ background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-line); }
+.cl-badge-improved{ background:rgba(74,222,128,0.08); color:#86efac; border:1px solid rgba(74,222,128,0.2); }
+.cl-badge-fix{ background:rgba(96,165,250,0.08); color:#93c5fd; border:1px solid rgba(96,165,250,0.2); }
+.cl-entry h3{ font-size:15px; font-weight:600; margin-bottom:6px; }
+.cl-entry p{ font-size:13.5px; color:var(--text-dim); line-height:1.65; }
+
 /* ─── ONBOARDING FLOW ─── */
 
 .onboarding-progress{

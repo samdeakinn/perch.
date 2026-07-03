@@ -23,7 +23,7 @@ const articles = [
   { slug: 'domain-renewal-lapses', title: 'Domain Renewal Lapses: The Most Preventable Financial Loss', excerpt: 'A forgotten domain renewal can cost ten times the original price to fix. Here\'s why it happens and how to stop it.', date: '23 Jun 2026', readTime: 3, template: 'domain-renewal-lapses' },
 ];
 
-const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool'];
+const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog'];
 
 app.get('/', (_, res) => res.render('index', { currentPage: 'index' }));
 pages.forEach(p => {
@@ -43,7 +43,7 @@ app.get('/robots.txt', (_, res) => {
 });
 
 app.get('/sitemap.xml', (_, res) => {
-  const urls = ['','problem','how-it-works','comparison','proof','pricing','uses','waitlist','privacy','brand','dashboard','blog','demo','stats','tool'];
+  const urls = ['','problem','how-it-works','comparison','proof','pricing','uses','waitlist','privacy','brand','dashboard','blog','demo','stats','tool','changelog'];
   const blogUrls = articles.map(a => `blog/${a.slug}`);
   const all = [...urls, ...blogUrls];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
