@@ -36,6 +36,9 @@ document.getElementById('footerSubscribe')?.addEventListener('submit', e => {
 
 <script src="/particles.js"></script>
 <script>
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+</script>
+<script>
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const dot = document.getElementById('cursorDot');
