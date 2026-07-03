@@ -7,13 +7,21 @@
     <div class="page-header a-fade-up" style="text-align:center;">
       <div class="section-tag" style="justify-content:center;">cost explorer</div>
       <h2 style="max-width:none;">what are <em class="glow-text">you</em> overpaying?</h2>
-      <p style="max-width:500px;margin:14px auto 0;">select the providers you use. we'll show you what the loyalty penalty is costing vs. the best available rate — and what perch. would catch.</p>
+      <p style="max-width:500px;margin:14px auto 0;">select the providers you use, or try a preset below. we'll show you what the loyalty penalty is costing vs. the best available rate.</p>
+    </div>
+
+    <div class="tool-presets a-fade-up">
+      <span class="tool-preset-label">quick start:</span>
+      <button class="tool-preset-btn" data-preset="individual" onclick="applyPreset('individual')">single person</button>
+      <button class="tool-preset-btn" data-preset="couple" onclick="applyPreset('couple')">couple / family</button>
+      <button class="tool-preset-btn" data-preset="business" onclick="applyPreset('business')">small business</button>
+      <button class="tool-preset-btn" data-preset="clear" onclick="applyPreset('clear')">clear all</button>
     </div>
 
     <div class="tool-categories a-fade-up">
       <div class="tool-cat">
         <div class="tool-cat-header" onclick="toggleCat(this)">
-          <span>insurance</span>
+          <span>car insurance</span>
           <span class="tool-cat-arrow">▾</span>
         </div>
         <div class="tool-cat-body">
@@ -23,6 +31,20 @@
           <label class="tool-item"><input type="checkbox" data-cat="ins" data-rate="88" onchange="calcTool()"><span class="tool-item-name">churchill</span><span class="tool-item-rate">+£88/yr</span></label>
           <label class="tool-item"><input type="checkbox" data-cat="ins" data-rate="72" onchange="calcTool()"><span class="tool-item-name">lv=</span><span class="tool-item-rate">+£72/yr</span></label>
           <label class="tool-item"><input type="checkbox" data-cat="ins" data-rate="69" onchange="calcTool()"><span class="tool-item-name">more than</span><span class="tool-item-rate">+£69/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="ins" data-rate="65" onchange="calcTool()"><span class="tool-item-name">hastings direct</span><span class="tool-item-rate">+£65/yr</span></label>
+        </div>
+      </div>
+
+      <div class="tool-cat">
+        <div class="tool-cat-header" onclick="toggleCat(this)">
+          <span>home insurance</span>
+          <span class="tool-cat-arrow">▾</span>
+        </div>
+        <div class="tool-cat-body">
+          <label class="tool-item"><input type="checkbox" data-cat="home" data-rate="112" onchange="calcTool()"><span class="tool-item-name">direct line</span><span class="tool-item-rate">+£112/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="home" data-rate="96" onchange="calcTool()"><span class="tool-item-name">aviva</span><span class="tool-item-rate">+£96/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="home" data-rate="78" onchange="calcTool()"><span class="tool-item-name">halifax</span><span class="tool-item-rate">+£78/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="home" data-rate="134" onchange="calcTool()"><span class="tool-item-name">churchill</span><span class="tool-item-rate">+£134/yr</span></label>
         </div>
       </div>
 
@@ -38,6 +60,7 @@
           <label class="tool-item"><input type="checkbox" data-cat="bb" data-rate="84" onchange="calcTool()"><span class="tool-item-name">ee</span><span class="tool-item-rate">+£84/yr</span></label>
           <label class="tool-item"><input type="checkbox" data-cat="bb" data-rate="120" onchange="calcTool()"><span class="tool-item-name">vodafone</span><span class="tool-item-rate">+£120/yr</span></label>
           <label class="tool-item"><input type="checkbox" data-cat="bb" data-rate="60" onchange="calcTool()"><span class="tool-item-name">plusnet</span><span class="tool-item-rate">+£60/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="bb" data-rate="72" onchange="calcTool()"><span class="tool-item-name">three mobile</span><span class="tool-item-rate">+£72/yr</span></label>
         </div>
       </div>
 
@@ -51,6 +74,7 @@
           <label class="tool-item"><input type="checkbox" data-cat="sub" data-rate="240" onchange="calcTool()"><span class="tool-item-name">saas tools (3+)</span><span class="tool-item-rate">+£240/yr</span></label>
           <label class="tool-item"><input type="checkbox" data-cat="sub" data-rate="96" onchange="calcTool()"><span class="tool-item-name">gym membership</span><span class="tool-item-rate">+£96/yr</span></label>
           <label class="tool-item"><input type="checkbox" data-cat="sub" data-rate="60" onchange="calcTool()"><span class="tool-item-name">app subscriptions</span><span class="tool-item-rate">+£60/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="sub" data-rate="48" onchange="calcTool()"><span class="tool-item-name">magazine / newsletter</span><span class="tool-item-rate">+£48/yr</span></label>
         </div>
       </div>
 
@@ -65,6 +89,19 @@
           <label class="tool-item"><input type="checkbox" data-cat="dom" data-rate="300" onchange="calcTool()"><span class="tool-item-name">5+ domains</span><span class="tool-item-rate">+£300/yr</span></label>
         </div>
       </div>
+
+      <div class="tool-cat">
+        <div class="tool-cat-header" onclick="toggleCat(this)">
+          <span>software &amp; business</span>
+          <span class="tool-cat-arrow">▾</span>
+        </div>
+        <div class="tool-cat-body">
+          <label class="tool-item"><input type="checkbox" data-cat="biz" data-rate="360" onchange="calcTool()"><span class="tool-item-name">accounting software</span><span class="tool-item-rate">+£360/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="biz" data-rate="240" onchange="calcTool()"><span class="tool-item-name">crm / sales tools</span><span class="tool-item-rate">+£240/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="biz" data-rate="480" onchange="calcTool()"><span class="tool-item-name">design tools (adobe, figma)</span><span class="tool-item-rate">+£480/yr</span></label>
+          <label class="tool-item"><input type="checkbox" data-cat="biz" data-rate="180" onchange="calcTool()"><span class="tool-item-name">hosting / servers</span><span class="tool-item-rate">+£180/yr</span></label>
+        </div>
+      </div>
     </div>
 
     <div class="tool-total a-fade-up" id="toolTotal">
@@ -76,9 +113,10 @@
         </div>
         <div class="tool-bar-labels">
           <span>£0</span>
-          <span id="toolBarMax">£1,200</span>
+          <span id="toolBarMax">£2,500</span>
         </div>
       </div>
+      <div class="tool-total-save" id="toolSaveMsg" style="display:none;">perch. could help you recover <span id="toolSaveAmount">£0</span> of this — just by tracking renewal dates and price changes.</div>
       <div class="tool-total-note">this is what the loyalty penalty costs you each year — money you could keep by switching or renegotiating. perch. tracks every renewal so you never miss the window.</div>
       <a href="/waitlist" class="btn-primary" style="margin-top:20px;display:inline-flex;">get early access →</a>
     </div>
@@ -99,9 +137,41 @@ function calcTool() {
     total += parseInt(cb.getAttribute('data-rate'), 10);
   });
   document.getElementById('toolAmount').textContent = '\u00A3' + total.toLocaleString();
-  var max = 1200;
+  var max = 2500;
   var pct = Math.min(total / max * 100, 100);
   document.getElementById('toolBarFill').style.width = pct + '%';
+  var saveMsg = document.getElementById('toolSaveMsg');
+  var saveAmt = document.getElementById('toolSaveAmount');
+  if (total > 0) {
+    var save = Math.round(total * 0.68);
+    saveAmt.textContent = '\u00A3' + save.toLocaleString();
+    saveMsg.style.display = 'block';
+  } else {
+    saveMsg.style.display = 'none';
+  }
+}
+var PRESETS = {
+  individual: ['ins-admiral', 'bb-virgin', 'sub-gym', 'dom-1'],
+  couple: ['ins-admiral', 'ins-lv', 'home-aviva', 'bb-virgin', 'bb-three', 'sub-stream', 'sub-gym', 'dom-1'],
+  business: ['ins-admiral', 'home-direct', 'bb-bt', 'biz-acct', 'biz-crm', 'biz-host', 'dom-3']
+};
+function applyPreset(name) {
+  document.querySelectorAll('.tool-item input').forEach(function(cb) { cb.checked = false; });
+  if (name === 'clear') { calcTool(); return; }
+  var ids = PRESETS[name] || [];
+  ids.forEach(function(id) {
+    var parts = id.split('-');
+    var cat = parts[0];
+    var namePart = parts.slice(1).join('-');
+    document.querySelectorAll('.tool-item').forEach(function(item) {
+      var text = item.querySelector('.tool-item-name');
+      if (text && text.textContent.trim().toLowerCase().indexOf(namePart) >= 0) {
+        var cb = item.querySelector('input');
+        if (cb) { cb.checked = true; }
+      }
+    });
+  });
+  calcTool();
 }
 document.querySelectorAll('.tool-cat').forEach(function(c) {
   c.querySelector('.tool-cat-body').classList.add('open');

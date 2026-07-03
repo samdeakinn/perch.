@@ -4,12 +4,12 @@
 <div class="page" id="main-content" role="main">
 
 <section class="demo-page" id="demoPage">
-  <div class="wrap" style="text-align:center;padding-top:140px;padding-bottom:60px;">
+  <div class="wrap" style="text-align:center;padding-top:120px;padding-bottom:32px;">
     <div class="eyebrow" style="justify-content:center;">interactive demo</div>
-    <h1 style="max-width:none;margin-bottom:12px;">see perch. <em class="glow-text">in action.</em></h1>
-    <p style="font-size:16px;color:var(--text-dim);max-width:480px;margin:0 auto 32px;line-height:1.6;">forward an email in your head. watch what happens. no download, no sign-up, no risk.</p>
-    <button class="demo-launch-btn" id="demoLaunchBtn">launch the demo →</button>
-    <p style="font-size:12px;color:var(--text-faint);margin-top:10px;">everything runs in your browser. nothing is saved.</p>
+    <h1 style="max-width:none;margin-bottom:8px;">see perch. <em class="glow-text">in action.</em></h1>
+    <p class="demo-intro-text">forward an email in your head. watch what happens. no download, no sign-up, no risk.</p>
+    <button class="demo-replay-btn" id="demoReplayBtn"><span class="demo-replay-icon">↻</span> replay scan</button>
+    <span style="display:inline-block;font-size:11px;color:var(--text-faint);margin-left:12px;" id="demoStatusBadge">loading your demo...</span>
   </div>
 
   <!-- macOS-style window -->
@@ -20,7 +20,7 @@
         <span class="demo-dot demo-dot-yellow"></span>
         <span class="demo-dot demo-dot-green"></span>
       </div>
-      <div class="demo-title-text">perch.</div>
+      <div class="demo-title-text">perch. inbox</div>
     </div>
 
     <div class="demo-body">
@@ -29,7 +29,7 @@
         <div class="demo-scan-inner">
           <div class="demo-scan-icon">
             <div class="demo-scan-ring"></div>
-            <span>⌛</span>
+            <span>🔍</span>
           </div>
           <div class="demo-scan-label" id="demoScanLabel">connecting to inbox...</div>
           <div class="demo-scan-track">
@@ -70,7 +70,7 @@
           <div class="demo-list" id="demoList"></div>
           <div class="demo-list-footer" id="demoListFooter" style="display:none;">
             <div class="demo-list-footer-inner">
-              <span>all 6 renewals processed</span>
+              <span class="demo-footer-text">all 6 renewals processed</span>
               <button class="demo-list-footer-btn" id="demoViewDigestBtn">view digest →</button>
             </div>
           </div>
@@ -124,9 +124,42 @@
     </div>
   </div>
 
-  <!-- Bottom CTA -->
-  <div class="wrap" style="text-align:center;padding:80px 0 60px;">
-    <h2 style="max-width:none;margin:0 auto 16px;">see what <em class="glow-text">you're</em> missing.</h2>
+  <!-- Scenario shortcuts -->
+  <div class="wrap" style="text-align:center;padding:40px 0 20px;">
+    <div class="demo-scenarios" id="demoScenarios" style="display:none;">
+      <div style="font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:12px;">try clicking around</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        <button class="demo-scenario-btn" data-action="digest">📋 view the digest</button>
+        <button class="demo-scenario-btn" data-action="savings">💰 see your savings</button>
+        <button class="demo-scenario-btn" data-action="expand">🖱️ expand an item</button>
+        <button class="demo-scenario-btn" data-action="replay">↻ replay the scan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- What's next -->
+  <div class="wrap" style="text-align:center;padding:60px 0 40px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:720px;margin:0 auto;text-align:left;">
+      <div style="padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft);">
+        <div style="font-size:24px;margin-bottom:8px;">1</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">forward an email</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">send your renewal notice to hello@perch.app. one email, no setup.</div>
+      </div>
+      <div style="padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft);">
+        <div style="font-size:24px;margin-bottom:8px;">2</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">perch. parses it</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">dates, amounts, providers, price changes — extracted, organised, verdict-ready.</div>
+      </div>
+      <div style="padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft);">
+        <div style="font-size:24px;margin-bottom:8px;">3</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">get your digest</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">a ranked weekly summary. renew, cancel, or renegotiate — you decide.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="text-align:center;padding:40px 0 60px;">
+    <h2 style="max-width:none;margin:0 auto 16px;font-size:clamp(24px,5vw,32px);">see what <em class="glow-text">you're</em> missing.</h2>
     <p style="font-size:15px;color:var(--text-dim);max-width:420px;margin:0 auto 28px;line-height:1.6;">forward one email. get a date, an amount, and a verdict. that's the whole loop.</p>
     <a href="/waitlist" class="btn-primary" style="padding:16px 32px;font-size:16px;">get early access →</a>
     <p style="font-size:12px;color:var(--text-faint);margin-top:10px;">no bank linking. no auto-cancel bots. just visibility.</p>

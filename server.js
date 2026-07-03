@@ -38,7 +38,11 @@ const PORT = process.env.PORT || 3001;
 app.set('view engine', 'ejs');
 app.set('views', join(__dirname, 'views'));
 app.use(securityHeaders);
+app.use((_, res, next) => { pageViews++; next(); });
+process.on('SIGINT', savePageViews);
+process.on('SIGTERM', savePageViews);
 app.use(express.static(join(__dirname, 'public'), { maxAge: '7d', immutable: true }));
+app.get('/api/views', (_, res) => res.json({ ok: true, views: pageViews }));
 app.use('/downloads', express.static(join(__dirname, 'public/downloads'), { maxAge: '1h' }));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: false }));
@@ -76,12 +80,17 @@ app.get('/robots.txt', (_, res) => {
 });
 
 app.get('/sitemap.xml', (_, res) => {
-  const urls = ['','problem','how-it-works','comparison','proof','pricing','uses','waitlist','privacy','brand','dashboard','blog','demo','stats','tool','changelog','roadmap','about','terms','contact', 'download'];
+  const primary = ['','problem','how-it-works','comparison','proof','pricing','uses','demo','download','tool','waitlist'];
+  const secondary = ['privacy','brand','blog','changelog','roadmap','about','terms','contact','digest','stats','dashboard'];
   const blogUrls = articles.map(a => `blog/${a.slug}`);
-  const all = [...urls, ...blogUrls];
+  const all = [...primary.map(u => ({url:u,priority:'0.9',changefreq:'weekly'})),
+    ...secondary.map(u => ({url:u,priority:'0.6',changefreq:'monthly'})),
+    ...blogUrls.map(u => ({url:u,priority:'0.7',changefreq:'monthly'}))
+  ];
+  const now = new Date().toISOString().split('T')[0];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${all.map(u => `<url><loc>https://perch.vercel.app/${u}</loc></url>`).join('\n  ')}
+  ${all.map(u => `<url><loc>https://perch.vercel.app/${u.url}</loc><lastmod>${now}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`).join('\n  ')}
 </urlset>`;
   res.type('application/xml').send(xml);
 });
@@ -111,9 +120,23 @@ articles.forEach(a => {
   app.get(`/blog/${a.slug}`, (_, res) => res.render('article', { currentPage: 'blog', article: a, articles }));
 });
 
+let pageViews = 0;
+
 function ensureDataDir(){
   try { if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true }); } catch(_) {}
+  try {
+    const pvFile = join(dataDir, 'pageviews.txt');
+    if (existsSync(pvFile)) pageViews = parseInt(readFileSync(pvFile, 'utf-8').trim(), 10) || 0;
+  } catch(_) {}
 }
+
+function savePageViews(){
+  try {
+    writeFileSync(join(dataDir, 'pageviews.txt'), String(pageViews));
+  } catch(_) {}
+}
+
+ensureDataDir();
 
 function getWaitlist(){
   ensureDataDir();

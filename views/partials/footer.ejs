@@ -28,6 +28,7 @@
       <div id="footerSubMsg" style="display:none;font-size:12px;color:var(--accent);">you're subscribed.</div>
     </div>
     <div class="footer-trust">we only process what you send us. nothing is shared, sold, or used to train models on your data.</div>
+    <div class="footer-counter" id="pageViewCounter" style="display:none;"></div>
   </div>
 </footer>
 
@@ -309,6 +310,18 @@ if ('serviceWorker' in navigator) {
           else { heroPlus.style.opacity = '1'; heroPlus.style.transition = 'opacity .3s'; }
         }
         requestAnimationFrame(tick);
+      }
+    }
+  }).catch(function() {});
+
+  // ─── Page View Counter ───
+
+  fetch('/api/views', { cache: 'no-store' }).then(function(r) { return r.json(); }).then(function(d) {
+    if (d.ok && d.views > 0) {
+      var pv = document.getElementById('pageViewCounter');
+      if (pv) {
+        pv.textContent = d.views.toLocaleString() + ' page views · no cookies, no tracking';
+        pv.style.display = 'block';
       }
     }
   }).catch(function() {});
