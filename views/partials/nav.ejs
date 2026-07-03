@@ -5,17 +5,24 @@
       <a href="/problem" class="<%= currentPage === 'problem' ? 'active' : '' %>">the problem</a>
       <a href="/how-it-works" class="<%= currentPage === 'how-it-works' ? 'active' : '' %>">how it works</a>
       <a href="/comparison" class="<%= currentPage === 'comparison' ? 'active' : '' %>">comparison</a>
-      <a href="/proof" class="<%= currentPage === 'proof' ? 'active' : '' %>">proof</a>
       <a href="/pricing" class="<%= currentPage === 'pricing' ? 'active' : '' %>">pricing</a>
       <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>">blog</a>
       <a href="/demo" class="<%= currentPage === 'demo' ? 'active' : '' %>">demo</a>
+      <a href="/download" class="<%= currentPage === 'download' ? 'active' : '' %>">download ↓</a>
     </div>
-    <a href="/waitlist" class="nav-cta">get early access <span class="nav-badge" id="waitlistCount"></span></a>
-    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      <a href="/waitlist" class="nav-cta">get early access <span class="nav-badge" id="waitlistCount"></span></a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 </nav>
 
-<div class="nav-overlay" id="navOverlay">
+<div class="nav-overlay" id="navOverlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <div class="nav-drawer">
     <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">✕</button>
     <div class="nav-drawer-links">
@@ -26,14 +33,19 @@
       <a href="/pricing" class="<%= currentPage === 'pricing' ? 'active' : '' %>">pricing</a>
       <a href="/uses" class="<%= currentPage === 'uses' ? 'active' : '' %>">uses</a>
       <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>">blog</a>
-      <a href="/dashboard" class="<%= currentPage === 'dashboard' ? 'active' : '' %>">dashboard</a>
-      <a href="/brand" class="<%= currentPage === 'brand' ? 'active' : '' %>">brand</a>
       <a href="/demo" class="<%= currentPage === 'demo' ? 'active' : '' %>">demo</a>
+      <a href="/download" class="<%= currentPage === 'download' ? 'active' : '' %>">download ↓</a>
       <a href="/tool" class="<%= currentPage === 'tool' ? 'active' : '' %>">cost explorer</a>
+      <a href="/dashboard" class="<%= currentPage === 'dashboard' ? 'active' : '' %>">dashboard</a>
       <a href="/stats" class="<%= currentPage === 'stats' ? 'active' : '' %>">stats</a>
       <a href="/changelog" class="<%= currentPage === 'changelog' ? 'active' : '' %>">changelog</a>
       <a href="/roadmap" class="<%= currentPage === 'roadmap' ? 'active' : '' %>">roadmap</a>
     </div>
-    <a href="/waitlist" class="nav-cta nav-drawer-cta" style="text-align:center;display:block;">get early access</a>
+    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:auto;">
+      <a href="/waitlist" class="nav-cta nav-drawer-cta" style="text-align:center;display:block;">get early access</a>
+      <button class="theme-toggle" id="themeToggleDrawer" aria-label="Toggle theme" style="margin:12px auto 0;width:auto;padding:6px 14px;border-radius:999px;gap:6px;font-size:12px;">
+        <span id="drawerThemeIcon">🌙</span> <span id="drawerThemeLabel">dark</span>
+      </button>
+    </div>
   </div>
 </div>

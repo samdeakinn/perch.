@@ -1,37 +1,102 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0a0e0d" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#f5f3ef" media="(prefers-color-scheme:light)">
+
 <title><%= locals.title ? title + ' — ' : '' %>perch. — every auto-renewal in one inbox</title>
-<meta name="description" content="perch. is an ai inbox for everything that quietly auto-renews. forward an email or upload a document, get a verdict: renew, cancel, or renegotiate.">
+<meta name="description" content="<%= locals.metaDesc || "perch. is an ai inbox for everything that quietly auto-renews. forward an email or upload a document, get a verdict: renew, cancel, or renegotiate." %>">
+
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://perch.vercel.app<%= locals.canonical || '/' %>">
+
+<!-- Preconnect & Preload -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preload" as="style" href="/style.css">
+<link rel="modulepreload" href="/particles.js">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="perch.">
+<meta property="og:title" content="<%= locals.ogTitle || (locals.title ? title + ' — ' : '') %>perch.">
+<meta property="og:description" content="<%= locals.ogDesc || locals.metaDesc || "an ai inbox for everything that quietly auto-renews." %>">
+<meta property="og:url" content="https://perch.vercel.app<%= locals.canonical || '/' %>">
+<meta property="og:image" content="<%= locals.ogImage || 'https://perch.vercel.app/og-image.svg' %>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@perch_app">
+<meta name="twitter:title" content="<%= locals.ogTitle || (locals.title ? title + ' — ' : '') %>perch.">
+<meta name="twitter:description" content="<%= locals.ogDesc || locals.metaDesc || "an ai inbox for everything that quietly auto-renews." %>">
+<meta name="twitter:image" content="<%= locals.ogImage || 'https://perch.vercel.app/og-image.svg' %>">
+
 <link rel="stylesheet" href="/style.css">
+<noscript><style>.a-fade-up,.a-stagger>*,.steps-a .step{opacity:1;transform:none}</style></noscript>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "perch.",
   "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web",
+  "operatingSystem": "macOS, Web",
   "description": "an ai inbox for everything that quietly auto-renews — insurance, broadband, domains, subscriptions, contracts.",
+  "url": "https://perch.vercel.app",
+  "sameAs": [
+    "https://x.com/perch_app",
+    "https://linkedin.com/company/perch"
+  ],
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "GBP",
     "lowPrice": "6.99",
     "highPrice": "14.99",
     "offerCount": "2"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "perch."
   }
 }
 </script>
-<meta property="og:title" content="<%= locals.title ? title + ' — ' : '' %>perch.">
-<meta property="og:description" content="perch. is an ai inbox for everything that quietly auto-renews.">
-<meta property="og:image" content="https://perch.vercel.app/og-image.svg">
-<meta name="twitter:card" content="summary_large_image">
+<% if (locals.article) { %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "<%= article.title %>",
+  "description": "<%= article.excerpt %>",
+  "datePublished": "<%= new Date(article.date).toISOString() %>",
+  "author": { "@type": "Organization", "name": "perch." }
+}
+</script>
+<% } %>
+
+<!-- Fonts non-blocking -->
+<script>
+(function() {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+  link.media = 'print';
+  link.onload = function() { this.media = 'all'; };
+  document.head.appendChild(link);
+})();
+</script>
 </head>
-<div class="grain-overlay" aria-hidden="true"></div>
 <body>
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-fill" id="scrollFill"></div></div>
 <a href="#main-content" class="skip-link">skip to main content</a>

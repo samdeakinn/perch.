@@ -3,6 +3,8 @@
     <div class="logo" style="font-size:17px;">perch<span>.</span></div>
     <div class="footer-links">
       <a href="/demo">demo</a>
+      <a href="/download">download mac app</a>
+      <a href="/digest">daily digest</a>
       <a href="/problem">the problem</a>
       <a href="/how-it-works">how it works</a>
       <a href="/uses">uses</a>
@@ -30,10 +32,10 @@
 </footer>
 
 <script>
-document.getelementbyid('footersubscribe')?.addeventlistener('submit', e => {
+document.getElementById('footerSubscribe')?.addEventListener('submit', e => {
   e.preventdefault();
-  document.getelementbyid('footersubscribe').style.display = 'none';
-  document.getelementbyid('footersubmsg').style.display = 'block';
+  document.getElementById('footerSubscribe').style.display = 'none';
+  document.getElementById('footerSubMsg').style.display = 'block';
 });
 </script>
 

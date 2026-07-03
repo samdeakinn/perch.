@@ -4,14 +4,44 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
 
+const rateLimitMap = new Map();
+const RATE_WINDOW = 60000;
+const RATE_MAX = 10;
+
+function rateLimit(ip) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now - entry.start > RATE_WINDOW) {
+    rateLimitMap.set(ip, { start: now, count: 1 });
+    return true;
+  }
+  if (entry.count >= RATE_MAX) return false;
+  entry.count++;
+  return true;
+}
+
+function securityHeaders(req, res, next) {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '0');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
+  // Relaxed CSP for fonts, analytics-none
+  res.setHeader('Content-Security-Policy', "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self'");
+  next();
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.set('view engine', 'ejs');
 app.set('views', join(__dirname, 'views'));
-app.use(express.static(join(__dirname, 'public')));
-app.use(express.json());
+app.use(securityHeaders);
+app.use(express.static(join(__dirname, 'public'), { maxAge: '7d', immutable: true }));
+app.use('/downloads', express.static(join(__dirname, 'public/downloads'), { maxAge: '1h' }));
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: false }));
 
 const dataDir = process.env.VERCEL ? '/tmp/data' : join(__dirname, 'data');
 
@@ -23,9 +53,12 @@ const articles = [
   { slug: 'domain-renewal-lapses', title: 'domain renewal lapses: the most preventable financial loss', excerpt: 'a forgotten domain renewal can cost ten times the original price to fix. here\'s why it happens and how to stop it.', date: '23 Jun 2026', readTime: 3, template: 'domain-renewal-lapses' },
 ];
 
-const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap', 'about', 'terms', 'contact'];
+const pages = ['problem', 'how-it-works', 'comparison', 'proof', 'pricing', 'uses', 'waitlist', 'privacy', 'brand', 'dashboard', 'blog', 'demo', 'tool', 'changelog', 'roadmap', 'about', 'terms', 'contact', 'download'];
 
 app.get('/', (_, res) => res.render('index', { currentPage: 'index' }));
+app.get('/get-access', (_, res) => res.redirect(301, '/waitlist'));
+app.get('/digest', (_, res) => res.render('digest', { currentPage: 'digest' }));
+app.get('/health', (_, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 pages.forEach(p => {
   app.get(`/${p}`, (_, res) => {
     if (p === 'blog') return res.render('blog', { currentPage: 'blog', articles });
@@ -43,7 +76,7 @@ app.get('/robots.txt', (_, res) => {
 });
 
 app.get('/sitemap.xml', (_, res) => {
-  const urls = ['','problem','how-it-works','comparison','proof','pricing','uses','waitlist','privacy','brand','dashboard','blog','demo','stats','tool','changelog','roadmap','about','terms','contact'];
+  const urls = ['','problem','how-it-works','comparison','proof','pricing','uses','waitlist','privacy','brand','dashboard','blog','demo','stats','tool','changelog','roadmap','about','terms','contact', 'download'];
   const blogUrls = articles.map(a => `blog/${a.slug}`);
   const all = [...urls, ...blogUrls];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -100,6 +133,9 @@ function referralCode(email){
 }
 
 app.post('/api/waitlist', (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress || 'unknown';
+  if (!rateLimit(ip)) return res.status(429).json({ ok: false, error: 'too many requests — slow down' });
+
   const { name, email, segment, estimated_exposure } = req.body;
   if (!name || !email) return res.status(400).json({ ok: false, error: 'name and email required' });
 
@@ -200,6 +236,18 @@ app.post('/api/waitlist/referral', (req, res) => {
 });
 
 app.use((_, res) => res.status(404).render('404', { currentPage: '404' }));
+
+app.use((err, _, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).type('html').send(`
+    <!DOCTYPE html><html lang="en-GB"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>error — perch.</title><style>body{background:#0a0e0d;color:#edefed;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:20px;}
+    h1{font-family:Georgia,serif;font-size:48px;color:#c98a3a;margin-bottom:8px;}p{color:#a3aba7;max-width:400px;line-height:1.6;}
+    a{color:#c98a3a;text-decoration:underline;}</style></head><body><div>
+    <h1>something went wrong</h1><p>we've been notified. in the meantime, <a href="/">go back home</a> or <a href="/contact">let us know</a> what happened.</p>
+    </div></body></html>
+  `);
+});
 
 export default app;
 

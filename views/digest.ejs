@@ -1,0 +1,82 @@
+<%- include('partials/head', { title: 'daily digest', metaDesc: 'a weekly roundup of your renewals, verdicts, and upcoming charges from perch.', canonical: '/digest' }) %>
+<%- include('partials/nav') %>
+
+<main id="main-content">
+  <section class="page-section">
+    <div class="wrap">
+      <div class="page-header">
+        <div class="eyebrow">weekly briefing</div>
+        <h1>your perch. digest</h1>
+        <p>a weekly roundup of your renewals — what's coming up, what changed, and what needs your attention.</p>
+      </div>
+
+      <div class="digest-mockup" style="margin-top:28px;">
+        <div class="digest-header">
+          <div class="digest-from">
+            <div class="digest-avatar">p</div>
+            <div>
+              <div class="digest-name">perch. digest</div>
+              <div class="digest-addr">digest@perch.app</div>
+            </div>
+          </div>
+          <div class="digest-to">to you</div>
+        </div>
+        <div class="digest-subject">your weekly renewal roundup — 3 items need attention</div>
+        <div class="digest-body">
+          <div class="digest-intro">here's what's renewing this week. 1 needs renegotiation, 2 are flagged for cancellation.</div>
+
+          <div class="digest-section">
+            <div class="digest-sectitle"><span class="digest-dot urgent"></span> needs attention</div>
+            <div class="digest-item">
+              <span class="digest-verdict urgent">renegotiate</span>
+              <div class="digest-info">
+                <div class="digest-provider">virgin media</div>
+                <div class="digest-meta">broadband · <span class="digest-warn">£72/mo</span> · <span class="digest-up">↑ 24% from last year</span></div>
+              </div>
+              <div class="digest-deadline">renews in 6 days</div>
+            </div>
+            <div class="digest-item">
+              <span class="digest-verdict cancel">cancel</span>
+              <div class="digest-info">
+                <div class="digest-provider">adobe creative cloud</div>
+                <div class="digest-meta">subscription · £59.99/mo · last used 47 days ago</span></div>
+              </div>
+              <div class="digest-deadline">renews in 11 days</div>
+            </div>
+          </div>
+
+          <div class="digest-section">
+            <div class="digest-sectitle"><span class="digest-dot coming"></span> upcoming (next 30 days)</div>
+            <div class="digest-item">
+              <span class="digest-verdict monitor">monitor</span>
+              <div class="digest-info">
+                <div class="digest-provider">namecheap domain renewal</div>
+                <div class="digest-meta">domains · £24.99/yr · competitive rate</span></div>
+              </div>
+              <div class="digest-deadline">renews in 23 days</div>
+            </div>
+            <div class="digest-item">
+              <span class="digest-verdict monitor">monitor</span>
+              <div class="digest-info">
+                <div class="digest-provider">octopus energy</div>
+                <div class="digest-meta">utilities · £136/mo · fixed until jan 2027</span></div>
+              </div>
+              <div class="digest-deadline">renews in 28 days</div>
+            </div>
+          </div>
+        </div>
+        <div class="digest-footer-line">perch. — your ai inbox for auto-renewals. <a href="/download" style="color:var(--accent);">download the mac app</a> to get live updates.</div>
+      </div>
+
+      <div style="margin-top:48px;text-align:center;">
+        <p style="font-size:14px;color:var(--text-dim);max-width:480px;margin:0 auto 24px;line-height:1.6;">the perch. digest is sent weekly once you start tracking renewals. forward an email or download the app to begin.</p>
+        <div class="hero-cta-row" style="justify-content:center;">
+          <a href="/download" class="btn-primary">download for mac ↓</a>
+          <a href="/demo" class="btn-secondary" style="width:auto;padding:12px 24px;">try the demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

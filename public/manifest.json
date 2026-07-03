@@ -1,0 +1,12 @@
+{
+  "name": "perch.",
+  "short_name": "perch.",
+  "description": "an ai inbox for everything that quietly auto-renews.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e0d",
+  "theme_color": "#c98a3a",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
