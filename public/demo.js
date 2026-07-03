@@ -1,5 +1,5 @@
 (function(){
-  if (!document.getElementById('demoApp')) return;
+  if (!document.getElementById('main-content')) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ITEMS = [

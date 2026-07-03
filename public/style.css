@@ -45,6 +45,15 @@
   --space-28:112px;
   --space-32:128px;
 }
+.skip-link{
+  position:fixed; top:-100%; left:16px; z-index:10000;
+  padding:12px 20px; border-radius:0 0 8px 8px;
+  background:var(--accent); color:#181208;
+  font-size:14px; font-weight:600; text-decoration:none;
+  transition:top .3s var(--ease);
+}
+.skip-link:focus{ top:0; }
+
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
 html::-webkit-scrollbar{ width:6px; }
