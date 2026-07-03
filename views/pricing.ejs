@@ -9,12 +9,16 @@
       <h2>Straightforward pricing. No affiliate kickbacks shaping what we tell you.</h2>
       <p>Two plans, one job each. Pick the one that matches your scale. Both include unlimited renewals, full extraction, and the Monday digest. No hidden fees, no per-item charges, no "premium extraction" upsells.</p>
     </div>
-    <div class="pricing-grid a-fade-up pricing-a">
-      <div class="price-card">
+    <div class="pricing-toggle a-fade-up">
+      <button class="pt-btn pt-btn-active" data-period="month">Monthly</button>
+      <button class="pt-btn" data-period="year">Annual <span class="pt-save">Save ~30%</span></button>
+    </div>
+    <div class="pricing-grid a-fade-up pricing-a" id="pricingGrid">
+      <div class="price-card" data-month="6.99" data-year="59">
         <h3>Household</h3>
         <div class="for">For personal and family use</div>
-        <div class="price-amount">£6.99<span>/month</span></div>
-        <div class="price-alt">or £59/year (save ~30%)</div>
+        <div class="price-amount"><span class="pa-val">£6.99</span><span class="pa-period">/month</span></div>
+        <div class="price-alt"><span class="pa-alt"></span></div>
         <ul>
           <li>Unlimited renewals tracked</li>
           <li>Document &amp; email extraction</li>
@@ -24,11 +28,11 @@
         </ul>
         <a href="/waitlist" class="btn-secondary">Join the waitlist</a>
       </div>
-      <div class="price-card featured">
+      <div class="price-card featured" data-month="14.99" data-year="119">
         <h3>Small business</h3>
         <div class="for">For micro-businesses and solo founders</div>
-        <div class="price-amount">£14.99<span>/month</span></div>
-        <div class="price-alt">Billed monthly, cancel anytime</div>
+        <div class="price-amount"><span class="pa-val">£14.99</span><span class="pa-period">/month</span></div>
+        <div class="price-alt"><span class="pa-alt"></span></div>
         <ul>
           <li>Everything in Household</li>
           <li>Multiple forwarding inboxes</li>
@@ -80,4 +84,29 @@
 </section>
 </div>
 
+<script>
+document.querySelectorAll('.pt-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pt-btn').forEach(b => b.classList.remove('pt-btn-active'));
+    btn.classList.add('pt-btn-active');
+    const period = btn.getAttribute('data-period');
+    document.querySelectorAll('.price-card').forEach(card => {
+      const month = parseFloat(card.getAttribute('data-month'));
+      const year = parseFloat(card.getAttribute('data-year'));
+      const val = card.querySelector('.pa-val');
+      const periodEl = card.querySelector('.pa-period');
+      const alt = card.querySelector('.pa-alt');
+      if (period === 'month') {
+        val.textContent = '£' + month.toFixed(2);
+        periodEl.textContent = '/month';
+        alt.textContent = 'or £' + year + '/year (save ~30%)';
+      } else {
+        val.textContent = '£' + year;
+        periodEl.textContent = '/year';
+        alt.textContent = '£' + (month * 0.7).toFixed(2) + '/month equivalent';
+      }
+    });
+  });
+});
+</script>
 <%- include('partials/footer') %>
