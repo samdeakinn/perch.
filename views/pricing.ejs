@@ -85,25 +85,25 @@
 </div>
 
 <script>
-document.queryselectorall('.pt-btn').foreach(btn => {
-  btn.addeventlistener('click', () => {
-    document.queryselectorall('.pt-btn').foreach(b => b.classlist.remove('pt-btn-active'));
-    btn.classlist.add('pt-btn-active');
-    const period = btn.getattribute('data-period');
-    document.queryselectorall('.price-card').foreach(card => {
-      const month = parsefloat(card.getattribute('data-month'));
-      const year = parsefloat(card.getattribute('data-year'));
-      const val = card.queryselector('.pa-val');
-      const periodel = card.queryselector('.pa-period');
-      const alt = card.queryselector('.pa-alt');
+document.querySelectorAll('.pt-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.pt-btn').forEach(function(b) { b.classList.remove('pt-btn-active'); });
+    btn.classList.add('pt-btn-active');
+    var period = btn.getAttribute('data-period');
+    document.querySelectorAll('.price-card').forEach(function(card) {
+      var month = parseFloat(card.getAttribute('data-month'));
+      var year = parseFloat(card.getAttribute('data-year'));
+      var valEl = card.querySelector('.pa-val');
+      var periodEl = card.querySelector('.pa-period');
+      var altEl = card.querySelector('.pa-alt');
       if (period === 'month') {
-        val.textcontent = '£' + month.tofixed(2);
-        periodel.textcontent = '/month';
-        alt.textcontent = 'or £' + year + '/year (save ~30%)';
+        valEl.textContent = '\u00A3' + month.toFixed(2);
+        periodEl.textContent = '/month';
+        altEl.textContent = 'or \u00A3' + year + '/year (save ~30%)';
       } else {
-        val.textcontent = '£' + year;
-        periodel.textcontent = '/year';
-        alt.textcontent = '£' + (month * 0.7).tofixed(2) + '/month equivalent';
+        valEl.textContent = '\u00A3' + year;
+        periodEl.textContent = '/year';
+        altEl.textContent = '\u00A3' + (month * 0.7).toFixed(2) + '/month equivalent';
       }
     });
   });

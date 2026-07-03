@@ -119,56 +119,60 @@
 </div>
 
 <script>
-  let selectedsegment = 'household';
-  let currentstep = 1;
-  const totalsteps = 3;
+  var selectedSegment = 'household';
+  var currentStep = 1;
+  var totalSteps = 3;
+  var rates = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
 
-  const rates = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
-
-  function calctotal(){
-    const ins = parseint(document.getelementbyid('sliderinsurance').value, 10);
-    const subs = parseint(document.getelementbyid('slidersubs').value, 10);
-    const util = parseint(document.getelementbyid('sliderutilities').value, 10);
-    const dom = parseint(document.getelementbyid('sliderdomains').value, 10);
-    const total = ins * rates.insurance + subs * rates.subs + util * rates.utilities + dom * rates.domains;
-    document.getelementbyid('calcinsurance').textcontent = ins;
-    document.getelementbyid('calcsubs').textcontent = subs;
-    document.getelementbyid('calcutilities').textcontent = util;
-    document.getelementbyid('calcdomains').textcontent = dom;
-    document.getelementbyid('calctotal').textcontent = '£' + total.tolocalestring();
-    document.getelementbyid('estimatedexposure').value = total;
+  function calcTotal() {
+    var ins = parseInt(document.getElementById('sliderInsurance').value, 10);
+    var subs = parseInt(document.getElementById('sliderSubs').value, 10);
+    var util = parseInt(document.getElementById('sliderUtilities').value, 10);
+    var dom = parseInt(document.getElementById('sliderDomains').value, 10);
+    var total = ins * rates.insurance + subs * rates.subs + util * rates.utilities + dom * rates.domains;
+    document.getElementById('calcInsurance').textContent = ins;
+    document.getElementById('calcSubs').textContent = subs;
+    document.getElementById('calcUtilities').textContent = util;
+    document.getElementById('calcDomains').textContent = dom;
+    document.getElementById('calcTotal').textContent = '\u00A3' + total.toLocaleString();
+    document.getElementById('estimatedExposure').value = total;
   }
-  document.queryselectorall('.calc-slider').foreach(s => s.addeventlistener('input', calctotal));
-  calctotal();
 
-  document.queryselectorall('.ob-segment-card').foreach(card => {
-    card.addeventlistener('click', () => {
-      document.queryselectorall('.ob-segment-card').foreach(c => c.classlist.remove('selected'));
-      card.classlist.add('selected');
-      selectedsegment = card.getattribute('data-segment');
+  document.querySelectorAll('.calc-slider').forEach(function(s) {
+    s.addEventListener('input', calcTotal);
+  });
+  calcTotal();
+
+  document.querySelectorAll('.ob-segment-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      document.querySelectorAll('.ob-segment-card').forEach(function(c) {
+        c.classList.remove('selected');
+      });
+      card.classList.add('selected');
+      selectedSegment = card.getAttribute('data-segment');
     });
   });
 
-  function showstep(n){
-    currentstep = n;
-    document.queryselectorall('.ob-panel').foreach((el, i) => {
-      el.classlist.toggle('ob-panel-active', i + 1 === n);
+  function showStep(n) {
+    currentStep = n;
+    document.querySelectorAll('.ob-panel').forEach(function(el, i) {
+      el.classList.toggle('ob-panel-active', i + 1 === n);
     });
-    document.queryselectorall('.ob-step').foreach(el => {
-      const step = parseint(el.getattribute('data-step'), 10);
-      el.classlist.toggle('ob-step-active', step === n);
-      el.classlist.toggle('ob-step-done', step < n);
+    document.querySelectorAll('.ob-step').forEach(function(el) {
+      var step = parseInt(el.getAttribute('data-step'), 10);
+      el.classList.toggle('ob-step-active', step === n);
+      el.classList.toggle('ob-step-done', step < n);
     });
     document.getElementById('obBack').style.display = n === 1 ? 'none' : 'inline-flex';
-    document.getElementById('obNext').textContent = n === totalSteps ? 'Submit' : 'Continue →';
+    document.getElementById('obNext').textContent = n === totalSteps ? 'Submit' : 'Continue \u2192';
     document.getElementById('obNext').style.display = 'inline-flex';
   }
 
-  document.getElementById('obNext').addEventListener('click', () => {
-    if (currentstep === 2) {
-      document.getelementbyid('obnext').textcontent = 'submit';
+  document.getElementById('obNext').addEventListener('click', function() {
+    if (currentStep === 2) {
+      document.getElementById('obNext').textContent = 'Submit';
     }
-    if (currentstep < totalSteps) {
+    if (currentStep < totalSteps) {
       showStep(currentStep + 1);
     } else {
       document.getElementById('obNext').style.display = 'none';
@@ -176,33 +180,34 @@
     }
   });
 
-  document.getElementById('obBack').addEventListener('click', () => {
-    if (currentstep > 1) showstep(currentstep - 1);
+  document.getElementById('obBack').addEventListener('click', function() {
+    if (currentStep > 1) showStep(currentStep - 1);
   });
 
-  const form = document.getelementbyid('waitlistform');
-  const formsuccess = document.getelementbyid('formsuccess');
-  if (form && formsuccess) {
-    form.addeventlistener('submit', async (e) => {
-      e.preventdefault();
-      const name = document.getelementbyid('name').value.trim();
-      const email = document.getelementbyid('email').value.trim();
+  var form = document.getElementById('waitlistForm');
+  var formSuccess = document.getElementById('formSuccess');
+  if (form && formSuccess) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
       if (!name || !email) return;
 
-      const exposure = document.getelementbyid('estimatedexposure').value;
-      const msgel = document.getelementbyid('formsuccessmsg');
-      msgel.textcontent = 'we\'ll email your personalised breakdown at ' + email + ' when perch. opens for ' + (selectedsegment === 'business' ? 'small businesses' : 'households') + '. in the meantime, start gathering those renewal emails.';
+      var exposure = document.getElementById('estimatedExposure').value;
+      var msgEl = document.getElementById('formSuccessMsg');
+      msgEl.textContent = 'we\'ll email your personalised breakdown at ' + email + ' when perch. opens for ' + (selectedSegment === 'business' ? 'small businesses' : 'households') + '. in the meantime, start gathering those renewal emails.';
 
       try {
         await fetch('/api/waitlist', {
-          method: 'post', headers: { 'content-type': 'application/json' },
-          body: json.stringify({ name, email, segment: selectedsegment, estimated_exposure: exposure })
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, segment: selectedSegment, estimated_exposure: exposure })
         });
-      } catch(_) {}
+      } catch (_) {}
 
       form.style.display = 'none';
-      formsuccess.classlist.add('show');
-      document.getelementbyid('obnav').style.display = 'none';
+      formSuccess.classList.add('show');
+      document.getElementById('obNav').style.display = 'none';
     });
   }
 </script>

@@ -103,52 +103,54 @@
 </div>
 
 <script>
-  document.getelementbyid('dashbtn').addeventlistener('click', lookupstatus);
-  document.getelementbyid('dashemail').addeventlistener('keydown', e => { if (e.key === 'enter') lookupstatus(); });
+  document.getElementById('dashBtn').addEventListener('click', lookupStatus);
+  document.getElementById('dashEmail').addEventListener('keydown', function(e) { if (e.key === 'Enter') lookupStatus(); });
 
-  async function lookupstatus(){
-    const email = document.getelementbyid('dashemail').value.trim();
+  async function lookupStatus() {
+    var email = document.getElementById('dashEmail').value.trim();
     if (!email) return;
 
-    document.getelementbyid('dashloading').classlist.add('dash-loading-visible');
-    document.getelementbyid('dashbtn').disabled = true;
-    document.getelementbyid('dashresult').style.display = 'none';
-    document.getelementbyid('dashnotfound').style.display = 'none';
+    document.getElementById('dashLoading').classList.add('dash-loading-visible');
+    document.getElementById('dashBtn').disabled = true;
+    document.getElementById('dashResult').style.display = 'none';
+    document.getElementById('dashNotFound').style.display = 'none';
 
     try {
-      const r = await fetch('/api/waitlist/status?email=' + encodeuricomponent(email));
-      const data = await r.json();
+      var r = await fetch('/api/waitlist/status?email=' + encodeURIComponent(email));
+      var data = await r.json();
 
       if (data.found) {
-        document.getelementbyid('dashname').textcontent = data.name;
-        document.getelementbyid('dashposition').textcontent = data.position;
-        document.getelementbyid('dashtotal').textcontent = data.total - data.position;
-        document.getelementbyid('dashaccess').textcontent = data.estimatedaccess;
-        document.getelementbyid('dashsegment').textcontent = data.segment === 'business' ? 'small business' : 'household';
-        document.getelementbyid('dashreflink').value = 'https://perch.vercel.app/waitlist?ref=' + data.referralcode;
-        document.getelementbyid('dashrefcount').textcontent = data.referralcount;
-        document.getelementbyid('dashresult').style.display = 'block';
+        document.getElementById('dashName').textContent = data.name;
+        document.getElementById('dashPosition').textContent = data.position;
+        document.getElementById('dashTotal').textContent = data.total - data.position;
+        document.getElementById('dashAccess').textContent = data.estimatedAccess;
+        document.getElementById('dashSegment').textContent = data.segment === 'business' ? 'small business' : 'household';
+        document.getElementById('dashRefLink').value = 'https://perch.vercel.app/waitlist?ref=' + data.referralCode;
+        document.getElementById('dashRefCount').textContent = data.referralCount;
+        document.getElementById('dashResult').style.display = 'block';
 
-        if (data.referralcount > 0) {
-          document.getelementbyid('dashposition').textcontent = data.position - data.referralcount + ' (was ' + data.position + ')';
+        if (data.referralCount > 0) {
+          document.getElementById('dashPosition').textContent = (data.position - data.referralCount) + ' (was ' + data.position + ')';
         }
       } else {
-        document.getelementbyid('dashnotfound').style.display = 'block';
+        document.getElementById('dashNotFound').style.display = 'block';
       }
     } catch(_) {
-      document.getelementbyid('dashnotfound').style.display = 'block';
+      document.getElementById('dashNotFound').style.display = 'block';
     }
 
-    document.getelementbyid('dashloading').classlist.remove('dash-loading-visible');
-    document.getelementbyid('dashbtn').disabled = false;
+    document.getElementById('dashLoading').classList.remove('dash-loading-visible');
+    document.getElementById('dashBtn').disabled = false;
   }
 
-  document.getelementbyid('dashcopybtn').addeventlistener('click', () => {
-    const input = document.getelementbyid('dashreflink');
+  document.getElementById('dashCopyBtn').addEventListener('click', function() {
+    var input = document.getElementById('dashRefLink');
     input.select();
-    document.execcommand('copy');
-    document.getelementbyid('dashcopymsg').style.display = 'block';
-    settimeout(() => { document.getelementbyid('dashcopymsg').style.display = 'none'; }, 2000);
+    document.execCommand('copy');
+    document.getElementById('dashCopyMsg').style.display = 'block';
+    setTimeout(function() {
+      document.getElementById('dashCopyMsg').style.display = 'none';
+    }, 2000);
   });
 </script>
 <%- include('partials/footer') %>

@@ -40,10 +40,10 @@
 </div>
 
 <script>
-document.getelementbyid('blogsubscribe')?.addeventlistener('submit', e => {
-  e.preventdefault();
-  document.getelementbyid('blogsubscribe').style.display = 'none';
-  document.getelementbyid('blogsubmsg').style.display = 'block';
+document.getElementById('blogSubscribe')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('blogSubMsg').style.display = 'block';
 });
 </script>
 <%- include('partials/footer') %>

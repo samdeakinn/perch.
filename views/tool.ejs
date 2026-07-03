@@ -87,26 +87,26 @@
 </div>
 
 <script>
-function togglecat(header){
-  const body = header.nextelementsibling;
-  const arrow = header.queryselector('.tool-cat-arrow');
-  body.classlist.toggle('open');
-  arrow.textcontent = body.classlist.contains('open') ? '▴' : '▾';
+function toggleCat(header) {
+  var body = header.nextElementSibling;
+  var arrow = header.querySelector('.tool-cat-arrow');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '\u25B4' : '\u25BE';
 }
-function calctool(){
-  let total = 0;
-  document.queryselectorall('.tool-item input:checked').foreach(cb => {
-    total += parseint(cb.getattribute('data-rate'), 10);
+function calcTool() {
+  var total = 0;
+  document.querySelectorAll('.tool-item input:checked').forEach(function(cb) {
+    total += parseInt(cb.getAttribute('data-rate'), 10);
   });
-  document.getelementbyid('toolamount').textcontent = '£' + total.tolocalestring();
-  const max = 1200;
-  const pct = math.min(total / max * 100, 100);
-  document.getelementbyid('toolbarfill').style.width = pct + '%';
+  document.getElementById('toolAmount').textContent = '\u00A3' + total.toLocaleString();
+  var max = 1200;
+  var pct = Math.min(total / max * 100, 100);
+  document.getElementById('toolBarFill').style.width = pct + '%';
 }
-document.queryselectorall('.tool-cat').foreach(c => {
-  c.queryselector('.tool-cat-body').classlist.add('open');
-  c.queryselector('.tool-cat-arrow').textcontent = '▴';
+document.querySelectorAll('.tool-cat').forEach(function(c) {
+  c.querySelector('.tool-cat-body').classList.add('open');
+  c.querySelector('.tool-cat-arrow').textContent = '\u25B4';
 });
-calctool();
+calcTool();
 </script>
 <%- include('partials/footer') %>
