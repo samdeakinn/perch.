@@ -42,10 +42,18 @@
 </div>
 
 <script>
-document.getElementById('blogSubscribe')?.addEventListener('submit', function(e) {
+document.getElementById('blogSubscribe')?.addEventListener('submit', async function(e) {
   e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('blogSubMsg').style.display = 'block';
+  var email = document.getElementById('blogEmail').value.trim();
+  if (!email) return;
+  try {
+    var r = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Blog Reader', email: email, segment: 'household', source: 'blog' }) });
+    var d = await r.json();
+    this.style.display = 'none';
+    var msg = document.getElementById('blogSubMsg');
+    msg.textContent = d.ok ? (d.existing ? 'you\'re already subscribed.' : 'you\'re subscribed. no spam, ever.') : 'error — try again.';
+    msg.style.display = 'block';
+  } catch(_) { this.style.display = 'none'; document.getElementById('blogSubMsg').style.display = 'block'; }
 });
 </script>
 <%- include('partials/footer') %>

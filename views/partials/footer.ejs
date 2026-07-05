@@ -77,10 +77,18 @@ if ('serviceWorker' in navigator) {
 
   // ─── Footer Subscribe ───
 
-  document.getElementById('footerSubscribe')?.addEventListener('submit', function(e) {
+  document.getElementById('footerSubscribe')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    this.style.display = 'none';
-    document.getElementById('footerSubMsg').style.display = 'block';
+    var email = document.getElementById('footerEmail').value.trim();
+    if (!email) return;
+    try {
+      var r = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Subscriber', email: email, segment: 'household', source: 'footer' }) });
+      var d = await r.json();
+      this.style.display = 'none';
+      var msg = document.getElementById('footerSubMsg');
+      msg.textContent = d.ok ? (d.existing ? 'you\'re already subscribed.' : 'subscribed.') : 'error — try again.';
+      msg.style.display = 'block';
+    } catch(_) { this.style.display = 'none'; document.getElementById('footerSubMsg').style.display = 'block'; }
   });
 
   // ─── Cursor Dot ───

@@ -4,17 +4,44 @@
     <h3>the monday digest</h3>
     <p>one email, every monday. your renewals this week, ranked by urgency. free until we launch billing.</p>
     <form id="newsletterForm" class="nl-form">
-      <input type="email" id="nlEmail" placeholder="you@email.com" required class="nl-input">
-      <button type="submit" class="nl-submit">subscribe</button>
+      <input type="text" id="nlName" placeholder="your name" required class="nl-input" style="margin-bottom:8px;">
+      <div style="display:flex;gap:8px;max-width:340px;margin:0 auto;">
+        <input type="email" id="nlEmail" placeholder="you@email.com" required class="nl-input">
+        <button type="submit" class="nl-submit">subscribe</button>
+      </div>
     </form>
-    <p id="nlMsg" style="display:none;font-size:13px;color:var(--accent);margin-top:8px;">subscribed. you'll hear from us soon.</p>
+    <p id="nlMsg" style="display:none;font-size:12px;color:var(--accent);margin-top:8px;"></p>
+    <p id="nlErr" style="display:none;font-size:12px;color:#fca5a5;margin-top:8px;"></p>
   </div>
 </div>
 
 <script>
-document.getElementById('newsletterForm')?.addEventListener('submit', function(e) {
+document.getElementById('newsletterForm')?.addEventListener('submit', async function(e) {
   e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('nlMsg').style.display = 'block';
+  var name = document.getElementById('nlName').value.trim();
+  var email = document.getElementById('nlEmail').value.trim();
+  if (!name || !email) return;
+  var btn = this.querySelector('button');
+  btn.disabled = true; btn.textContent = 'subscribing...';
+  try {
+    var r = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, segment: 'household', source: 'newsletter_cta' })
+    });
+    var d = await r.json();
+    if (d.ok) {
+      this.style.display = 'none';
+      document.getElementById('nlMsg').textContent = d.existing ? 'you\'re already on the list. we\'ll be in touch.' : 'subscribed. you\'ll hear from us soon.';
+      document.getElementById('nlMsg').style.display = 'block';
+    } else {
+      document.getElementById('nlErr').textContent = d.error || 'something went wrong — try again.';
+      document.getElementById('nlErr').style.display = 'block';
+    }
+  } catch (_) {
+    document.getElementById('nlErr').textContent = 'network error — check your connection.';
+    document.getElementById('nlErr').style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = 'subscribe';
 });
 </script>
