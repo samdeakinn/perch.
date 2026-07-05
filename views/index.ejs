@@ -13,13 +13,8 @@
       <h1>stop paying for things <em>you forgot you agreed to.</em></h1>
       <p class="hero-sub">perch. is an ai inbox for everything that quietly auto-renews — insurance, broadband, domains, subscriptions, contracts. forward an email or upload a document. get a date, an amount, and a verdict.</p>
       <div class="hero-cta-row">
-        <a href="/waitlist" class="btn-primary">
-          join the waitlist →
-        </a>
-        <a href="/download" class="btn-secondary" style="margin-left:8px;display:inline-flex;flex-direction:column;align-items:center;line-height:1.2;">
-          <span>download for mac ↓</span>
-          <span style="font-size:10px;font-weight:400;color:var(--text-faint);margin-top:2px;">macos 15+ · arm64+intel · 3.4mb</span>
-        </a>
+        <a href="/waitlist" class="btn-primary">join the waitlist →</a>
+        <a href="/app" class="btn-secondary" style="margin-left:8px;display:inline-flex;max-width:fit-content;padding:14px 24px;">open app</a>
         <span class="hero-microcopy">no bank linking. no auto-cancel bots. just visibility.</span>
       </div>
       <div class="stat-badge">
@@ -27,37 +22,7 @@
         <span><strong id="heroWaitlistCount" data-count="200">200</strong><span id="heroWaitlistPlus">+</span> households and businesses already tracking renewals</span>
       </div>
     </div>
-    <div class="hero-visual a-stagger" id="heroScene">
-      <div class="hero-scene">
-        <div class="scene-stage" id="sceneStage">
-          <div class="scene-ring"></div>
-          <div class="scene-card scene-card-1">
-            <div class="ftitle">fwd: your policy renews soon</div>
-            <div class="fmeta"><span>admiral car insurance</span><span class="tag">pdf</span></div>
-          </div>
-          <div class="scene-card scene-card-2">
-            <div class="ftitle">fwd: your subscription ends</div>
-            <div class="fmeta"><span>adobe creative cloud</span><span class="tag">invoice</span></div>
-          </div>
-          <div class="scene-card scene-card-3">
-            <div class="ftitle">fwd: broadband price update</div>
-            <div class="fmeta"><span>virgin media</span><span class="tag">notice</span></div>
-          </div>
-          <div class="scene-card scene-card-4">
-            <div class="ftitle">fwd: domain renewal</div>
-            <div class="fmeta"><span>namecheap — perch. domain</span><span class="tag">reminder</span></div>
-          </div>
-          <div class="scene-particle"></div>
-          <div class="scene-particle"></div>
-          <div class="scene-particle"></div>
-          <div class="scene-particle"></div>
-          <div class="scene-particle"></div>
-          <div class="scene-particle"></div>
-          <div class="scene-particle"></div>
-          <div class="scene-label">forward it. we extract it. you decide.</div>
-        </div>
-      </div>
-    </div>
+    <div class="hero-visual" id="heroScene3D"></div>
   </div>
 </section>
 
@@ -498,4 +463,5 @@ fetch('/api/waitlist/stats', { cache: 'no-store' }).then(function(r) { return r.
 }).catch(function(){});
 </script>
 
+<script src="/hero-scene.js"></script>
 <%- include('partials/footer') %>
