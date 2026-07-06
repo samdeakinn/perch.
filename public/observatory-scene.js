@@ -1,11 +1,18 @@
 (function(){
+  try {
+  console.log('[perch-3d] observatory-scene.js STARTED — THREE type: ' + typeof THREE);
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   var isMobile = window.innerWidth < 768;
 
   var container = document.getElementById('observatoryScene');
-  if (!container || prefersReduced || isTouch || isMobile || typeof THREE === 'undefined') return;
+  console.log('[perch-3d] container found: ' + !!container + ' | reduced=' + prefersReduced + ' touch=' + isTouch + ' mobile=' + isMobile + ' THREE undefined=' + (typeof THREE === 'undefined'));
+  if (!container || prefersReduced || isTouch || isMobile || typeof THREE === 'undefined') {
+    console.log('[perch-3d] EARLY RETURN — scene will not render');
+    return;
+  }
   container.style.display = 'block';
+  console.log('[perch-3d] container display set to block, dimensions: ' + container.clientWidth + 'x' + container.clientHeight);
 
   var W = container.clientWidth;
   var H = container.clientHeight;
@@ -21,6 +28,7 @@
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
   container.appendChild(renderer.domElement);
+  console.log('[perch-3d] WebGL renderer created, canvas appended to container. Canvas size: ' + renderer.domElement.width + 'x' + renderer.domElement.height);
 
   function createGlowTexture(innerColor, outerColor) {
     var canvas = document.createElement('canvas');
@@ -352,4 +360,8 @@
     renderer.render(scene, camera);
   }
   requestAnimationFrame(animate);
+  console.log('[perch-3d] SCENE READY — animation loop started, ' + rings.length + ' rings, ' + docs.length + ' docs, ' + verdicts.length + ' verdicts, ' + particleCount + ' particles');
+  } catch(e) {
+    console.error('[perch-3d] FATAL ERROR:', e.message, e.stack);
+  }
 })();
