@@ -48,7 +48,8 @@
 
   // ═══ Section handoff transitions ═══
   if (!prefersReduced) {
-    var sections = document.querySelectorAll('.lp-section');
+    var sections = document.querySelectorAll('.gravitational');
+    if (!sections.length) return;
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) { entry.target.style.transform = 'translateY(0)'; entry.target.style.opacity = '1'; }
