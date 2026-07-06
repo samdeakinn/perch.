@@ -47,7 +47,7 @@
   s.onload = function() {
     console.log('[perch-3d] Three.js loaded successfully — THREE type: ' + typeof THREE);
     var obs = document.createElement('script');
-    obs.src = '/observatory-scene.js?v=5';
+      obs.src = '/observatory-scene.js?v=6';
     obs.onload = function() { console.log('[perch-3d] observatory-scene.js executed'); };
     obs.onerror = function() { console.error('[perch-3d] ERROR: observatory-scene.js failed to load (404?)'); };
     document.body.appendChild(obs);

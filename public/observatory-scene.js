@@ -347,8 +347,8 @@
     particlesMat.opacity = 0.5 * epEased;
     particles.rotation.y = time * 0.02;
 
-    ambientGlowMat.opacity = 0.12 * epEased;
-    ambientGlowMat.color.copy(accentColor);
+    ambientMat.opacity = 0.12 * epEased;
+    ambientMat.color.copy(accentColor);
 
     var camZ = 9 - scrollPct * 4.5;
     var camY = 0.3 + scrollPct * 0.8;
