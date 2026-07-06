@@ -27,11 +27,11 @@
   </div>
 
   <div style="max-width:var(--max-body);margin:24px auto 0;padding:0 100px;">
-    <div style="border-top:1px solid var(--mist);padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-      <div style="font-size:12.5px;color:var(--dust);">get updates on auto-renewal, loyalty penalties, and perch. launch news.</div>
+    <div style="border-top:1px solid var(--mist);padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="font-size:12px;color:var(--dust);">get updates on auto-renewal, loyalty penalties, and perch. launch news.</div>
       <form id="footerSubscribe" style="display:flex;gap:6px;max-width:340px;">
-        <input type="email" id="footerEmail" placeholder="you@email.com" required style="flex:1;min-width:180px;padding:8px 12px;border-radius:var(--radius-full);border:1px solid var(--fog);background:var(--slate);color:var(--paper);font-size:12.5px;outline:none;font-family:var(--sans);">
-        <button type="submit" style="padding:8px 14px;border-radius:var(--radius-full);border:none;background:var(--ember);color:var(--obsidian);font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--sans);">subscribe</button>
+        <input type="email" id="footerEmail" placeholder="you@email.com" required style="flex:1;min-width:180px;padding:8px 12px;border-radius:var(--radius-pill);border:1px solid var(--fog);background:var(--slate);color:var(--paper);font-size:12px;outline:none;font-family:var(--sans);">
+        <button type="submit" style="padding:8px 14px;border-radius:var(--radius-pill);border:none;background:var(--ember);color:var(--obsidian);font-weight:500;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--sans);">subscribe</button>
       </form>
       <div id="footerSubMsg" style="display:none;font-size:12px;color:var(--ember);">you're subscribed.</div>
     </div>
@@ -46,9 +46,12 @@
   </div>
 </footer>
 
-<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+<div class="cursor-dot" id="cursorDot"></div>
 
-<script src="/motion.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="/motion.js?v=2"></script>
+
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
@@ -57,13 +60,13 @@ if ('serviceWorker' in navigator) {
 (function() {
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ─── Nav Scroll ───
+  // Nav scroll
   var nav = document.getElementById('nav');
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
 
-  // ─── Hamburger Menu ───
+  // Hamburger menu
   var hamburger = document.getElementById('hamburgerBtn');
   var overlay = document.getElementById('navOverlay');
   var overlayClose = document.getElementById('navOverlayClose');
@@ -75,8 +78,7 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // ─── Footer Subscribe ───
-
+  // Footer subscribe
   document.getElementById('footerSubscribe')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     var email = document.getElementById('footerEmail').value.trim();
@@ -91,8 +93,7 @@ if ('serviceWorker' in navigator) {
     } catch(_) { this.style.display = 'none'; document.getElementById('footerSubMsg').style.display = 'block'; }
   });
 
-  // ─── Button Ripple ───
-
+  // Button ripple
   document.querySelectorAll('.btn-primary').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       var rect = this.getBoundingClientRect();
@@ -107,42 +108,41 @@ if ('serviceWorker' in navigator) {
     });
   });
 
-  // ─── Back to Top ───
-
+  // Back to top
   var backBtn = document.getElementById('backToTop');
   if (backBtn) {
-    window.addEventListener('scroll', function() {
-      backBtn.classList.toggle('visible', window.scrollY > 500);
-    }, { passive: true });
-    backBtn.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    window.addEventListener('scroll', function() { backBtn.classList.toggle('visible', window.scrollY > 500); }, { passive: true });
+    backBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   }
 
-  // ─── Tilt Cards ───
+  // FAQ toggles
+  document.querySelectorAll('.faq-item').forEach(function(item) {
+    item.addEventListener('click', function() { item.classList.toggle('open'); });
+  });
 
-  if (!prefersReduced) {
-    document.querySelectorAll('.tilt-card').forEach(function(card) {
-      var wrap = card.closest('.tilt-wrap') || card.parentElement;
-      if (!wrap) return;
-      wrap.style.perspective = '800px';
-      card.style.transformStyle = 'preserve-3d';
-      card.style.willChange = 'transform';
-      card.addEventListener('mousemove', function(e) {
-        var r = card.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width;
-        var y = (e.clientY - r.top) / r.height;
-        var rotX = (y - 0.5) * -12;
-        var rotY = (x - 0.5) * 12;
-        card.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+  // Counter anims
+  document.querySelectorAll('.proof-num[data-count], .stat-block-num[data-count]').forEach(function(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var isCurrency = el.textContent.includes('\u00A3');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(el);
+        var dur = 1500, start = performance.now();
+        function tick(now) {
+          var t = Math.min((now - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - t, 3);
+          var val = Math.round(eased * target) || 0;
+          el.textContent = isCurrency ? '\u00A3' + val.toLocaleString() : val.toLocaleString();
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
       });
-      card.addEventListener('mouseleave', function() {
-        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-      });
-    });
-  }
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
 
-  // ─── Waitlist Form ───
+  // Waitlist form (used on waitlist page)
   var form = document.getElementById('waitlistForm');
   var formSuccess = document.getElementById('formSuccess');
   if (form && formSuccess) {
@@ -151,70 +151,38 @@ if ('serviceWorker' in navigator) {
       var name = document.getElementById('name').value.trim();
       var email = document.getElementById('email').value.trim();
       if (!name || !email) return;
-
       try {
         var segment = (document.querySelector('.ob-segment-card.selected')?.getAttribute('data-segment')) || 'household';
-        await fetch('/api/waitlist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name, email: email, segment: segment })
-        });
+        await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, email: email, segment: segment }) });
       } catch (_) {}
-
       form.style.display = 'none';
       formSuccess.classList.add('show');
     });
   }
 
-  // ─── Waitlist Count ───
-
+  // Waitlist count
   fetch('/api/waitlist/count', { cache: 'no-store' }).then(function(r) { return r.json(); }).then(function(d) {
     if (d.ok && d.count > 0) {
       var badge = document.getElementById('waitlistCount');
       if (badge) { badge.textContent = d.count.toLocaleString(); badge.style.display = 'inline'; }
-      var heroBadge = document.getElementById('heroWaitlistCount');
-      var heroPlus = document.getElementById('heroWaitlistPlus');
-      if (heroBadge && heroPlus) {
-        var target = d.count;
-        var startVal = parseInt(heroBadge.textContent.replace(/[^0-9]/g, ''), 10) || 0;
-        var diff = target - startVal;
-        if (diff <= 0) { heroBadge.textContent = target.toLocaleString(); return; }
-        heroPlus.style.opacity = '0';
-        var dur = 1200;
-        var start = performance.now();
-        function tick(now) {
-          var t = Math.min((now - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - t, 3);
-          var v = Math.round(startVal + eased * diff);
-          heroBadge.textContent = v.toLocaleString();
-          if (t < 1) { requestAnimationFrame(tick); }
-          else { heroPlus.style.opacity = '1'; heroPlus.style.transition = 'opacity .3s'; }
-        }
-        requestAnimationFrame(tick);
-      }
     }
   }).catch(function() {});
 
-  // ─── Page View Counter ───
-
+  // Page view counter
   fetch('/api/views', { cache: 'no-store' }).then(function(r) { return r.json(); }).then(function(d) {
     if (d.ok && d.views > 0) {
       var pv = document.getElementById('pageViewCounter');
-      if (pv) {
-        pv.textContent = d.views.toLocaleString() + ' page views · no cookies, no tracking';
-        pv.style.display = 'block';
-      }
+      if (pv) { pv.textContent = d.views.toLocaleString() + ' page views · no cookies, no tracking'; pv.style.display = 'block'; }
     }
   }).catch(function() {});
 
-  // ─── Cookie Consent ───
-
+  // Cookie consent
   try {
     if (!localStorage.getItem('cookieConsent')) {
       var bar = document.createElement('div');
       bar.id = 'cookieBar';
-      bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:100;padding:14px 20px;background:var(--bg-soft);border-top:1px solid var(--line);font-size:13px;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;backdrop-filter:blur(12px);';
-      bar.innerHTML = '<span>perch. uses only essential cookies for site function. no tracking, no profiling, no sharing.</span><button id="cookieDismiss" style="white-space:nowrap;padding:8px 16px;border-radius:8px;border:1px solid var(--line-strong);background:none;color:var(--text);font-size:12.5px;cursor:pointer;font-family:var(--sans);font-weight:500;">got it</button>';
+      bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:100;padding:14px 20px;background:var(--graphite);border-top:1px solid var(--mist);font-size:13px;color:var(--pencil);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;backdrop-filter:blur(12px);';
+      bar.innerHTML = '<span>perch. uses only essential cookies for site function. no tracking, no profiling, no sharing.</span><button id="cookieDismiss" style="white-space:nowrap;padding:8px 16px;border-radius:8px;border:1px solid var(--fog);background:none;color:var(--paper);font-size:12px;cursor:pointer;font-family:var(--sans);font-weight:500;">got it</button>';
       document.body.appendChild(bar);
       document.getElementById('cookieDismiss').addEventListener('click', function() {
         bar.style.transform = 'translateY(100%)';

@@ -41,7 +41,7 @@ app.use(securityHeaders);
 app.use((_, res, next) => { pageViews++; next(); });
 process.on('SIGINT', savePageViews);
 process.on('SIGTERM', savePageViews);
-app.use(express.static(join(__dirname, 'public'), { maxAge: '7d', immutable: true }));
+app.use(express.static(join(__dirname, 'public'), { maxAge: '1h', immutable: true }));
 app.get('/api/views', (_, res) => res.json({ ok: true, views: pageViews }));
 app.use('/downloads', express.static(join(__dirname, 'public/downloads'), { maxAge: '1h' }));
 app.use(express.json({ limit: '10kb' }));

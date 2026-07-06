@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0a0e0d" media="(prefers-color-scheme:dark)">
-<meta name="theme-color" content="#f5f3ef" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#080d0c" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#f5f2eb" media="(prefers-color-scheme:light)">
 
 <title><%= locals.title ? title + ' — ' : '' %>perch. — every auto-renewal in one inbox</title>
 <meta name="description" content="<%= locals.metaDesc || "perch. is an ai inbox for everything that quietly auto-renews. forward an email or upload a document, get a verdict: renew, cancel, or renegotiate." %>">
@@ -15,7 +15,6 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="https://perch.vercel.app<%= locals.canonical || '/' %>">
 
-<!-- Preconnect & Preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -29,10 +28,29 @@
   document.head.appendChild(link);
 })();
 </script>
-<link rel="preload" as="style" href="/style.css">
-<link rel="preload" as="script" href="/motion.js">
+<link rel="preload" as="style" href="/style.css?v=2">
+<link rel="stylesheet" href="/style.css?v=2">
 
-<!-- Open Graph / Social -->
+<% if (currentPage === 'index') { %>
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  var mobile = window.innerWidth < 768;
+  if (!reduced && !touch && !mobile) {
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+    s.onload = function() {
+      var obs = document.createElement('script');
+      obs.src = '/observatory-scene.js?v=2';
+      document.body.appendChild(obs);
+    };
+    document.head.appendChild(s);
+  }
+})();
+</script>
+<% } %>
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="perch.">
 <meta property="og:title" content="<%= locals.ogTitle || (locals.title ? title + ' — ' : '') %>perch.">
@@ -43,15 +61,11 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_GB">
 
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@perch_app">
 <meta name="twitter:title" content="<%= locals.ogTitle || (locals.title ? title + ' — ' : '') %>perch.">
 <meta name="twitter:description" content="<%= locals.ogDesc || locals.metaDesc || "an ai inbox for everything that quietly auto-renews." %>">
 <meta name="twitter:image" content="<%= locals.ogImage || 'https://perch.vercel.app/og-image.svg' %>">
-
-<link rel="stylesheet" href="/style.css">
-
 
 <script type="application/ld+json">
 {
@@ -62,21 +76,9 @@
   "operatingSystem": "macOS, Web",
   "description": "an ai inbox for everything that quietly auto-renews — insurance, broadband, domains, subscriptions, contracts.",
   "url": "https://perch.vercel.app",
-  "sameAs": [
-    "https://x.com/perch_app",
-    "https://linkedin.com/company/perch"
-  ],
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "GBP",
-    "lowPrice": "0",
-    "highPrice": "19.99",
-    "offerCount": "3"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "perch."
-  }
+  "sameAs": ["https://x.com/perch_app","https://linkedin.com/company/perch"],
+  "offers": { "@type": "AggregateOffer", "priceCurrency": "GBP", "lowPrice": "0", "highPrice": "19.99", "offerCount": "3" },
+  "author": { "@type": "Organization", "name": "perch." }
 }
 </script>
 <% if (locals.article) { %>

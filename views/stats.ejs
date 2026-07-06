@@ -10,7 +10,7 @@
       <p>live waitlist analytics. these numbers update in real-time as people join the list.</p>
     </div>
 
-    <div class="a-fade-up">
+    <div>
       <div class="dash-stats" style="justify-content:center;flex-wrap:wrap;">
         <div class="dash-stat">
           <div class="dash-stat-num"><%= stats.total %></div>
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="dash-card a-fade-up">
+    <div class="dash-card">
       <h3 style="margin-bottom:16px;">signups over time</h3>
       <% if (stats.signupsByDay.length > 0) { %>
       <div class="stats-chart" id="statsChart">
@@ -55,11 +55,11 @@
         <% }) %>
       </div>
       <% } else { %>
-      <p style="font-size:14px;color:var(--text-dim);">no signup data yet. share the waitlist to get things moving.</p>
+      <p style="font-size:14px;color:var(--pencil);">no signup data yet. share the waitlist to get things moving.</p>
       <% } %>
     </div>
 
-    <div class="dash-card a-fade-up">
+    <div class="dash-card">
       <div class="stats-meta">
         <div class="stats-meta-item">
           <div class="stats-meta-label">avg. referrals per person</div>
@@ -72,8 +72,8 @@
       </div>
     </div>
 
-    <div class="dash-card a-fade-up" style="text-align:center;">
-      <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px;">share the waitlist to grow these numbers.</p>
+    <div class="dash-card" style="text-align:center;">
+      <p style="font-size:13px;color:var(--pencil);margin-bottom:16px;">share the waitlist to grow these numbers.</p>
       <a href="/waitlist" class="btn-primary" style="display:inline-flex;">join the waitlist →</a>
     </div>
   </div>

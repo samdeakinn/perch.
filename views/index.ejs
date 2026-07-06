@@ -3,10 +3,13 @@
 <%- include('partials/nav') %>
 
 <div class="page" id="main-content" role="main">
+
 <section class="hero" id="heroSection">
+  <div id="observatoryScene"></div>
   <div class="wrap">
-    <div class="eyebrow" style="text-align:center;">built for the uk</div>
-    <h1 style="text-align:center;max-width:720px;margin:0 auto;">stop paying for things <em>you forgot you agreed to.</em></h1>
+    <div class="eyebrow" style="justify-content:center;">built for the uk</div>
+    <div class="hero-ring-fallback"></div>
+    <h1 style="text-align:center;max-width:760px;margin:0 auto;">stop paying for things <em>you forgot you agreed to.</em></h1>
     <p>perch. is an ai inbox for everything that quietly auto-renews — insurance, broadband, domains, subscriptions, contracts. forward an email or upload a document. get a date, an amount, and a verdict.</p>
     <form class="hero-form" action="/waitlist" method="get">
       <input type="email" name="email" placeholder="you@email.com" required>
@@ -18,9 +21,9 @@
 
 <section class="lp-section gravitational" id="cost">
   <div class="wrap" style="text-align:center;">
-    <div class="eyebrow">the cost of doing nothing</div>
-    <h2 style="margin:0 auto 8px;">auto-renewal isn't a convenience. it's a &pound;4bn tax on not paying attention.</h2>
-    <p class="section-sub" style="margin:0 auto 36px;">every provider is incentivised to make renewal silent. here's what that adds up to for uk households.</p>
+    <div class="eyebrow" style="justify-content:center;">the cost of doing nothing</div>
+    <h2 style="text-align:center;margin:0 auto 8px;">auto-renewal isn't a convenience. it's a &pound;4bn tax on not paying attention.</h2>
+    <p class="section-sub section-sub-center">every provider is incentivised to make renewal silent. here's what that adds up to for uk households.</p>
     <div class="big-stat">&pound;4bn</div>
     <div class="stat-row-flex">
       <div class="stat-block">
@@ -37,7 +40,7 @@
 
 <section class="lp-section gravitational" id="how">
   <div class="wrap">
-    <div class="eyebrow" style="text-align:center;">how it works</div>
+    <div class="eyebrow" style="justify-content:center;">how it works</div>
     <h2 style="text-align:center;margin:0 auto 8px;">one email forward, one clear verdict. that's the whole loop.</h2>
     <p class="section-sub section-sub-center">perch. doesn't need your bank, your passwords, or your attention every day. just the emails you'd ignore anyway.</p>
     <div style="max-width:var(--max-narrow);margin:40px auto 0;">
@@ -63,7 +66,7 @@
 
 <section class="lp-section gravitational" id="track">
   <div class="wrap">
-    <div class="eyebrow" style="text-align:center;">what perch. tracks</div>
+    <div class="eyebrow" style="justify-content:center;">what perch. tracks</div>
     <h2 style="text-align:center;margin:0 auto 8px;">every category that quietly costs you money.</h2>
     <p class="section-sub section-sub-center">broad categories, precise extraction. if it renews automatically, perch. can track it.</p>
     <div class="track-grid-2col">
@@ -71,25 +74,25 @@
         <div style="font-size:24px;margin-bottom:8px;">🛡️</div>
         <h3>insurance</h3>
         <p>car, home, pet, life, landlord — every policy that auto-renews with a loyalty penalty baked in.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;308 <span style="color:var(--dust);">avg yearly overpayment</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;308 <span style="color:var(--dust);">avg yearly overpayment</span></div>
       </div>
       <div class="card">
         <div style="font-size:24px;margin-bottom:8px;">🎬</div>
         <h3>subscriptions</h3>
         <p>streaming, saas, gym, co-working, apps — the small charges that add up to big annual totals.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;180 <span style="color:var(--dust);">avg yearly forgotten subs</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;180 <span style="color:var(--dust);">avg yearly forgotten subs</span></div>
       </div>
       <div class="card">
         <div style="font-size:24px;margin-bottom:8px;">🌐</div>
         <h3>broadband &amp; utilities</h3>
         <p>out-of-contract pricing that doubles your bill the moment your fixed term ends without you noticing.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;120 <span style="color:var(--dust);">avg yearly loyalty penalty</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;120 <span style="color:var(--dust);">avg yearly loyalty penalty</span></div>
       </div>
       <div class="card">
         <div style="font-size:24px;margin-bottom:8px;">🔗</div>
         <h3>domains &amp; hosting</h3>
         <p>the silent lapses that cost ten times more to fix than to renew on time — if you can get them back at all.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;40+ <span style="color:var(--dust);">per domain if it lapses</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;40+ <span style="color:var(--dust);">per domain if it lapses</span></div>
       </div>
     </div>
   </div>
@@ -97,10 +100,9 @@
 
 <section class="lp-section gravitational" id="proof">
   <div class="wrap">
-    <div class="eyebrow" style="text-align:center;">proof</div>
+    <div class="eyebrow" style="justify-content:center;">proof</div>
     <h2 style="text-align:center;margin:0 auto 8px;">what people are saying before they've even paid us.</h2>
     <p class="section-sub section-sub-center">no paid reviews. no nps score. just people who forwarded some emails.</p>
-
     <div style="position:relative;max-width:var(--max-narrow);margin:40px auto 0;">
       <div class="testimonial" id="testimonial0">
         <blockquote>i forwarded fifteen emails in about four minutes. it found a domain renewal i'd forgotten about, a pet insurance quote that jumped 34%, and a charity subscription i meant to cancel last year. already worth it and i haven't paid a thing.</blockquote>
@@ -118,14 +120,14 @@
         <blockquote>we had three saas tools on annual contracts that we'd completely stopped using. total cost: about &pound;1,800 a year. perch. flagged all three in the first batch.</blockquote>
         <cite>mike rowland · co-founder, rafter · edinburgh</cite>
       </div>
-      <div style="display:flex;justify-content:center;gap:8px;margin-top:8px;" id="testimonialDots"></div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:12px;" id="testimonialDots"></div>
     </div>
   </div>
 </section>
 
 <section class="lp-section gravitational" id="pricing">
   <div class="wrap">
-    <div class="eyebrow" style="text-align:center;">pricing</div>
+    <div class="eyebrow" style="justify-content:center;">pricing</div>
     <h2 style="text-align:center;margin:0 auto 8px;">three tiers. no kickbacks.</h2>
     <p class="section-sub section-sub-center">free to start, cheap to stay, premium if you need the firehose. all plans include extraction, verdicts, and the weekly digest.</p>
     <div class="pricing-row">
@@ -174,30 +176,15 @@
 
 <section class="lp-section gravitational" id="faq">
   <div class="wrap">
-    <div class="eyebrow" style="text-align:center;">questions</div>
+    <div class="eyebrow" style="justify-content:center;">questions</div>
     <h2 style="text-align:center;margin:0 auto 8px;">questions we get asked.</h2>
     <p class="section-sub section-sub-center">here's what people ask when they first hear about perch. and how we answer.</p>
     <div style="max-width:720px;margin:0 auto;">
-      <div class="faq-item">
-        <div class="faq-q">how is this different from a budgeting app?<span class="icon">+</span></div>
-        <div class="faq-a">budgeting apps categorise past spending. they tell you what you already spent. perch. looks forward — it tells you what's about to renew and whether you should act. entirely different time horizon, entirely different job.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">do you auto-cancel things on my behalf?<span class="icon">+</span></div>
-        <div class="faq-a">never. you always make the call. we surface the deadline and the recommended action, but we never touch an account, cancel a policy, or send anything on your behalf. that's not a limitation — it's the point.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">what happens to the emails and documents i send you?<span class="icon">+</span></div>
-        <div class="faq-a">we extract the renewal details immediately and store nothing beyond what's needed to track your items. no training models on your data, no sharing with third parties. you can delete any item at any time.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">what if i don't get renewal emails?<span class="icon">+</span></div>
-        <div class="faq-a">that happens more often than you'd think. if you don't have the email, you can upload a pdf statement, a screenshot, or even a photo of a letter. we'll extract the same details from whatever you give us.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">can i try it before paying?<span class="icon">+</span></div>
-        <div class="faq-a">during early access, all features are free. you'll get full extraction, verdicts, and the weekly digest for as long as you're in the beta. we'll give plenty of notice before billing starts, and you can leave at any time.</div>
-      </div>
+      <div class="faq-item"><div class="faq-q">how is this different from a budgeting app?<span class="icon">+</span></div><div class="faq-a">budgeting apps categorise past spending. they tell you what you already spent. perch. looks forward — it tells you what's about to renew and whether you should act. entirely different time horizon, entirely different job.</div></div>
+      <div class="faq-item"><div class="faq-q">do you auto-cancel things on my behalf?<span class="icon">+</span></div><div class="faq-a">never. you always make the call. we surface the deadline and the recommended action, but we never touch an account, cancel a policy, or send anything on your behalf. that's not a limitation — it's the point.</div></div>
+      <div class="faq-item"><div class="faq-q">what happens to the emails and documents i send you?<span class="icon">+</span></div><div class="faq-a">we extract the renewal details immediately and store nothing beyond what's needed to track your items. no training models on your data, no sharing with third parties. you can delete any item at any time.</div></div>
+      <div class="faq-item"><div class="faq-q">what if i don't get renewal emails?<span class="icon">+</span></div><div class="faq-a">that happens more often than you'd think. if you don't have the email, you can upload a pdf statement, a screenshot, or even a photo of a letter. we'll extract the same details from whatever you give us.</div></div>
+      <div class="faq-item"><div class="faq-q">can i try it before paying?<span class="icon">+</span></div><div class="faq-a">during early access, all features are free. you'll get full extraction, verdicts, and the weekly digest for as long as you're in the beta. we'll give plenty of notice before billing starts, and you can leave at any time.</div></div>
     </div>
   </div>
 </section>
@@ -213,6 +200,7 @@
     <div class="hero-micro">no bank linking. no auto-cancel bots. just visibility.</div>
   </div>
 </section>
+
 </div>
 
 <script>
@@ -223,7 +211,7 @@
   var dotsDiv = document.getElementById('testimonialDots');
   testimonials.forEach(function(t, i) {
     var dot = document.createElement('button');
-    dot.style.cssText = 'width:8px;height:8px;border-radius:50%;border:1px solid var(--fog);background:' + (i === 0 ? 'var(--ember)' : 'transparent') + ';cursor:pointer;padding:0;transition:background 0.2s var(--ease);';
+    dot.style.cssText = 'width:8px;height:8px;border-radius:50%;border:1px solid var(--fog);background:' + (i === 0 ? 'var(--ember)' : 'transparent') + ';cursor:pointer;padding:0;';
     dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
     dot.onclick = function() { showCard(i); resetTimer(); };
     dotsDiv.appendChild(dot);
@@ -231,9 +219,7 @@
   var timer;
   function showCard(i) {
     testimonials.forEach(function(t, j) { t.style.display = j === i ? '' : 'none'; });
-    dotsDiv.querySelectorAll('button').forEach(function(d, j) {
-      d.style.background = j === i ? 'var(--ember)' : 'transparent';
-    });
+    dotsDiv.querySelectorAll('button').forEach(function(d, j) { d.style.background = j === i ? 'var(--ember)' : 'transparent'; });
     current = i;
   }
   function next() { showCard((current + 1) % testimonials.length); }
