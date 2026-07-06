@@ -74,25 +74,25 @@
         <div style="font-size:24px;margin-bottom:8px;">🛡️</div>
         <h3>insurance</h3>
         <p>car, home, pet, life, landlord — every policy that auto-renews with a loyalty penalty baked in.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;308 <span style="color:var(--dust);">avg yearly overpayment</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;308 <span style="color:var(--dust);">avg yearly overpayment</span></div>
       </div>
       <div class="card">
         <div style="font-size:24px;margin-bottom:8px;">🎬</div>
         <h3>subscriptions</h3>
         <p>streaming, saas, gym, co-working, apps — the small charges that add up to big annual totals.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;180 <span style="color:var(--dust);">avg yearly forgotten subs</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;180 <span style="color:var(--dust);">avg yearly forgotten subs</span></div>
       </div>
       <div class="card">
         <div style="font-size:24px;margin-bottom:8px;">🌐</div>
         <h3>broadband &amp; utilities</h3>
         <p>out-of-contract pricing that doubles your bill the moment your fixed term ends without you noticing.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;120 <span style="color:var(--dust);">avg yearly loyalty penalty</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;120 <span style="color:var(--dust);">avg yearly loyalty penalty</span></div>
       </div>
       <div class="card">
         <div style="font-size:24px;margin-bottom:8px;">🔗</div>
         <h3>domains &amp; hosting</h3>
         <p>the silent lapses that cost ten times more to fix than to renew on time — if you can get them back at all.</p>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--ember);margin-top:12px;">&pound;40+ <span style="color:var(--dust);">per domain if it lapses</span></div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:12px;">&pound;40+ <span style="color:var(--dust);">per domain if it lapses</span></div>
       </div>
     </div>
   </div>
@@ -211,7 +211,7 @@
   var dotsDiv = document.getElementById('testimonialDots');
   testimonials.forEach(function(t, i) {
     var dot = document.createElement('button');
-    dot.style.cssText = 'width:8px;height:8px;border-radius:50%;border:1px solid var(--fog);background:' + (i === 0 ? 'var(--ember)' : 'transparent') + ';cursor:pointer;padding:0;';
+    dot.style.cssText = 'width:8px;height:8px;border-radius:50%;border:1px solid var(--fog);background:' + (i === 0 ? 'var(--accent)' : 'transparent') + ';cursor:pointer;padding:0;';
     dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
     dot.onclick = function() { showCard(i); resetTimer(); };
     dotsDiv.appendChild(dot);
@@ -219,7 +219,7 @@
   var timer;
   function showCard(i) {
     testimonials.forEach(function(t, j) { t.style.display = j === i ? '' : 'none'; });
-    dotsDiv.querySelectorAll('button').forEach(function(d, j) { d.style.background = j === i ? 'var(--ember)' : 'transparent'; });
+    dotsDiv.querySelectorAll('button').forEach(function(d, j) { d.style.background = j === i ? 'var(--accent)' : 'transparent'; });
     current = i;
   }
   function next() { showCard((current + 1) % testimonials.length); }

@@ -1,6 +1,6 @@
-const CACHE = 'perch-v3';
+const CACHE = 'perch-v4';
 const PRECACHE = [
-  '/', '/style.css', '/demo.js', '/particles.js',
+  '/', '/style.css', '/demo.js',
   '/favicon.svg', '/manifest.json',
   '/problem', '/how-it-works', '/pricing', '/demo',
   '/404', '/download', '/digest'

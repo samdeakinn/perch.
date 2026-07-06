@@ -28,8 +28,8 @@
   document.head.appendChild(link);
 })();
 </script>
-<link rel="preload" as="style" href="/style.css?v=2">
-<link rel="stylesheet" href="/style.css?v=2">
+<link rel="preload" as="style" href="/style.css?v=3">
+<link rel="stylesheet" href="/style.css?v=3">
 
 <% if (currentPage === 'index') { %>
 <script>
@@ -42,7 +42,7 @@
     s.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
     s.onload = function() {
       var obs = document.createElement('script');
-      obs.src = '/observatory-scene.js?v=2';
+      obs.src = '/observatory-scene.js?v=3';
       document.body.appendChild(obs);
     };
     document.head.appendChild(s);
