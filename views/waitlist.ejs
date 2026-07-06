@@ -2,186 +2,70 @@
 <%- include('partials/nav') %>
 
 <div class="page" id="main-content" role="main">
-<section class="page-section" style="min-height:80vh;display:flex;align-items:center;">
-  <div class="wrap" style="width:100%;max-width:700px;">
-    <div class="a-fade-up" style="text-align:center;">
-      <div class="section-tag" style="justify-content:center;">early access</div>
-      <h2 style="max-width:none;">you're minutes away from <em class="glow-text">seeing clearly.</em></h2>
-      <p class="section-sub" style="text-align:center;margin:8px auto 0;">three quick steps. no commitment. we'll email you when perch. opens for your segment.</p>
-    </div>
-
-    <div class="onboarding-progress a-fade-up" id="obProgress">
-      <div class="ob-step ob-step-active" data-step="1"><span class="ob-num">1</span><span class="ob-label">segment</span></div>
-      <div class="ob-step" data-step="2"><span class="ob-num">2</span><span class="ob-label">estimate</span></div>
-      <div class="ob-step" data-step="3"><span class="ob-num">3</span><span class="ob-label">details</span></div>
-    </div>
-
-    <div class="onboarding-panels a-fade-up">
-      <!-- Step 1: Segment -->
-      <div class="ob-panel ob-panel-active" id="obStep1">
-        <h3 class="ob-panel-title">i'm signing up as a...</h3>
-        <div class="ob-segment-grid">
-          <button class="ob-segment-card" data-segment="household">
-            <div class="ob-seg-icon">🏠</div>
-            <div class="ob-seg-name">household</div>
-            <div class="ob-seg-desc">for personal and family use</div>
-            <div class="ob-seg-check">✓</div>
-          </button>
-          <button class="ob-segment-card" data-segment="business">
-            <div class="ob-seg-icon">⚡</div>
-            <div class="ob-seg-name">small business</div>
-            <div class="ob-seg-desc">for micro-businesses and solo founders</div>
-            <div class="ob-seg-check">✓</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 2: Calculator -->
-      <div class="ob-panel" id="obStep2">
-        <h3 class="ob-panel-title">what are auto-renewals costing you?</h3>
-        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">based on uk averages. adjust the sliders to match your situation — we'll calculate your estimated annual exposure.</p>
-        <div class="calc-panel" style="margin-top:0;">
-          <div class="calc-slider-row">
-            <div class="calc-label-row">
-              <span class="calc-label">insurance policies</span>
-              <span class="calc-val" id="calcInsurance">2</span>
-            </div>
-            <input type="range" class="calc-slider" id="sliderInsurance" min="0" max="8" value="2" step="1">
-            <div class="calc-range-labels"><span>0</span><span>8+</span></div>
-          </div>
-          <div class="calc-slider-row">
-            <div class="calc-label-row">
-              <span class="calc-label">subscriptions (streaming, saas, gym, apps)</span>
-              <span class="calc-val" id="calcSubs">6</span>
-            </div>
-            <input type="range" class="calc-slider" id="sliderSubs" min="0" max="20" value="6" step="1">
-            <div class="calc-range-labels"><span>0</span><span>20+</span></div>
-          </div>
-          <div class="calc-slider-row">
-            <div class="calc-label-row">
-              <span class="calc-label">broadband, mobile &amp; utility contracts</span>
-              <span class="calc-val" id="calcUtilities">2</span>
-            </div>
-            <input type="range" class="calc-slider" id="sliderUtilities" min="0" max="6" value="2" step="1">
-            <div class="calc-range-labels"><span>0</span><span>6+</span></div>
-          </div>
-          <div class="calc-slider-row">
-            <div class="calc-label-row">
-              <span class="calc-label">domains &amp; annual services</span>
-              <span class="calc-val" id="calcDomains">3</span>
-            </div>
-            <input type="range" class="calc-slider" id="sliderDomains" min="0" max="10" value="3" step="1">
-            <div class="calc-range-labels"><span>0</span><span>10+</span></div>
-          </div>
-          <div class="calc-total" style="margin-top:8px;">
-            <div class="calc-total-label">estimated annual exposure</div>
-            <div class="calc-total-amount" id="calcTotal">£650</div>
-            <div class="calc-total-note">based on average loyalty penalties across uk markets</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3: Details -->
-      <div class="ob-panel" id="obStep3">
-        <h3 class="ob-panel-title">where should we send your breakdown?</h3>
-        <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:20px;line-height:1.6;">we'll send you one email with your personalised estimate and early access when perch. opens for your segment.</p>
-        <form id="waitlistForm" class="ob-form">
-          <input type="hidden" id="estimatedExposure" name="estimated_exposure" value="650">
-          <div class="field">
-            <label for="name">your name</label>
-            <input type="text" id="name" required placeholder="e.g. Jo Milner" autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="email">email address</label>
-            <input type="email" id="email" required placeholder="you@email.com" autocomplete="email">
-          </div>
-          <button type="submit" class="ob-submit-btn">get my breakdown &amp; join the waitlist →</button>
-          <p class="submit-note">no spam. no newsletters. one email with your breakdown, then silence until we're ready for you.</p>
-        </form>
-        <div class="form-success" id="formSuccess">
-          <div class="check">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>you're on the list.</h3>
-          <p id="formSuccessMsg">we'll email your personalised breakdown when perch. opens for your segment. in the meantime, start gathering those renewal emails.</p>
-        </div>
+  <div class="wrap" style="padding-top:140px;padding-bottom:80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+    <div>
+      <div class="eyebrow">early access</div>
+      <h1 style="max-width:none;">you're minutes away from <em>seeing clearly.</em></h1>
+      <p style="font-size:15px;color:var(--pencil);line-height:1.6;margin-bottom:24px;">one form, no commitment. we'll email you when perch. opens for your segment. zero spam, zero follow-ups until we're ready.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-family:var(--body-serif);font-size:13px;color:var(--dust);">no bank linking required</div>
+        <div style="font-family:var(--body-serif);font-size:13px;color:var(--dust);">data stays with your bank</div>
+        <div style="font-family:var(--body-serif);font-size:13px;color:var(--dust);">cancel any time, no questions</div>
       </div>
     </div>
 
-    <div class="ob-nav" id="obNav">
-      <button class="ob-back" id="obBack">← back</button>
-      <button class="ob-next" id="obNext">continue →</button>
+    <div>
+      <form id="waitlistForm" style="display:flex;flex-direction:column;gap:12px;">
+        <input type="hidden" id="estimatedExposure" name="estimated_exposure" value="0">
+        <div>
+          <label for="name" style="display:block;font-family:var(--mono);font-size:10px;color:var(--dust);margin-bottom:4px;">your name</label>
+          <input type="text" id="name" required placeholder="e.g. jo milner" autocomplete="name" style="width:100%;padding:12px 16px;border:1px solid var(--fog);background:var(--slate);color:var(--paper);font-family:var(--sans);font-size:13px;outline:none;border-radius:6px;">
+        </div>
+        <div>
+          <label for="email" style="display:block;font-family:var(--mono);font-size:10px;color:var(--dust);margin-bottom:4px;">email address</label>
+          <input type="email" id="email" required placeholder="you@email.com" autocomplete="email" style="width:100%;padding:12px 16px;border:1px solid var(--fog);background:var(--slate);color:var(--paper);font-family:var(--sans);font-size:13px;outline:none;border-radius:6px;">
+        </div>
+        <div>
+          <label style="display:block;font-family:var(--mono);font-size:10px;color:var(--dust);margin-bottom:6px;">i'm signing up as...</label>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="ob-segment-pill selected" data-segment="household" style="flex:1;padding:10px;border:1px solid var(--ember);background:var(--ember-soft);color:var(--ember);font-family:var(--sans);font-size:12px;cursor:pointer;border-radius:var(--radius-full);text-align:center;">household</button>
+            <button type="button" class="ob-segment-pill" data-segment="freelancer" style="flex:1;padding:10px;border:1px solid var(--fog);background:transparent;color:var(--pencil);font-family:var(--sans);font-size:12px;cursor:pointer;border-radius:var(--radius-full);text-align:center;">freelancer</button>
+            <button type="button" class="ob-segment-pill" data-segment="business" style="flex:1;padding:10px;border:1px solid var(--fog);background:transparent;color:var(--pencil);font-family:var(--sans);font-size:12px;cursor:pointer;border-radius:var(--radius-full);text-align:center;">business</button>
+          </div>
+        </div>
+        <button type="submit" style="padding:14px 24px;background:var(--ember);color:var(--obsidian);border:none;border-radius:var(--radius-full);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;margin-top:4px;">join the waitlist &rarr;</button>
+        <p style="font-size:11px;color:var(--dust);text-align:center;">no spam. no newsletters. silence until we're ready for you.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="check">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>you're on the list.</h3>
+        <p id="formSuccessMsg">we'll email you when perch. opens for your segment. start gathering those renewal emails.</p>
+      </div>
     </div>
   </div>
-</section>
 </div>
 
 <script>
   var selectedSegment = 'household';
-  var currentStep = 1;
-  var totalSteps = 3;
-  var rates = { insurance: 75, subs: 180, utilities: 120, domains: 40 };
 
-  function calcTotal() {
-    var ins = parseInt(document.getElementById('sliderInsurance').value, 10);
-    var subs = parseInt(document.getElementById('sliderSubs').value, 10);
-    var util = parseInt(document.getElementById('sliderUtilities').value, 10);
-    var dom = parseInt(document.getElementById('sliderDomains').value, 10);
-    var total = ins * rates.insurance + subs * rates.subs + util * rates.utilities + dom * rates.domains;
-    document.getElementById('calcInsurance').textContent = ins;
-    document.getElementById('calcSubs').textContent = subs;
-    document.getElementById('calcUtilities').textContent = util;
-    document.getElementById('calcDomains').textContent = dom;
-    document.getElementById('calcTotal').textContent = '\u00A3' + total.toLocaleString();
-    document.getElementById('estimatedExposure').value = total;
-  }
-
-  document.querySelectorAll('.calc-slider').forEach(function(s) {
-    s.addEventListener('input', calcTotal);
-  });
-  calcTotal();
-
-  document.querySelectorAll('.ob-segment-card').forEach(function(card) {
-    card.addEventListener('click', function() {
-      document.querySelectorAll('.ob-segment-card').forEach(function(c) {
-        c.classList.remove('selected');
+  document.querySelectorAll('.ob-segment-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.ob-segment-pill').forEach(function(p) {
+        p.classList.remove('selected');
+        p.style.borderColor = 'var(--fog)';
+        p.style.background = 'transparent';
+        p.style.color = 'var(--pencil)';
       });
-      card.classList.add('selected');
-      selectedSegment = card.getAttribute('data-segment');
+      pill.classList.add('selected');
+      pill.style.borderColor = 'var(--ember)';
+      pill.style.background = 'var(--ember-soft)';
+      pill.style.color = 'var(--ember)';
+      selectedSegment = pill.getAttribute('data-segment');
     });
-  });
-
-  function showStep(n) {
-    currentStep = n;
-    document.querySelectorAll('.ob-panel').forEach(function(el, i) {
-      el.classList.toggle('ob-panel-active', i + 1 === n);
-    });
-    document.querySelectorAll('.ob-step').forEach(function(el) {
-      var step = parseInt(el.getAttribute('data-step'), 10);
-      el.classList.toggle('ob-step-active', step === n);
-      el.classList.toggle('ob-step-done', step < n);
-    });
-    document.getElementById('obBack').style.display = n === 1 ? 'none' : 'inline-flex';
-    document.getElementById('obNext').textContent = n === totalSteps ? 'Submit' : 'Continue \u2192';
-    document.getElementById('obNext').style.display = 'inline-flex';
-  }
-
-  document.getElementById('obNext').addEventListener('click', function() {
-    if (currentStep === 2) {
-      document.getElementById('obNext').textContent = 'Submit';
-    }
-    if (currentStep < totalSteps) {
-      showStep(currentStep + 1);
-    } else {
-      document.getElementById('obNext').style.display = 'none';
-      document.getElementById('obBack').style.display = 'none';
-    }
-  });
-
-  document.getElementById('obBack').addEventListener('click', function() {
-    if (currentStep > 1) showStep(currentStep - 1);
   });
 
   var form = document.getElementById('waitlistForm');
@@ -193,23 +77,20 @@
       var email = document.getElementById('email').value.trim();
       if (!name || !email) return;
 
-      var exposure = document.getElementById('estimatedExposure').value;
       var msgEl = document.getElementById('formSuccessMsg');
-      msgEl.textContent = 'we\'ll email your personalised breakdown at ' + email + ' when perch. opens for ' + (selectedSegment === 'business' ? 'small businesses' : 'households') + '. in the meantime, start gathering those renewal emails.';
+      msgEl.textContent = 'we\'ll email you at ' + email + ' when perch. opens for ' + (selectedSegment === 'business' ? 'small businesses' : selectedSegment === 'freelancer' ? 'freelancers' : 'households') + '. start gathering those renewal emails.';
 
       try {
         await fetch('/api/waitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name, email: email, segment: selectedSegment, estimated_exposure: exposure })
+          body: JSON.stringify({ name: name, email: email, segment: selectedSegment })
         });
       } catch (_) {}
 
       form.style.display = 'none';
       formSuccess.classList.add('show');
-      document.getElementById('obNav').style.display = 'none';
     });
   }
 </script>
-<%- include('partials/newsletter-cta') %>
 <%- include('partials/footer') %>

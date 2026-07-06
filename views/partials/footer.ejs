@@ -1,38 +1,53 @@
 <footer>
-  <div class="wrap footer-inner">
-    <div class="logo" style="font-size:17px;">perch<span>.</span></div>
-    <div class="footer-links">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">perch<span>.</span></div>
+      <p class="footer-tagline">track what renews. decide what stays.</p>
+    </div>
+    <div class="footer-col">
+      <h4>product</h4>
       <a href="/app">app</a>
       <a href="/demo">demo</a>
       <a href="/pricing">pricing</a>
+      <a href="/features">features</a>
       <a href="/download">download</a>
-      <a href="/problem">problem</a>
+      <a href="/roadmap">roadmap</a>
+      <a href="/changelog">changelog</a>
+    </div>
+    <div class="footer-col">
+      <h4>learn</h4>
+      <a href="/problem">the problem</a>
       <a href="/how-it-works">how it works</a>
       <a href="/blog">blog</a>
-      <a href="/features">features</a>
       <a href="/resources">resources</a>
       <a href="/about">about</a>
       <a href="/privacy">privacy</a>
       <a href="/terms">terms</a>
-      <a href="https://x.com/perch_app" target="_blank" rel="noopener">x</a>
     </div>
-    <div style="width:100%;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-      <div style="font-size:12.5px;color:var(--text-faint);">get updates on auto-renewal, loyalty penalties, and perch. launch news.</div>
+  </div>
+
+  <div style="max-width:var(--max-body);margin:24px auto 0;padding:0 100px;">
+    <div style="border-top:1px solid var(--mist);padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="font-size:12.5px;color:var(--dust);">get updates on auto-renewal, loyalty penalties, and perch. launch news.</div>
       <form id="footerSubscribe" style="display:flex;gap:6px;max-width:340px;">
-        <input type="email" id="footerEmail" placeholder="you@email.com" required style="flex:1;min-width:180px;padding:8px 12px;border-radius:6px;border:1px solid var(--line-strong);background:var(--bg);color:var(--text);font-size:12.5px;outline:none;font-family:var(--sans);">
-        <button type="submit" style="padding:8px 14px;border-radius:6px;border:none;background:var(--accent);color:#181208;font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--sans);">subscribe</button>
+        <input type="email" id="footerEmail" placeholder="you@email.com" required style="flex:1;min-width:180px;padding:8px 12px;border-radius:var(--radius-full);border:1px solid var(--fog);background:var(--slate);color:var(--paper);font-size:12.5px;outline:none;font-family:var(--sans);">
+        <button type="submit" style="padding:8px 14px;border-radius:var(--radius-full);border:none;background:var(--ember);color:var(--obsidian);font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--sans);">subscribe</button>
       </form>
-      <div id="footerSubMsg" style="display:none;font-size:12px;color:var(--accent);">you're subscribed.</div>
+      <div id="footerSubMsg" style="display:none;font-size:12px;color:var(--ember);">you're subscribed.</div>
     </div>
-    <div class="footer-trust">we only process what you send us. nothing is shared, sold, or used to train models on your data.</div>
-    <div class="footer-counter" id="pageViewCounter" style="display:none;"></div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">&copy; 2026 perch. &middot; <a href="/privacy" style="color:inherit;">privacy</a> &middot; <a href="/terms" style="color:inherit;">terms</a> &middot; <a href="/contact" style="color:inherit;">contact</a></span>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a href="https://x.com/perch_app" target="_blank" rel="noopener" style="font-size:11px;color:var(--dust);">x</a>
+      <span class="footer-bottom-text" id="pageViewCounter" style="display:none;"></span>
+    </div>
   </div>
 </footer>
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-<div class="cursor-dot" id="cursorDot"></div>
 
-<script src="/particles.js"></script>
 <script src="/motion.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
@@ -42,39 +57,23 @@ if ('serviceWorker' in navigator) {
 (function() {
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ─── Theme Toggle ───
+  // ─── Nav Scroll ───
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
 
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem('theme', theme); } catch(e) {}
-    var moon = '\u{1F319}';
-    var sun = '\u{2600}\u{FE0F}';
-    var icon = theme === 'dark' ? moon : sun;
-    var label = theme === 'dark' ? 'dark' : 'light';
-    document.querySelectorAll('#themeToggle, #themeToggleDrawer').forEach(function(btn) {
-      btn.textContent = icon;
+  // ─── Hamburger Menu ───
+  var hamburger = document.getElementById('hamburgerBtn');
+  var overlay = document.getElementById('navOverlay');
+  var overlayClose = document.getElementById('navOverlayClose');
+  if (hamburger && overlay && overlayClose) {
+    hamburger.addEventListener('click', function() { overlay.classList.add('open'); });
+    overlayClose.addEventListener('click', function() { overlay.classList.remove('open'); });
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.classList.remove('open');
     });
-    var dl = document.getElementById('drawerThemeLabel');
-    if (dl) dl.textContent = label;
-    var di = document.getElementById('drawerThemeIcon');
-    if (di) di.textContent = icon;
   }
-
-  function toggleTheme() {
-    var current = document.documentElement.getAttribute('data-theme') || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  }
-
-  // Load saved theme
-  try {
-    var saved = localStorage.getItem('theme');
-    if (saved === 'light' || saved === 'dark') {
-      setTheme(saved);
-    }
-  } catch(e) {}
-
-  document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
-  document.getElementById('themeToggleDrawer')?.addEventListener('click', toggleTheme);
 
   // ─── Footer Subscribe ───
 
@@ -92,26 +91,6 @@ if ('serviceWorker' in navigator) {
     } catch(_) { this.style.display = 'none'; document.getElementById('footerSubMsg').style.display = 'block'; }
   });
 
-  // ─── Cursor Dot ───
-
-  var dot = document.getElementById('cursorDot');
-  if (dot && !window.matchMedia('(hover: none), (pointer: coarse)').matches && !prefersReduced) {
-    var mx = -100, my = -100, cx = -100, cy = -100;
-    document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
-    function driftDot() {
-      cx += (mx - cx) * 0.15;
-      cy += (my - cy) * 0.15;
-      dot.style.transform = 'translate(' + (cx - 3) + 'px, ' + (cy - 3) + 'px)';
-      dot.classList.add('cursor-dot-visible');
-      requestAnimationFrame(driftDot);
-    }
-    driftDot();
-    document.querySelectorAll('a, button, .tilt-card, input, .faq-item').forEach(function(el) {
-      el.addEventListener('mouseenter', function() { dot.classList.add('cursor-dot-hover'); });
-      el.addEventListener('mouseleave', function() { dot.classList.remove('cursor-dot-hover'); });
-    });
-  }
-
   // ─── Button Ripple ───
 
   document.querySelectorAll('.btn-primary').forEach(function(btn) {
@@ -128,20 +107,6 @@ if ('serviceWorker' in navigator) {
     });
   });
 
-  // ─── Nav Compress ───
-
-  var nav = document.getElementById('nav');
-  var ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        nav.classList.toggle('compressed', window.scrollY > 40);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-
   // ─── Back to Top ───
 
   var backBtn = document.getElementById('backToTop');
@@ -152,81 +117,6 @@ if ('serviceWorker' in navigator) {
     backBtn.addEventListener('click', function() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  }
-
-  // ─── Hamburger Menu ───
-
-  var hamburger = document.getElementById('hamburgerBtn');
-  var overlay = document.getElementById('navOverlay');
-  var closeBtn = document.getElementById('navDrawerClose');
-  if (hamburger && overlay && closeBtn) {
-    hamburger.addEventListener('click', function() { overlay.classList.add('open'); });
-    closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) overlay.classList.remove('open');
-    });
-  }
-
-  // ─── Scroll Animations ───
-
-  function initAnimations() {
-    var faders = document.querySelectorAll('.a-fade-up');
-    if (prefersReduced) {
-      faders.forEach(function(el) { el.classList.add('in'); });
-    } else {
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      faders.forEach(function(el) { observer.observe(el); });
-    }
-
-    document.querySelectorAll('.faq-item').forEach(function(item) {
-      item.addEventListener('click', function() { item.classList.toggle('open'); });
-    });
-
-    document.querySelectorAll('.proof-num[data-count]').forEach(function(el) {
-      var target = parseInt(el.getAttribute('data-count'), 10);
-      var isCurrency = el.textContent.includes('\u00A3');
-
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) return;
-          observer.unobserve(el);
-
-          var dur = 1500;
-          var start = performance.now();
-
-          function tick(now) {
-            var t = Math.min((now - start) / dur, 1);
-            var eased = 1 - Math.pow(1 - t, 3);
-            var val = Math.round(eased * target) || 0;
-            el.textContent = isCurrency ? '\u00A3' + val.toLocaleString() : val.toLocaleString();
-            if (t < 1) requestAnimationFrame(tick);
-          }
-
-          requestAnimationFrame(tick);
-        });
-      }, { threshold: 0.5 });
-      observer.observe(el);
-    });
-  }
-
-  initAnimations();
-
-  // ─── Scroll Progress ───
-
-  var fill = document.getElementById('scrollFill');
-  if (fill) {
-    window.addEventListener('scroll', function() {
-      var h = document.documentElement;
-      var p = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight);
-      fill.style.width = (p * 100) + '%';
-    }, { passive: true });
   }
 
   // ─── Tilt Cards ───
@@ -250,24 +140,9 @@ if ('serviceWorker' in navigator) {
         card.style.transform = 'rotateX(0deg) rotateY(0deg)';
       });
     });
-
-    var stage = document.getElementById('sceneStage');
-    var scene = document.getElementById('heroScene');
-    if (stage && scene) {
-      scene.addEventListener('mousemove', function(e) {
-        var r = scene.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width;
-        var y = (e.clientY - r.top) / r.height;
-        stage.style.transform = 'rotateY(' + ((x - 0.5) * 8) + 'deg) rotateX(' + ((y - 0.5) * -6) + 'deg)';
-      });
-      scene.addEventListener('mouseleave', function() {
-        stage.style.transform = 'rotateY(0deg) rotateX(0deg)';
-      });
-    }
   }
 
   // ─── Waitlist Form ───
-
   var form = document.getElementById('waitlistForm');
   var formSuccess = document.getElementById('formSuccess');
   if (form && formSuccess) {

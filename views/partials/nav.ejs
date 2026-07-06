@@ -1,51 +1,33 @@
 <nav class="nav" id="nav">
-  <div class="wrap nav-inner">
+  <div class="nav-inner">
     <a href="/" class="logo">perch<span>.</span></a>
     <div class="nav-links">
       <a href="/problem" class="<%= currentPage === 'problem' ? 'active' : '' %>">problem</a>
       <a href="/how-it-works" class="<%= currentPage === 'how-it-works' ? 'active' : '' %>">how it works</a>
-      <a href="/pricing" class="<%= currentPage === 'pricing' ? 'active' : '' %>">pricing</a>
       <a href="/demo" class="<%= currentPage === 'demo' ? 'active' : '' %>">demo</a>
       <a href="/app" class="<%= currentPage === 'app' ? 'active' : '' %>">app</a>
+      <a href="/pricing" class="<%= currentPage === 'pricing' ? 'active' : '' %>">pricing</a>
       <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>">blog</a>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
-      <a href="/waitlist" class="nav-cta">get early access <span class="nav-badge" id="waitlistCount"></span></a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="theme-toggle" id="themeToggle" aria-label="toggle theme" style="background:none;border:none;color:var(--pencil);font-size:15px;cursor:pointer;padding:4px;">◐</button>
+      <a href="/waitlist" class="nav-cta">join waitlist <span class="nav-badge" id="waitlistCount"></span></a>
     </div>
-    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="menu">
+      <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="nav-overlay" id="navOverlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <div class="nav-drawer">
-    <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">✕</button>
-    <div class="nav-drawer-links">
-      <a href="/problem" class="<%= currentPage === 'problem' ? 'active' : '' %>">problem</a>
-      <a href="/how-it-works" class="<%= currentPage === 'how-it-works' ? 'active' : '' %>">how it works</a>
-      <a href="/pricing" class="<%= currentPage === 'pricing' ? 'active' : '' %>">pricing</a>
-      <a href="/demo" class="<%= currentPage === 'demo' ? 'active' : '' %>">demo</a>
-      <a href="/app" class="<%= currentPage === 'app' ? 'active' : '' %>">app</a>
-      <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>">blog</a>
-      <div style="margin:8px 0;border-top:1px solid var(--line);"></div>
-      <a href="/features" class="<%= currentPage === 'features' ? 'active' : '' %>">features</a>
-      <a href="/resources" class="<%= currentPage === 'resources' ? 'active' : '' %>">resources</a>
-      <a href="/proof" class="<%= currentPage === 'proof' ? 'active' : '' %>">proof</a>
-      <a href="/uses" class="<%= currentPage === 'uses' ? 'active' : '' %>">uses</a>
-      <a href="/tool" class="<%= currentPage === 'tool' ? 'active' : '' %>">cost explorer</a>
-      <a href="/download" class="<%= currentPage === 'download' ? 'active' : '' %>">download mac app</a>
-      <a href="/roadmap" class="<%= currentPage === 'roadmap' ? 'active' : '' %>">roadmap</a>
-      <a href="/changelog" class="<%= currentPage === 'changelog' ? 'active' : '' %>">changelog</a>
-    </div>
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:auto;">
-      <a href="/waitlist" class="nav-cta nav-drawer-cta" style="text-align:center;display:block;">get early access</a>
-      <button class="theme-toggle" id="themeToggleDrawer" aria-label="Toggle theme" style="margin:12px auto 0;width:auto;padding:6px 14px;border-radius:999px;gap:6px;font-size:12px;">
-        <span id="drawerThemeIcon">🌙</span> <span id="drawerThemeLabel">dark</span>
-      </button>
-    </div>
-  </div>
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="navOverlayClose" aria-label="close menu">✕</button>
+  <a href="/problem">problem</a>
+  <a href="/how-it-works">how it works</a>
+  <a href="/demo">demo</a>
+  <a href="/app">app</a>
+  <a href="/pricing">pricing</a>
+  <a href="/blog">blog</a>
+  <a href="/features">features</a>
+  <a href="/resources">resources</a>
+  <a href="/waitlist">join waitlist</a>
 </div>

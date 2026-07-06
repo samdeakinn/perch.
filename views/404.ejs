@@ -1,25 +1,18 @@
 <%- include('partials/head', { title: 'not found' }) %>
 <%- include('partials/nav') %>
 
-<main id="main-content">
-  <section class="page-section" style="min-height:70vh;display:flex;align-items:center;border-bottom:none;">
-    <div class="wrap" style="width:100%;">
-      <div class="page-404">
-        <div style="font-family:var(--serif);font-size:clamp(80px,15vw,140px);line-height:1;color:var(--accent);margin-bottom:8px;">404</div>
-        <h1 style="margin:0 auto 12px;font-size:clamp(24px,3vw,32px);text-align:center;">this page wandered off</h1>
-        <p style="font-size:16px;color:var(--text-dim);max-width:440px;margin:0 auto 32px;line-height:1.7;">
-          maybe it was auto-renewed and cancelled. or maybe it never existed. either way, it's not here.
-        </p>
-        <div class="hero-cta-row" style="justify-content:center;">
-          <a href="/" class="btn-primary">go home</a>
-          <a href="/demo" class="btn-secondary" style="width:auto;padding:12px 24px;">try the demo</a>
-        </div>
-        <div style="margin-top:40px;font-size:13px;color:var(--text-faint);">
-          <span id="brokenLink">or maybe the link you followed is broken.</span>
-        </div>
-      </div>
+<div class="page" id="main-content" role="main">
+  <div class="page-404">
+    <div style="font-family:var(--display);font-size:clamp(80px,15vw,140px);line-height:1;color:var(--ember);margin-bottom:8px;font-style:italic;">404</div>
+    <h1 style="margin:0 auto 12px;font-size:clamp(24px,3vw,32px);text-align:center;">this page doesn't exist.</h1>
+    <p style="font-size:15px;color:var(--pencil);max-width:440px;margin:0 auto 32px;line-height:1.7;">
+      maybe it was auto-renewed and cancelled. or maybe it never existed.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/" class="btn-primary">return home</a>
+      <a href="/demo" class="btn-tertiary">try the demo</a>
     </div>
-  </section>
-</main>
+  </div>
+</div>
 
 <%- include('partials/footer') %>

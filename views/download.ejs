@@ -1,44 +1,32 @@
 <%- include('partials/head', { title: 'download mac app' }) %>
 <%- include('partials/nav') %>
 
-<div class="page doc-page" id="main-content" role="main" style="scroll-margin-top:80px;">
-<section class="doc-section a-fade-up">
-  <div class="wrap" style="max-width:700px;padding:60px 20px;">
-    <div class="eyebrow">native app</div>
-    <h1>download perch. for mac</h1>
-    <p style="font-size:14px;color:var(--text-dim);margin-bottom:32px;line-height:1.6;">track renewals without opening a browser. our native mac app lives in your menu bar, sends notifications, and syncs with your calendar.</p>
+<div class="page" id="main-content" role="main">
+  <div class="wrap" style="padding-top:140px;padding-bottom:80px;text-align:center;max-width:640px;">
+    <div class="eyebrow" style="justify-content:center;">native app</div>
+    <h1 style="max-width:none;">download perch. <em>for mac</em></h1>
+    <p style="font-size:14px;color:var(--pencil);margin-bottom:32px;line-height:1.6;">track renewals without opening a browser. lives in your menu bar. apple silicon &amp; intel.</p>
 
-    <div style="background:var(--panel);border-radius:12px;padding:32px;border:1px solid var(--line);margin-bottom:24px;">
+    <div class="card" style="text-align:center;margin-bottom:24px;">
       <div style="font-size:32px;margin-bottom:8px;">🖥</div>
       <h3 style="margin:0 0 4px;font-size:18px;">perch. for macos 15+</h3>
-      <p style="font-size:12px;color:var(--text-faint);margin:0 0 20px;">apple silicon & intel · 3.4 mb · v0.3.0</p>
-      <ul style="font-size:13px;color:var(--text-dim);line-height:1.8;margin:0 0 20px;padding-left:20px;">
-        <li>inbox with search, filter & sort</li>
-        <li>weekly digest & calendar view</li>
-        <li>swiftdata persistence (offline-first)</li>
-        <li>drag-and-drop email files</li>
-        <li>csv import & export</li>
-        <li>menu bar quick glance</li>
-        <li>local notifications for renewals</li>
-        <li>calendar & reminders sync</li>
-        <li>charts & reports</li>
-        <li>keyboard shortcuts</li>
-      </ul>
-      <a href="/downloads/perch-mac.zip" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;font-size:14px;">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--dust);margin:0 0 20px;">v0.3.0 · 3.4 mb · apple silicon &amp; intel</div>
+      <a href="/downloads/perch-mac.zip" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span>↓</span> download perch. for mac
       </a>
-      <p style="font-size:11px;color:var(--text-faint);margin-top:12px;">972 kb zip · no sign-up required · data stays on your mac</p>
+      <p style="font-size:11px;color:var(--dust);">972 kb zip · no sign-up required · data stays on your mac</p>
     </div>
 
-    <div style="background:var(--panel);border-radius:12px;padding:24px;border:1px solid var(--line);font-size:12.5px;color:var(--text-dim);line-height:1.7;">
-      <strong style="color:var(--accent);">to install:</strong><br>
-      1. download the zip<br>
-      2. extract and drag <code style="background:var(--bg);padding:2px 6px;border-radius:3px;font-size:11px;">perch.app</code> to your applications folder<br>
-      3. open it (right-click open the first time, as it's not yet notarized)<br>
-      4. perch. lives in your menu bar — click the bell icon to get started
+    <div class="card" style="text-align:left;">
+      <h3 style="font-size:14px;margin-bottom:12px;">to install:</h3>
+      <div style="font-family:var(--body-serif);font-size:13px;color:var(--pencil);line-height:2;">
+        1. download the zip<br>
+        2. extract and drag <code style="font-family:var(--mono);font-size:11px;background:var(--graphite);padding:2px 6px;border-radius:3px;">perch.app</code> to your applications folder<br>
+        3. right-click open the first time (not yet notarized)<br>
+        4. perch. lives in your menu bar — click the bell icon
+      </div>
     </div>
   </div>
-</section>
 </div>
 
 <%- include('partials/footer') %>
