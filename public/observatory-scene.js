@@ -18,15 +18,15 @@
   var H = container.clientHeight;
 
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 100);
-  camera.position.set(0, 0.3, 9);
+  var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
+  camera.position.set(0, 0.2, 6.5);
 
   var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(W, H);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.toneMappingExposure = 1.3;
   container.appendChild(renderer.domElement);
   console.log('[perch-3d] WebGL renderer created, canvas appended to container. Canvas size: ' + renderer.domElement.width + 'x' + renderer.domElement.height);
 
@@ -61,9 +61,9 @@
 
   var rings = [];
   var ringConfigs = [
-    { radius: 2.0, tube: 0.018, tiltX: Math.PI * 0.45, tiltZ: 0, speed: 0.12, emissive: 0.4 },
-    { radius: 1.55, tube: 0.014, tiltX: Math.PI * 0.3, tiltZ: Math.PI * 0.25, speed: 0.2, emissive: 0.5 },
-    { radius: 1.15, tube: 0.01, tiltX: Math.PI * 0.6, tiltZ: Math.PI * 0.5, speed: 0.28, emissive: 0.6 }
+    { radius: 2.4, tube: 0.025, tiltX: Math.PI * 0.45, tiltZ: 0, speed: 0.12, emissive: 0.8 },
+    { radius: 1.85, tube: 0.018, tiltX: Math.PI * 0.3, tiltZ: Math.PI * 0.25, speed: 0.2, emissive: 1.0 },
+    { radius: 1.35, tube: 0.014, tiltX: Math.PI * 0.6, tiltZ: Math.PI * 0.5, speed: 0.28, emissive: 1.2 }
   ];
 
   ringConfigs.forEach(function(cfg) {
@@ -116,20 +116,27 @@
     roughness: 0.1,
     metalness: 0.2
   });
-  var core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.12, 1), coreMat);
+  var core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.18, 1), coreMat);
   scene.add(core);
 
   var coreGlowMat = new THREE.SpriteMaterial({
     map: emberGlow,
     color: 0xffd0a0,
     transparent: true,
-    opacity: 0.6,
+    opacity: 0.8,
     blending: THREE.AdditiveBlending,
     depthWrite: false
   });
   var coreGlow = new THREE.Sprite(coreGlowMat);
-  coreGlow.scale.set(1.2, 1.2, 1);
+  coreGlow.scale.set(2.0, 2.0, 1);
   scene.add(coreGlow);
+
+  var wireMat = new THREE.MeshBasicMaterial({
+    color: COLOR_AMBER.clone(), wireframe: true, transparent: true,
+    opacity: 0.06, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  var wireSphere = new THREE.Mesh(new THREE.IcosahedronGeometry(3.0, 1), wireMat);
+  scene.add(wireSphere);
 
   var docs = [];
   var docMat = new THREE.MeshStandardMaterial({
@@ -350,12 +357,16 @@
     ambientMat.opacity = 0.12 * epEased;
     ambientMat.color.copy(accentColor);
 
-    var camZ = 9 - scrollPct * 4.5;
-    var camY = 0.3 + scrollPct * 0.8;
+    var camZ = 6.5 - scrollPct * 3.5;
+    var camY = 0.2 + scrollPct * 0.6;
     camera.position.x += (mouseX * 0.6 - camera.position.x) * 0.03;
     camera.position.y += (camY + mouseY * 0.3 - camera.position.y) * 0.03;
     camera.position.z += (camZ - camera.position.z) * 0.03;
     camera.lookAt(0, 0, 0);
+
+    wireSphere.rotation.y = time * 0.03;
+    wireSphere.rotation.x = time * 0.02;
+    wireMat.color.copy(accentColor);
 
     renderer.render(scene, camera);
   }

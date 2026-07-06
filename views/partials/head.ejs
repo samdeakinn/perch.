@@ -28,8 +28,8 @@
   document.head.appendChild(link);
 })();
 </script>
-<link rel="preload" as="style" href="/style.css?v=5">
-<link rel="stylesheet" href="/style.css?v=5">
+<link rel="preload" as="style" href="/style.css?v=6">
+<link rel="stylesheet" href="/style.css?v=6">
 
 <% if (currentPage === 'index') { %>
 <script>
@@ -47,7 +47,7 @@
   s.onload = function() {
     console.log('[perch-3d] Three.js loaded successfully — THREE type: ' + typeof THREE);
     var obs = document.createElement('script');
-      obs.src = '/observatory-scene.js?v=6';
+      obs.src = '/observatory-scene.js?v=7';
     obs.onload = function() { console.log('[perch-3d] observatory-scene.js executed'); };
     obs.onerror = function() { console.error('[perch-3d] ERROR: observatory-scene.js failed to load (404?)'); };
     document.body.appendChild(obs);

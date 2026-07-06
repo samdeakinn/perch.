@@ -3,23 +3,12 @@
   var isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   if (prefersReduced) return;
 
-  // ═══ LENIS SMOOTH SCROLL ═══
-  var lenis;
-  function initLenis() {
-    if (typeof Lenis === 'undefined') return;
-    lenis = new Lenis({
-      duration: 0.7,
-      easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-      smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 2
-    });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
+  // ═══ SMOOTH SCROLL (native, no Lenis lag) ═══
+  function initScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       a.addEventListener('click', function(e) {
         var target = document.querySelector(this.getAttribute('href'));
-        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -80, duration: 1 }); }
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
   }
@@ -174,5 +163,5 @@
   });
 
   // ═══ INIT ═══
-  initLenis();
+  initScroll();
 })();
