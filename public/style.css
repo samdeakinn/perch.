@@ -31,7 +31,7 @@
   --scroll-pct:0;
 
   --accent: var(--accent-current);
-  --accent-current: color-mix(in srgb, var(--ember) calc((1 - var(--scroll-pct)) * 100%), var(--rose-gold) calc(var(--scroll-pct) * 100%));
+  --accent-current: color-mix(in srgb, var(--ember) calc((1 - var(--scroll-pct)) * 100%), #f0b840 calc(var(--scroll-pct) * 100%));
 
   --bg:var(--obsidian);
   --bg-soft:var(--graphite);
@@ -86,8 +86,6 @@ p{ color:var(--pencil); }
 #observatoryScene{
   position:absolute; inset:0; z-index:1; overflow:hidden;
   display:none;
-  mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
 }
 #observatoryScene canvas{ display:block; }
 @media (max-width:768px){
@@ -117,10 +115,6 @@ p{ color:var(--pencil); }
   background:radial-gradient(ellipse 1000px 700px at 50% 30%, rgba(201,138,58,0.12), transparent 60%),
              radial-gradient(ellipse 800px 500px at 50% 80%, rgba(184,120,72,0.06), transparent 55%),
              var(--obsidian);
-}
-.hero::after{
-  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:radial-gradient(ellipse 80% 100% at 50% 50%, transparent 40%, var(--obsidian) 95%);
 }
 @media (max-width:768px){ .hero{ padding:130px 0 90px; } }
 .hero .wrap{ position:relative; z-index:2; }
