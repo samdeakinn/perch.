@@ -1,5 +1,11 @@
 node_modules/
 data/
 .env
-.vercel
 .env*
+.vercel
+.next
+out
+build
+.DS_Store
+*.pem
+npm-debug.log*
